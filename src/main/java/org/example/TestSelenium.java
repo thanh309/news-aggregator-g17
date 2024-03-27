@@ -1,6 +1,10 @@
 package org.example;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,12 +22,12 @@ public class TestSelenium {
         driver.get("https://a16zcrypto.com/posts/?format=article");
 
 
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 10; i++) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            System.out.println("dads");
+            System.out.println("scrolling" + i);
             try {
-                Thread.sleep(4000); // Wait for the page to load
+                Thread.sleep(2000); // Wait for the page to load
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -31,7 +35,16 @@ public class TestSelenium {
 
 
         String htmlSource = driver.getPageSource();
-        System.out.println(Jsoup.parse(htmlSource));
+        Document doc = Jsoup.parse(htmlSource);
+        Elements links = doc.select("a[href~=^/posts/article]");
+        int ans = 0;
+        for (Element link : links) {
+            ans++;
+            String href = link.attr("href");
+            System.out.println(href);
+        }
+
+        System.out.println(ans);
 
         driver.quit();
     }
