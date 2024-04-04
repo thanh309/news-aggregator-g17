@@ -12,6 +12,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.jsoup:jsoup:1.17.2'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.41.0'
+    implementation files('src/libs/darcula.jar')
 }
 tasks.test {
     useJUnitPlatform()
