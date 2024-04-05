@@ -8,11 +8,12 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class TestScraper {
 
-    public static ArrayList<String> getArticleLinks(String category) {
+    public static List<String> getArticleLinks(String category) {
 
         var resultList = new ArrayList<String>();
 
