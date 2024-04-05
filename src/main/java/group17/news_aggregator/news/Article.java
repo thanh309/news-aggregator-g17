@@ -7,9 +7,8 @@ public class Article implements News {
     private String link;
     private String websiteSource;
     private String summary;
-    private String HTMLSource;
     private String title;
-    private String content;
+    private List<String> content;
     private String creationDate;
     private List<String> tags;
     private String author;
@@ -21,14 +20,6 @@ public class Article implements News {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public String getHTMLSource() {
-        return HTMLSource;
-    }
-
-    public void setHTMLSource(String HTMLSource) {
-        this.HTMLSource = HTMLSource;
     }
 
     public List<String> getTags() {
@@ -83,11 +74,11 @@ public class Article implements News {
     }
 
     @Override
-    public String getContent() {
+    public List<String> getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(List<String> content) {
         this.content = content;
     }
 

@@ -1,5 +1,7 @@
 package group17.news_aggregator.news;
 
+import java.util.List;
+
 public interface News {
     String getLink();
 
@@ -7,7 +9,7 @@ public interface News {
 
     String getTitle();
 
-    String getContent();
+    List<String> getContent();
 
     String getCreationDate();
 
