@@ -1,5 +1,6 @@
 package group17.news_aggregator.scraper;
 
+import group17.news_aggregator.exception.EmptyContentException;
 import group17.news_aggregator.news.Article;
 import group17.news_aggregator.news.CryptopolitanArticle;
 import org.jsoup.HttpStatusException;
@@ -9,60 +10,104 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class CryptopolitanScraper extends Scraper {
 
     public static final int MAX_PAGE = 1000;
 
+    public static void main(String[] args) throws InterruptedException {
+        // testing purpose for now
+        CryptopolitanScraper scraper = new CryptopolitanScraper();
+        List<Article> list = scraper.scrapeArticleUrls();
+        System.out.println(list);
+        System.out.println();
+    }
+
     @Override
-    public ArrayList<Article> scrapeArticleUrls() {
+    public List<Article> scrapeArticleUrls() throws InterruptedException {
 
-        var resultList = new ArrayList<Article>();
+        List<Article> resultList = new ArrayList<>();
+        ExecutorService executorService = Executors.newFixedThreadPool(50);
+        final int MAX_RETRIES = 5;
 
-        try {
-            for (int i = 1; i <= MAX_PAGE; i++) {
-                String url = String.format("https://www.cryptopolitan.com/news/page/%d/", i);
-                Document document = Jsoup
-                        .connect(url)
-                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
-                        .get();
-                Elements links = document
-                        .body()
-                        .select("h3[class=\"elementor-heading-title elementor-size-default\"]")
-                        .select("a[href]");
-                for (Element link : links) {
-                    Article article = new CryptopolitanArticle();
-                    resultList.add(getArticleInfoFromUrl(link.attr("abs:href"), article));
+
+        pageLoop:
+        for (int i = 1; i <= MAX_PAGE; i++) {
+
+            int retryCount = 0;
+            boolean success = false;
+
+            while (retryCount < MAX_RETRIES && !success) {
+                try {
+
+                    String url = String.format("https://www.cryptopolitan.com/news/page/%d/", i);
+
+                    Document document = Jsoup
+                            .connect(url)
+                            .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
+                            .get();
+                    Elements links = document
+                            .body()
+                            .select("h3[class=\"elementor-heading-title elementor-size-default\"]")
+                            .select("a[href]");
+
+
+                    for (Element link : links) {
+                        executorService.execute(() -> {
+                            Article article = new CryptopolitanArticle();
+                            String articleUrl = link.attr("abs:href");
+                            try {
+                                getArticleInfoFromUrl(articleUrl, article);
+                                resultList.add(article);
+                            } catch (EmptyContentException emptyContentException) {
+                                System.out.println("Article at " + articleUrl + " has no content");
+                            } catch (IOException e) {
+                                System.out.println("Error parsing URL: " + articleUrl);
+                            }
+                        });
+                    }
+
+                    System.out.printf("Page %d scraped%n", i);
+                    System.out.println("Number of links: " + links.size());
+
+                    success = true;
+
+
+                } catch (HttpStatusException httpStatusException) {
+                    int statusCode = httpStatusException.getStatusCode();
+                    if (statusCode == 404) {
+                        break pageLoop;
+                    } else {
+                        // Retry if status code is not 404 (Not Found)
+                        retryCount++;
+                        System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
+                    }
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                System.out.printf("Page %d scraped%n", i);
-                System.out.println("Number of links: " + links.size());
             }
-
-        } catch (HttpStatusException httpStatusException) {
-
-            int status = httpStatusException.getStatusCode();
-            if (status == 404) {
-                System.out.println("Finished scraping");
-            } else {
-                System.out.println(httpStatusException.getMessage());
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
+
+        System.out.println("-----------------");
+        System.out.println("Finished scraping");
+        System.out.println("-----------------");
+
+
+        executorService.shutdown();
+        boolean ignored = executorService.awaitTermination(300, TimeUnit.SECONDS);
         return resultList;
     }
 
-
     @Override
-    public Article getArticleInfoFromUrl(String url, Article article) throws IOException {
+    public void getArticleInfoFromUrl(String url, Article article) throws IOException {
 
         article.setLink(url);
 
@@ -71,24 +116,26 @@ public class CryptopolitanScraper extends Scraper {
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
-
         // get tags and category
-        Elements tags = document
-                .body()
-                .select("div[class=\"elementor-element elementor-element-58c72d8 elementor-align-left elementor-widget elementor-widget-breadcrumbs\"]")
-                .select("a[href]");
-        tags.removeFirst();
-        article.setCategory(tags.removeFirst().text());
+        try {
+            Elements tags = document
+                    .body()
+                    .select("div[class=\"elementor-element elementor-element-58c72d8 elementor-align-left elementor-widget elementor-widget-breadcrumbs\"]")
+                    .select("a[href]");
+            tags.removeFirst();
+            article.setCategory(tags.removeFirst().text());
 
-        List<String> tagsList = tags.eachText();
+            List<String> tagsList = tags.eachText();
 
-        Elements tags2 = document
-                .head()
-                .select("meta[property=\"article:tag\"]");
-        for (Element element : tags2) {
-            tagsList.add(element.attr("content"));
+            Elements tags2 = document
+                    .head()
+                    .select("meta[property=\"article:tag\"]");
+            for (Element element : tags2) {
+                tagsList.add(element.attr("content"));
+            }
+            article.setTags(tagsList);
+        } catch (NoSuchElementException ignored) {
         }
-        article.setTags(tagsList);
 
 
         // get author
@@ -107,8 +154,8 @@ public class CryptopolitanScraper extends Scraper {
                     .select("ul")
                     .eachText().getFirst();
             article.setSummary(summary);
-        } catch (NoSuchElementException ignored) {}
-
+        } catch (NoSuchElementException ignored) {
+        }
 
 
         // get title
@@ -120,32 +167,26 @@ public class CryptopolitanScraper extends Scraper {
 
 
         // get content
-        List<String> content = document
-                .select("div[class=\"elementor-element elementor-element-e3418d0 cp-post-content elementor-widget elementor-widget-theme-post-content\"]")
-                .select("div[class=\"elementor-widget-container\"]")
-                .getFirst()
-                .children()
-                .eachText();
-        article.setContent(content);
+        try {
+            List<String> content = document
+                    .select("div[class=\"elementor-element elementor-element-e3418d0 cp-post-content elementor-widget elementor-widget-theme-post-content\"]")
+                    .select("div[class=\"elementor-widget-container\"]")
+                    .getFirst()
+                    .children()
+                    .eachText();
+            article.setContent(content);
+        } catch (NoSuchElementException e) {
+            throw new EmptyContentException(article.getLink());
+        }
 
 
         // get creation date
         String creationDate = document
-                .head()
-                .select("meta[property=\"og:updated_time\"]")
-                .attr("content");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-        LocalDateTime time = LocalDateTime.parse(creationDate, dateTimeFormatter);
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("EEEE, yyyy-MM-dd 'at' HH:mm");
-        article.setCreationDate(time.format(customFormatter));
+                .body()
+                .select("li[class=\"elementor-icon-list-item elementor-repeater-item-189e642 elementor-inline-item\"]")
+                .text();
+        article.setCreationDate(creationDate);
 
 
-        return article;
-    }
-
-    public static void main(String[] args) {
-        CryptopolitanScraper scraper = new CryptopolitanScraper();
-        ArrayList<Article> list = scraper.scrapeArticleUrls();
-        System.out.println(list);
     }
 }

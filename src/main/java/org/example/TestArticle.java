@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TestArticle {
     public static void main(String[] args) throws IOException {
-        String url = "https://www.cryptopolitan.com/all-the-crypto-events-happening-in-april/";
+        String url = "https://www.cryptopolitan.com/brics-massive-35b-economic-stimulus-package/";
         Document document = Jsoup
                 .connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
@@ -45,10 +45,10 @@ public class TestArticle {
 //        System.out.println(author);
 
         // get summary
-        String summary = document
-                .select("div[class=\"elementor-element elementor-element-bcc212e elementor-widget elementor-widget-shortcode\"]")
-                .select("ul")
-                .eachText().getFirst();
+//        String summary = document
+//                .select("div[class=\"elementor-element elementor-element-bcc212e elementor-widget elementor-widget-shortcode\"]")
+//                .select("ul")
+//                .eachText().getFirst();
 //        System.out.println(summary);
 
 
@@ -65,14 +65,20 @@ public class TestArticle {
                 .text();
 
         // get creation date
-        String creationDate = document
-                .head()
-                .select("meta[property=\"og:updated_time\"]")
-                .attr("content");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
-        LocalDateTime time = LocalDateTime.parse(creationDate, dateTimeFormatter);
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("EEEE, yyyy-MM-dd 'at' HH:mm");
-        System.out.println(time.format(customFormatter));
+//        String creationDate = document
+//                .head()
+//                .select("meta[property=\"og:updated_time\"]")
+//                .attr("content");
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+//        LocalDateTime time = LocalDateTime.parse(creationDate, dateTimeFormatter);
+//        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("EEEE, yyyy-MM-dd 'at' HH:mm");
+//        System.out.println(time.format(customFormatter));
+
+        String creationTime = document
+                .body()
+                .select("li[class=\"elementor-icon-list-item elementor-repeater-item-189e642 elementor-inline-item\"]")
+                .text();
+        System.out.println(creationTime);
 
 
 
