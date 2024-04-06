@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.util.List;
 
 public class CSVConverter {
-    public void toCSV(List<Article> articles, String filePath, boolean overwrite) {
+    public void toCSV(List<? extends Article> articles, String filePath, boolean overwrite) {
 
         try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
             StatefulBeanToCsv<Object> beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();

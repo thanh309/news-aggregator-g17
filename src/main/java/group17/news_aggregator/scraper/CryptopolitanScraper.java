@@ -25,19 +25,32 @@ public class CryptopolitanScraper extends Scraper {
     public static void main(String[] args) throws InterruptedException {
         // testing purpose for now
         CryptopolitanScraper scraper = new CryptopolitanScraper();
-        List<Article> list = scraper.scrapeArticleUrls();
+        List<CryptopolitanArticle> list = scraper.scrapeArticleList();
 //        System.out.println(list);
         System.out.println("Done");
     }
 
     @Override
-    public List<Article> scrapeArticleUrls() throws InterruptedException {
+    public CryptopolitanArticle scrapeArticle(String url) {
+        CryptopolitanArticle article = new CryptopolitanArticle();
+        try {
+            getArticleInfoFromUrl(url, article);
+        } catch (EmptyContentException emptyContentException) {
+            System.out.println("Article at " + url + " has no content");
+        } catch (IOException e) {
+            System.out.println("Error parsing URL: " + url);
+        }
+        return article;
+    }
 
-        List<Article> resultList = new ArrayList<>();
+    @Override
+    public List<CryptopolitanArticle> scrapeArticleList() throws InterruptedException {
+
+        List<CryptopolitanArticle> resultList = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(50);
         final int MAX_RETRIES = 5;
 
-//        CSVConverter csvConverter = new CSVConverter();
+        CSVConverter csvConverter = new CSVConverter();
 
 
         pageLoop:
@@ -62,19 +75,14 @@ public class CryptopolitanScraper extends Scraper {
 
 
                     for (Element link : links) {
-                        executorService.execute(() -> {
-                            Article article = new CryptopolitanArticle();
-                            String articleUrl = link.attr("abs:href");
-                            try {
-                                getArticleInfoFromUrl(articleUrl, article);
-                                resultList.add(article);
-//                                csvConverter.toCSV(article, "src/resources/output.csv", false);
-                            } catch (EmptyContentException emptyContentException) {
-                                System.out.println("Article at " + articleUrl + " has no content");
-                            } catch (IOException e) {
-                                System.out.println("Error parsing URL: " + articleUrl);
-                            }
-                        });
+                        executorService.execute(
+                                () -> {
+                                    String articleUrl = link.attr("abs:href");
+                                    CryptopolitanArticle article = scrapeArticle(articleUrl);
+                                    resultList.add(article);
+                                    csvConverter.toCSV(article, "src/resources/output.csv", false);
+                                }
+                        );
                     }
 
                     System.out.printf("Page %d scraped%n", i);

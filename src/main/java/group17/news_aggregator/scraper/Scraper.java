@@ -7,7 +7,9 @@ import java.util.List;
 
 public abstract class Scraper {
 
-    public abstract List<Article> scrapeArticleUrls() throws InterruptedException;
+    public abstract List<? extends Article> scrapeArticleList() throws InterruptedException;
+
+    public abstract Article scrapeArticle(String url);
 
     public abstract void getArticleInfoFromUrl(String url, Article article) throws IOException;
 
