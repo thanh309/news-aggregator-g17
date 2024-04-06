@@ -55,7 +55,7 @@ class BM25:
 
     def get_top_n(self, query, documents, n=1):
 
-        assert self.corpus_size == len(documents), "The documents given don't match the index corpus!"
+        assert self.corpus_size == len(documents), ":) never occur"
 
         scores = self.get_scores(query)
         top_n = np.argsort(scores)
