@@ -1,5 +1,6 @@
 package group17.news_aggregator.scraper;
 
+import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.exception.EmptyContentException;
 import group17.news_aggregator.news.Article;
 import group17.news_aggregator.news.CryptopolitanArticle;
@@ -19,14 +20,14 @@ import java.util.concurrent.TimeUnit;
 
 public class CryptopolitanScraper extends Scraper {
 
-    public static final int MAX_PAGE = 1000;
+    public static final int MAX_PAGE = 100;
 
     public static void main(String[] args) throws InterruptedException {
         // testing purpose for now
         CryptopolitanScraper scraper = new CryptopolitanScraper();
         List<Article> list = scraper.scrapeArticleUrls();
-        System.out.println(list);
-        System.out.println();
+//        System.out.println(list);
+        System.out.println("Done");
     }
 
     @Override
@@ -35,6 +36,8 @@ public class CryptopolitanScraper extends Scraper {
         List<Article> resultList = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(50);
         final int MAX_RETRIES = 5;
+
+//        CSVConverter csvConverter = new CSVConverter();
 
 
         pageLoop:
@@ -65,6 +68,7 @@ public class CryptopolitanScraper extends Scraper {
                             try {
                                 getArticleInfoFromUrl(articleUrl, article);
                                 resultList.add(article);
+//                                csvConverter.toCSV(article, "src/resources/output.csv", false);
                             } catch (EmptyContentException emptyContentException) {
                                 System.out.println("Article at " + articleUrl + " has no content");
                             } catch (IOException e) {
