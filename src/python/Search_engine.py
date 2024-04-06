@@ -1,17 +1,16 @@
 import csv
 from math import *
-import regex as re
-import pandas as pd
 import time
 import numpy as np
 import string
 import json
 
+
 class BM25:
 
     def __init__(self, corpus) -> None:
-        self.corpus_size = 0    # here is the number of documents in corpus
-        self.avgdl = 0          # here is the avg length of all documents
+        self.corpus_size = 0  # here is the number of documents in corpus
+        self.avgdl = 0  # here is the avg length of all documents
         self.tf = []
         self.idf = {}
         self.doc_len = []
@@ -20,7 +19,7 @@ class BM25:
         self._calc_idf(df)
 
     def _initialize(self, corpus):
-        df = {}  # word : number of documents with word
+        df = {}  # dictionary {word : number of documents with word}
         len_docs = 0
 
         for document in corpus:
@@ -49,12 +48,12 @@ class BM25:
         return df
 
     def _calc_idf(self, df):
-        raise NotImplementedError()
+        pass
 
     def get_scores(self, query):
-        raise NotImplementedError()
+        pass
 
-    def get_top_n(self, query, documents, n = 1):
+    def get_top_n(self, query, documents, n=1):
 
         assert self.corpus_size == len(documents), "The documents given don't match the index corpus!"
 
@@ -64,8 +63,9 @@ class BM25:
 
         return [documents[i] for i in top_n]
 
+
 class BM25Okapi(BM25):
-    def __init__(self, corpus, k1 = 1.5, b = 0.75, epsilon = 0.25) -> None:
+    def __init__(self, corpus, k1=1.5, b=0.75, epsilon=0.25) -> None:
         self.k1 = k1
         self.b = b
         self.epsilon = epsilon
@@ -94,18 +94,19 @@ class BM25Okapi(BM25):
             q_freq = np.array([doc[q] if q in doc else 0 for doc in self.tf])
             if q in self.idf:
                 scores += self.idf[q] * (q_freq * (self.k1 + 1) /
-                                         (q_freq + self.k1 *(1 - self.b + self.b * doc_len / self.avgdl)))
+                                         (q_freq + self.k1 * (1 - self.b + self.b * doc_len / self.avgdl)))
 
         return scores
+
 
 def remove_puncts(input_string, string):
     return input_string.translate(str.maketrans('', '', string.punctuation)).lower()
 
-def make_json(csv_file, json_file):
 
+def make_json(csv_file, json_file):
     data = {}
 
-    with open(csv_file, encoding = 'utf-8') as csvf:
+    with open(csv_file, encoding='utf-8') as csvf:
         csvReader = csv.DictReader(csvf)
 
         key = 0
@@ -114,7 +115,8 @@ def make_json(csv_file, json_file):
             key += 1
 
     with open(json_file, 'w', encoding='utf-8') as jsonf:
-        jsonf.write(json.dumps(data, indent = 4))
+        jsonf.write(json.dumps(data, indent=4))
+
 
 if __name__ == "__main__":
 
@@ -122,7 +124,7 @@ if __name__ == "__main__":
     query = input()
     tokenized_query = remove_puncts(query, string).split()
 
-    make_json('../resources/game.csv', '../resources/jsonfile.json')
+    make_json('../resources/gamedataset.csv', '../resources/jsonfile.json')
 
     corpus = []
 
@@ -131,7 +133,6 @@ if __name__ == "__main__":
 
     for i in range(len(data)):
         corpus.append(' '.join(data[str(i)].values()))
-
 
     tokenized_corpus = [remove_puncts(doc, string).split() for doc in corpus]
 
@@ -142,9 +143,9 @@ if __name__ == "__main__":
     cnt = 0
     for score in scores:
         if score != 0.0:
-            cnt +=1
+            cnt += 1
 
-    lines1 = bm25.get_top_n(tokenized_query, corpus, n = cnt)
+    lines1 = bm25.get_top_n(tokenized_query, corpus, n=cnt)
 
     with open('../resources/answer.txt', 'w') as f:
         for line in lines1:
