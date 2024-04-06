@@ -19,7 +19,7 @@ public class TestSelenium {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 
-        driver.get("https://a16zcrypto.com/posts/?format=article");
+        driver.get("https://www.cryptopolitan.com/news/");
 
 
         for (int i = 1; i <= 10; i++) {
