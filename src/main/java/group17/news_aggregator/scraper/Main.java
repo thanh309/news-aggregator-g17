@@ -1,7 +1,7 @@
 package group17.news_aggregator.scraper;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
-import group17.news_aggregator.news.CryptopolitanArticle;
+import group17.news_aggregator.news.Article;
 
 import java.util.List;
 
@@ -10,7 +10,15 @@ public class Main {
         String outputPath = "src/resources/output_Cryptopolitan.csv";
 
         CryptopolitanScraper scraper = new CryptopolitanScraper();
-        List<CryptopolitanArticle> articleList = scraper.scrapeArticleList();
+        List<Article> articleList = scraper.scrapeAll();
+
+        /*
+        --------------------------------------
+
+        CHECK OVERWRITE BOOLEAN BEFORE RUNNING
+
+        --------------------------------------
+         */
 
         CSVConverter converter = new CSVConverter();
         converter.toCSV(articleList, outputPath, true);
