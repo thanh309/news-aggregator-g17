@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CryptopolitanScraper extends Scraper {
 
-    public static final int MAX_PAGE = 100;
+    public static final int MAX_PAGE = 1000;
 
     public static void main(String[] args) throws InterruptedException {
         // testing purpose for now
@@ -80,7 +80,6 @@ public class CryptopolitanScraper extends Scraper {
                                     String articleUrl = link.attr("abs:href");
                                     CryptopolitanArticle article = scrapeArticle(articleUrl);
                                     resultList.add(article);
-                                    csvConverter.toCSV(article, "src/resources/output.csv", false);
                                 }
                         );
                     }
@@ -100,9 +99,9 @@ public class CryptopolitanScraper extends Scraper {
                         retryCount++;
                         System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                     }
-
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    retryCount++;
+                    System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                 }
             }
         }

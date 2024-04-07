@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class Test {
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
-        String filePath = "src/resources/output.csv";
+        String filePath = "src/resources/output_Cryptopolitan_Test.csv";
         CryptopolitanScraper scraper = new CryptopolitanScraper();
 
 

@@ -14,7 +14,7 @@ public class CSVConverter {
     public void toCSV(List<? extends Article> articles, String filePath, boolean overwrite) {
 
         try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
-            StatefulBeanToCsv<Object> beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
             beanToCsv.write(articles);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -24,7 +24,7 @@ public class CSVConverter {
     public void toCSV(Article article, String filePath, boolean overwrite) {
 
         try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
-            StatefulBeanToCsv<Object> beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
+            StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
             beanToCsv.write(article);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
