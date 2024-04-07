@@ -92,6 +92,7 @@ public class CryptopolitanScraper extends ArticleScraper {
     public void getInfoFromURL(String url, News news) throws IOException {
 
         news.setLink(url);
+        news.setWebsiteSource("Cryptopolitan");
 
         Document document = Jsoup
                 .connect(url)

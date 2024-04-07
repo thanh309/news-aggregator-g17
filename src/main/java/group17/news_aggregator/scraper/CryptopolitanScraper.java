@@ -1,6 +1,5 @@
 package group17.news_aggregator.scraper;
 
-import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.exception.EmptyContentException;
 import group17.news_aggregator.news.Article;
 import group17.news_aggregator.news.CryptopolitanArticle;
@@ -49,8 +48,6 @@ public class CryptopolitanScraper extends Scraper {
         List<CryptopolitanArticle> resultList = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(50);
         final int MAX_RETRIES = 5;
-
-        CSVConverter csvConverter = new CSVConverter();
 
 
         pageLoop:
@@ -121,6 +118,7 @@ public class CryptopolitanScraper extends Scraper {
     public void getArticleInfoFromUrl(String url, Article article) throws IOException {
 
         article.setLink(url);
+        article.setWebsiteSource("Cryptopolitan");
 
         Document document = Jsoup
                 .connect(url)
