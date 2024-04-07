@@ -1,8 +1,6 @@
-package group17.news_aggregator.scraper2;
-
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.Article;
-import group17.news_aggregator.news.News;
+import group17.news_aggregator.scraper.CryptopolitanScraper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class Main {
+public class TestCSV {
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
 
         String outputPath = "src/resources/output_Cryptopolitan_Test2.csv";

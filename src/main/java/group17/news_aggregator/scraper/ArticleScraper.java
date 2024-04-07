@@ -1,4 +1,4 @@
-package group17.news_aggregator.scraper2;
+package group17.news_aggregator.scraper;
 
 import group17.news_aggregator.exception.EmptyContentException;
 import group17.news_aggregator.news.Article;

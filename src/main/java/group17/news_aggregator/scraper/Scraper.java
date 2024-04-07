@@ -1,17 +1,15 @@
 package group17.news_aggregator.scraper;
 
-import group17.news_aggregator.news.Article;
+import group17.news_aggregator.news.News;
 
 import java.io.IOException;
 import java.util.List;
 
-public abstract class Scraper {
+public interface Scraper {
+    News scrapeFromURL(String url);
 
-    public abstract List<? extends Article> scrapeArticleList() throws InterruptedException;
+    List<? extends News> scrapeAll() throws InterruptedException;
 
-    public abstract Article scrapeArticle(String url);
-
-    public abstract void getArticleInfoFromUrl(String url, Article article) throws IOException;
-
+    void getInfoFromURL(String url, News news) throws IOException;
 
 }
