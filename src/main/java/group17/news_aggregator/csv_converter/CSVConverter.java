@@ -4,14 +4,14 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import group17.news_aggregator.news.Article;
+import group17.news_aggregator.news.News;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.List;
 
 public class CSVConverter {
-    public void toCSV(List<? extends Article> articles, String filePath, boolean overwrite) {
+    public void toCSV(List<? extends News> articles, String filePath, boolean overwrite) {
 
         try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
@@ -21,7 +21,7 @@ public class CSVConverter {
         }
     }
 
-    public void toCSV(Article article, String filePath, boolean overwrite) {
+    public void toCSV(News article, String filePath, boolean overwrite) {
 
         try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
@@ -33,10 +33,10 @@ public class CSVConverter {
 
 
 
-    public List<Article> fromCSV(String filePath) {
+    public List<? extends News> fromCSV(String filePath) {
 
         try (FileReader reader = new FileReader(filePath)) {
-            CsvToBean<Article> csvToBean = new CsvToBeanBuilder<Article>(reader).withSeparator(',').build();
+            CsvToBean<News> csvToBean = new CsvToBeanBuilder<News>(reader).withType(News.class).withSeparator(',').build();
             return csvToBean.parse();
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

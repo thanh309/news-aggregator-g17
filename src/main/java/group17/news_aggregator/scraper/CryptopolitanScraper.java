@@ -1,9 +1,8 @@
 package group17.news_aggregator.scraper;
 
-import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.exception.EmptyContentException;
 import group17.news_aggregator.news.Article;
-import group17.news_aggregator.news.CryptopolitanArticle;
+import group17.news_aggregator.news.News;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,44 +17,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class CryptopolitanScraper extends Scraper {
-
-    public static final int MAX_PAGE = 1000;
-
-    public static void main(String[] args) throws InterruptedException {
-        // testing purpose for now
-        CryptopolitanScraper scraper = new CryptopolitanScraper();
-        List<CryptopolitanArticle> list = scraper.scrapeArticleList();
-//        System.out.println(list);
-        System.out.println("Done");
-    }
+public class CryptopolitanScraper extends ArticleScraper {
 
     @Override
-    public CryptopolitanArticle scrapeArticle(String url) {
-        CryptopolitanArticle article = new CryptopolitanArticle();
-        try {
-            getArticleInfoFromUrl(url, article);
-        } catch (EmptyContentException emptyContentException) {
-            System.out.println("Article at " + url + " has no content");
-        } catch (IOException e) {
-            System.out.println("Error parsing URL: " + url);
-        }
-        return article;
-    }
-
-    @Override
-    public List<CryptopolitanArticle> scrapeArticleList() throws InterruptedException {
-
-        List<CryptopolitanArticle> resultList = new ArrayList<>();
+    public List<Article> scrapeAll() throws InterruptedException {
+        List<Article> resultList = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(50);
         final int MAX_RETRIES = 5;
 
-        CSVConverter csvConverter = new CSVConverter();
-
-
         pageLoop:
-        for (int i = 1; i <= MAX_PAGE; i++) {
-
+        for (int i = 1; i <= getMaxPage(); i++) {
             int retryCount = 0;
             boolean success = false;
 
@@ -78,13 +49,13 @@ public class CryptopolitanScraper extends Scraper {
                         executorService.execute(
                                 () -> {
                                     String articleUrl = link.attr("abs:href");
-                                    CryptopolitanArticle article = scrapeArticle(articleUrl);
+                                    Article article = scrapeFromURL(articleUrl);
                                     resultList.add(article);
                                 }
                         );
                     }
 
-                    System.out.printf("Page %d scraped%n", i);
+                    System.out.printf("Page %d scraped. ", i);
                     System.out.println("Number of links: " + links.size());
 
                     success = true;
@@ -95,7 +66,6 @@ public class CryptopolitanScraper extends Scraper {
                     if (statusCode == 404) {
                         break pageLoop;
                     } else {
-                        // Retry if status code is not 404 (Not Found)
                         retryCount++;
                         System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                     }
@@ -104,8 +74,8 @@ public class CryptopolitanScraper extends Scraper {
                     System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                 }
             }
-        }
 
+        }
 
         System.out.println("-----------------");
         System.out.println("Finished scraping");
@@ -115,17 +85,20 @@ public class CryptopolitanScraper extends Scraper {
         executorService.shutdown();
         boolean ignored = executorService.awaitTermination(300, TimeUnit.SECONDS);
         return resultList;
+
     }
 
     @Override
-    public void getArticleInfoFromUrl(String url, Article article) throws IOException {
+    public void getInfoFromURL(String url, News news) throws IOException {
 
-        article.setLink(url);
+        news.setLink(url);
+        news.setWebsiteSource("Cryptopolitan");
 
         Document document = Jsoup
                 .connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
+
 
         // get tags and category
         try {
@@ -134,7 +107,7 @@ public class CryptopolitanScraper extends Scraper {
                     .select("div[class=\"elementor-element elementor-element-58c72d8 elementor-align-left elementor-widget elementor-widget-breadcrumbs\"]")
                     .select("a[href]");
             tags.removeFirst();
-            article.setCategory(tags.removeFirst().text());
+            news.setCategory(tags.removeFirst().text());
 
             List<String> tagsList = tags.eachText();
 
@@ -144,7 +117,7 @@ public class CryptopolitanScraper extends Scraper {
             for (Element element : tags2) {
                 tagsList.add(element.attr("content"));
             }
-            article.setTags(tagsList);
+            news.setTags(tagsList);
         } catch (NoSuchElementException ignored) {
         }
 
@@ -154,7 +127,7 @@ public class CryptopolitanScraper extends Scraper {
                 .head()
                 .select("meta[name=\"twitter:data1\"]")
                 .attr("content");
-        article.setAuthor(author);
+        news.setAuthor(author);
 
 
         // get summary
@@ -164,7 +137,7 @@ public class CryptopolitanScraper extends Scraper {
                     .select("div[class=\"elementor-element elementor-element-bcc212e elementor-widget elementor-widget-shortcode\"]")
                     .select("ul")
                     .eachText().getFirst();
-            article.setSummary(summary);
+            news.setSummary(summary);
         } catch (NoSuchElementException ignored) {
         }
 
@@ -174,7 +147,7 @@ public class CryptopolitanScraper extends Scraper {
                 .body()
                 .select("div[class=\"elementor-element elementor-element-b01a881 elementor-widget__width-inherit elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading\"]")
                 .text();
-        article.setTitle(title);
+        news.setTitle(title);
 
 
         // get content
@@ -185,9 +158,9 @@ public class CryptopolitanScraper extends Scraper {
                     .getFirst()
                     .children()
                     .eachText();
-            article.setContent(content);
+            news.setContent(content);
         } catch (NoSuchElementException e) {
-            throw new EmptyContentException(article.getLink());
+            throw new EmptyContentException(news.getLink());
         }
 
 
@@ -196,7 +169,7 @@ public class CryptopolitanScraper extends Scraper {
                 .body()
                 .select("li[class=\"elementor-icon-list-item elementor-repeater-item-189e642 elementor-inline-item\"]")
                 .text();
-        article.setCreationDate(creationDate);
+        news.setCreationDate(creationDate);
 
 
     }
