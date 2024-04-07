@@ -1,5 +1,6 @@
 package group17.news_aggregator.scraper;
 
+import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.exception.EmptyContentException;
 import group17.news_aggregator.news.Article;
 import group17.news_aggregator.news.CryptopolitanArticle;
@@ -24,17 +25,32 @@ public class CryptopolitanScraper extends Scraper {
     public static void main(String[] args) throws InterruptedException {
         // testing purpose for now
         CryptopolitanScraper scraper = new CryptopolitanScraper();
-        List<Article> list = scraper.scrapeArticleUrls();
-        System.out.println(list);
-        System.out.println();
+        List<CryptopolitanArticle> list = scraper.scrapeArticleList();
+//        System.out.println(list);
+        System.out.println("Done");
     }
 
     @Override
-    public List<Article> scrapeArticleUrls() throws InterruptedException {
+    public CryptopolitanArticle scrapeArticle(String url) {
+        CryptopolitanArticle article = new CryptopolitanArticle();
+        try {
+            getArticleInfoFromUrl(url, article);
+        } catch (EmptyContentException emptyContentException) {
+            System.out.println("Article at " + url + " has no content");
+        } catch (IOException e) {
+            System.out.println("Error parsing URL: " + url);
+        }
+        return article;
+    }
 
-        List<Article> resultList = new ArrayList<>();
+    @Override
+    public List<CryptopolitanArticle> scrapeArticleList() throws InterruptedException {
+
+        List<CryptopolitanArticle> resultList = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(50);
         final int MAX_RETRIES = 5;
+
+        CSVConverter csvConverter = new CSVConverter();
 
 
         pageLoop:
@@ -59,18 +75,13 @@ public class CryptopolitanScraper extends Scraper {
 
 
                     for (Element link : links) {
-                        executorService.execute(() -> {
-                            Article article = new CryptopolitanArticle();
-                            String articleUrl = link.attr("abs:href");
-                            try {
-                                getArticleInfoFromUrl(articleUrl, article);
-                                resultList.add(article);
-                            } catch (EmptyContentException emptyContentException) {
-                                System.out.println("Article at " + articleUrl + " has no content");
-                            } catch (IOException e) {
-                                System.out.println("Error parsing URL: " + articleUrl);
-                            }
-                        });
+                        executorService.execute(
+                                () -> {
+                                    String articleUrl = link.attr("abs:href");
+                                    CryptopolitanArticle article = scrapeArticle(articleUrl);
+                                    resultList.add(article);
+                                }
+                        );
                     }
 
                     System.out.printf("Page %d scraped%n", i);
@@ -88,9 +99,9 @@ public class CryptopolitanScraper extends Scraper {
                         retryCount++;
                         System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                     }
-
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    retryCount++;
+                    System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                 }
             }
         }
