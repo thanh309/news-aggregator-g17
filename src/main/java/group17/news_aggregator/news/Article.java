@@ -1,17 +1,28 @@
 package group17.news_aggregator.news;
 
+import com.opencsv.bean.CsvBindAndSplitByName;
+import com.opencsv.bean.CsvBindByName;
+
 import java.util.List;
 
 public class Article implements News {
-
+    @CsvBindByName
     private String link;
+    @CsvBindByName
     private String websiteSource;
+    @CsvBindByName
     private String summary;
+    @CsvBindByName
     private String title;
+    @CsvBindAndSplitByName(elementType = String.class, splitOn = "\\|", writeDelimiter = "|")
     private List<String> content;
+    @CsvBindByName
     private String creationDate;
+    @CsvBindAndSplitByName(elementType = String.class, splitOn = "\\|", writeDelimiter = "|")
     private List<String> tags;
+    @CsvBindByName
     private String author;
+    @CsvBindByName
     private String category;
 
     public String getSummary() {
