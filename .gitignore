@@ -1,5 +1,6 @@
-### ignore big csv files ###
+### ignore big files ###
 *.csv
+*.json
 
 .gradle
 build/
