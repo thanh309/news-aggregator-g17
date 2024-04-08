@@ -1,143 +1,156 @@
-import time
+import csv
 from math import *
-
-import pandas as pd
-import regex as re
-
-
-class Normalize:
-    global df
-    df = pd.read_csv('../resources/game.csv')
-
-    # with open("output.txt", 'w') as f:
-    # f.write(df.to_string)
-
-    global storage
-    storage = []
-    with open("../resources/output.txt", 'r') as f:
-        for i in range(1, len(df) + 2):
-            line = f.readline()
-            storage.append(line.lower())
-
-    global keys
-    keys = [line for line in df]
-
-    global d
-    d = dict()
-
-    for line in storage:
-        d[line] = dict()
-        for word in line.split():
-            if word not in d[line]:
-                d[line][word] = 1
-            else:
-                d[line][word] += 1
-    global D
-    D = 0
-    for key in keys:
-        doc = list(df[key])
-        D += len(doc)
-
-    def __init__(self) -> None:
-        self.keys = keys
-        self.df = df
-        self.N = len(df)
-        self.d = d
-        self.D = D
+import time
+import numpy as np
+import string
+import json
 
 
-class BM25Score(Normalize):
+class BM25:
 
-    def __init__(self, pattern) -> None:
-        super().__init__()
-        self.k = 1.2
-        self.b = 0.75
-        self.pattern = pattern
+    def __init__(self, corpus) -> None:
+        self.corpus_size = 0  # here is the number of documents in corpus
+        self.avgdl = 0  # here is the avg length of all documents
+        self.tf = []
+        self.idf = {}
+        self.doc_len = []
 
-    def numTerms(self, word):
+        df = self._initialize(corpus)
+        self._calc_idf(df)
 
-        # this method find the number of terms in query 
-        new_pattern = re.sub(r'[\W_]', ' ', word)
+    def _initialize(self, corpus):
+        df = {}  # dictionary {word : number of documents with word}
+        len_docs = 0
 
-        words = new_pattern.split()
+        for document in corpus:
+            self.doc_len.append(len(document))
+            len_docs += len(document)
 
-        return (words, len(words))
+            frequencies = {}
+            for word in document:
+                if word not in frequencies:
+                    frequencies[word] = 1
+                else:
+                    frequencies[word] += 1
 
-    def TF(self, word, document):
+            self.tf.append(frequencies)
 
-        # This method count the number of times pattern appears in the document
-        if word not in self.d[document]:
-            return 0
-        return self.d[document][word]
+            for word, freq in frequencies.items():
+                if word in df:
+                    df[word] += 1
+                else:
+                    df[word] = 1
 
-    def DF(self, word):
+            self.corpus_size += 1
 
-        # This method count the number of documents that contain the pattern
-        cnt = 0
-        for key in self.keys:
-            doc = ' '.join(str(i) for i in list(self.df[key]))
-            doc = doc.lower()
-            cnt += doc.count(pattern)
+        self.avgdl = len_docs / self.corpus_size
 
-        return cnt
+        return df
 
-    def IDF(self, word):
+    def _calc_idf(self, df):
+        pass
 
-        # This method find the inverse document frequency of word
-        numerator = self.N - self.DF(word) + 0.5
-        denominator = self.DF(word) + 0.5
+    def get_scores(self, query):
+        pass
 
-        return log(numerator / denominator + 1)
+    def get_top_n(self, query, documents, n=1):
 
-    def avgLength(self):
+        assert self.corpus_size == len(documents), ":) never occur"
 
-        # This method find the ave length of all documents.
-        return len(self.keys)
+        scores = self.get_scores(query)
+        top_n = np.argsort(scores)
+        top_n = list(top_n)[::-1][:n]
 
-    def score(self, document):
+        return [documents[i] for i in top_n]
 
-        # This method find the score of the document when searching pattern
-        total = 0
-        for word in self.numTerms(self.pattern)[0]:
-            total += self.IDF(word) * (self.TF(word, document) * (self.k + 1)) / (
-                    self.TF(word, document) + self.k * (1 - self.b + self.b * self.D / self.avgLength()))
 
-        return total
+class BM25Okapi(BM25):
+    def __init__(self, corpus, k1=1.5, b=0.75, epsilon=0.25) -> None:
+        self.k1 = k1
+        self.b = b
+        self.epsilon = epsilon
+        super().__init__(corpus)
+
+    def _calc_idf(self, df):
+        idf_sum = 0
+        negative_idfs = []
+        for word, freq in df.items():
+            idf = log(self.corpus_size - freq + 0.5) - log(freq + 0.5)
+            self.idf[word] = idf
+            idf_sum += idf
+            if idf < 0:
+                negative_idfs.append(word)
+        self.average_idf = idf_sum / len(self.idf)
+
+        eps = self.epsilon * self.average_idf
+        for word in negative_idfs:
+            self.idf[word] = eps
+
+    def get_scores(self, query):
+        scores = np.zeros(self.corpus_size)
+        doc_len = np.array(self.doc_len)
+
+        for q in query:
+            q_freq = np.array([doc[q] if q in doc else 0 for doc in self.tf])
+            if q in self.idf:
+                scores += self.idf[q] * (q_freq * (self.k1 + 1) /
+                                         (q_freq + self.k1 * (1 - self.b + self.b * doc_len / self.avgdl)))
+
+        return scores
+
+
+def remove_puncts(input_string, string):
+    return input_string.translate(str.maketrans('', '', string.punctuation)).lower()
+
+
+def make_json(csv_file, json_file):
+    data = {}
+
+    with open(csv_file, encoding='utf-8') as csvf:
+        csvReader = csv.DictReader(csvf)
+
+        key = 0
+        for rows in csvReader:
+            data[key] = rows
+            key += 1
+
+    with open(json_file, 'w', encoding='utf-8') as jsonf:
+        jsonf.write(json.dumps(data, indent=4))
 
 
 if __name__ == "__main__":
+
     start_time = time.time()
-    pattern = input().lower()
+    query = input()
+    tokenized_query = remove_puncts(query, string).split()
 
-    rank = BM25Score(pattern)
+    make_json('../resources/gamedataset.csv', '../resources/jsonfile.json')
 
-    # storage = []
-    # with open("output.txt", 'r') as f:
-    #     for i in range(1, len(df) + 2):
-    #         line = f.readline()
-    #         storage.append(line.lower())
+    corpus = []
 
-    # print(storage[1])
-    # print(score.TF(pattern, storage[1]))
-    # print(score.DF(pattern))
-    # print(score.IDF(pattern))
-    # print(score.score(storage[1]))
+    with open('../resources/jsonfile.json', 'r') as jsonf:
+        data = json.load(jsonf)
 
-    # d = dict()
-    # for line in storage:
-    #     d[line] = dict()
-    #     for word in line.split():
-    #         if word not in d[line]:
-    #             d[line][word] = 1
-    #         else:
-    #             d[line][word] += 1
+    for i in range(len(data)):
+        corpus.append(' '.join(data[str(i)].values()))
 
-    score_dict = {}
-    for line in storage:
-        point = rank.score(line)
-        if point != 0.0:
-            score_dict[line] = point
+    tokenized_corpus = [remove_puncts(doc, string).split() for doc in corpus]
 
-    ans = sorted(list(score_dict.keys()), key=lambda x: -score_dict[x])
-    print(*ans)
-    print(time.time() - start_time)
+    bm25 = BM25Okapi(tokenized_corpus)
+
+    scores = bm25.get_scores(tokenized_query)
+
+    cnt = 0
+    for score in scores:
+        if score != 0.0:
+            cnt += 1
+
+    lines1 = bm25.get_top_n(tokenized_query, corpus, n=cnt)
+
+    with open('../resources/answer.txt', 'w') as f:
+        for line in lines1:
+            f.write(line + "\n")
+
+    end_time = time.time()
+
+    print(end_time - start_time)
