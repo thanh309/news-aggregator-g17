@@ -1,22 +1,26 @@
-from src.python.PythonSearchEngine.file_handling import *
-from src.python.PythonSearchEngine.search_engine import *
+from search_engine import *
+from file_handling import *
 import string
-import json 
+import csv
 
-def search_from_file(file_name_csv, file_name_json):
+def search_from_file(csv_file):
 
-    query = input()
+    query = input('Enter the query here: ')
     tokenized_query = remove_puncts(query, string).split()
 
-    make_json(file_name_csv, file_name_json)
-
     corpus = []
+    data = {}
 
-    with open(file_name_json, 'r') as jsonf:
-        data = json.load(jsonf)
+    with open(csv_file, 'r', encoding='utf-8') as csvf:
+        csvReader = csv.DictReader(csvf)
+
+        key = 0
+        for rows in csvReader:
+            data[key] = rows
+            key += 1
 
     for i in range(len(data)):
-        corpus.append(' '.join(data[str(i)].values()))
+        corpus.append(' '.join(data[i].values()))
 
     tokenized_corpus = [remove_puncts(doc, string).split() for doc in corpus]
 
@@ -31,8 +35,6 @@ def search_from_file(file_name_csv, file_name_json):
 
     lines1 = bm25.get_top_n(tokenized_query, corpus, n=cnt)
 
-    with open('../resources/answer.txt', 'w') as f:
+    with open('../resource/answer.txt', 'w') as f:
         for line in lines1:
             f.write(line + "\n")
-
-
