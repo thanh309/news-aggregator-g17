@@ -6,14 +6,14 @@ import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import group17.news_aggregator.news.News;
 
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class CSVConverter {
     public void toCSV(List<? extends News> articles, String filePath, boolean overwrite) {
 
-        try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filePath, !overwrite), StandardCharsets.UTF_8)) {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
             beanToCsv.write(articles);
         } catch (Exception exception) {
@@ -23,7 +23,7 @@ public class CSVConverter {
 
     public void toCSV(News article, String filePath, boolean overwrite) {
 
-        try (FileWriter writer = new FileWriter(filePath, !overwrite)) {
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filePath, !overwrite), StandardCharsets.UTF_8)) {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
             beanToCsv.write(article);
         } catch (Exception exception) {
@@ -32,10 +32,9 @@ public class CSVConverter {
     }
 
 
-
     public List<? extends News> fromCSV(String filePath) {
 
-        try (FileReader reader = new FileReader(filePath)) {
+        try (InputStreamReader reader = new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8)) {
             CsvToBean<News> csvToBean = new CsvToBeanBuilder<News>(reader).withType(News.class).withSeparator(',').build();
             return csvToBean.parse();
         } catch (Exception exception) {
