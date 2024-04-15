@@ -3,8 +3,10 @@ plugins {
     id "org.openjfx.javafxplugin" version "0.1.0"
     id 'java'
 }
+
 group = 'org.example'
 version = ''
+
 repositories {
     mavenCentral()
 }
@@ -27,3 +29,25 @@ test {
 javafx {
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java/group17/news_aggregator/gui']
+        }
+        resources {
+            srcDirs = ['src/main/java/group17/news_aggregator/gui']
+        }
+    }
+}
+
+
+processResources {
+    from 'src/main/java/group17/news_aggregator/gui'
+    exclude '**/*.java'
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Region prefHeight="147.0" prefWidth="1200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane fx:id="scrPane" prefHeight="606.0" prefWidth="1068.0">
+               <content>
+                  <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="1067.7368125915527" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <Pane prefHeight="605.0" prefWidth="174.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="homeImage2" fitHeight="84.0" fitWidth="93.0" layoutX="45.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="image/house.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
