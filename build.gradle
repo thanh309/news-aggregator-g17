@@ -1,5 +1,6 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id "org.openjfx.javafxplugin" version "0.1.0"
     id 'java'
 }
 group = 'org.example'
@@ -19,8 +20,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
-test
-        {
-            jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED'
-        }
+test {
+    jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED'
+}
 
+javafx {
+    modules = ['javafx.controls', 'javafx.fxml']
+}
