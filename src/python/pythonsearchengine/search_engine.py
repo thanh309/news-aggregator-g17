@@ -1,10 +1,5 @@
-import csv
 from math import *
-import time
 import numpy as np
-import string
-import json
-
 
 class BM25:
 
@@ -99,58 +94,4 @@ class BM25Okapi(BM25):
         return scores
 
 
-def remove_puncts(input_string, string):
-    return input_string.translate(str.maketrans('', '', string.punctuation)).lower()
 
-
-def make_json(csv_file, json_file):
-    data = {}
-
-    with open(csv_file, encoding='utf-8') as csvf:
-        csvReader = csv.DictReader(csvf)
-
-        key = 0
-        for rows in csvReader:
-            data[key] = rows
-            key += 1
-
-    with open(json_file, 'w', encoding='utf-8') as jsonf:
-        jsonf.write(json.dumps(data, indent=4))
-
-
-if __name__ == "__main__":
-
-    start_time = time.time()
-    query = input()
-    tokenized_query = remove_puncts(query, string).split()
-
-    make_json('../resources/gamedataset.csv', '../resources/jsonfile.json')
-
-    corpus = []
-
-    with open('../resources/jsonfile.json', 'r') as jsonf:
-        data = json.load(jsonf)
-
-    for i in range(len(data)):
-        corpus.append(' '.join(data[str(i)].values()))
-
-    tokenized_corpus = [remove_puncts(doc, string).split() for doc in corpus]
-
-    bm25 = BM25Okapi(tokenized_corpus)
-
-    scores = bm25.get_scores(tokenized_query)
-
-    cnt = 0
-    for score in scores:
-        if score != 0.0:
-            cnt += 1
-
-    lines1 = bm25.get_top_n(tokenized_query, corpus, n=cnt)
-
-    with open('../resources/answer.txt', 'w') as f:
-        for line in lines1:
-            f.write(line + "\n")
-
-    end_time = time.time()
-
-    print(end_time - start_time)
