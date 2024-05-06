@@ -76,9 +76,9 @@
                      </image></ImageView>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="83.0" prefWidth="291.0" spacing="10.0">
+            <Pane prefHeight="83.0" prefWidth="22.0" />
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="83.0" prefWidth="165.0" spacing="10.0">
                <children>
-                  <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="50.0" />
                   <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
@@ -120,7 +120,7 @@
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font></Label>
-            <VBox alignment="TOP_RIGHT" prefHeight="338.0" prefWidth="208.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="285.0" prefWidth="208.0">
                <children>
                   <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Industry News">
                      <font>
@@ -166,6 +166,12 @@
                      </cursor></CheckBox>
                </children>
             </VBox>
+            <HBox alignment="BASELINE_CENTER" prefHeight="55.0" prefWidth="208.0">
+               <children>
+                  <Button fx:id="prev20" mnemonicParsing="false" onMouseClicked="#next20" prefHeight="25.0" prefWidth="42.0" text="Prev" />
+                  <Button fx:id="next20" mnemonicParsing="false" onMouseClicked="#prev20" prefHeight="25.0" prefWidth="42.0" text="Next" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>

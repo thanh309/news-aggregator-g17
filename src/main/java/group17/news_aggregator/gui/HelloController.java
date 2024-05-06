@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -27,9 +28,6 @@ public class HelloController {
     private ScrollPane scollableid;
 
     @FXML
-    private ImageView search_img;
-
-    @FXML
     private Button tagsSearch;
 
     @FXML
@@ -41,28 +39,55 @@ public class HelloController {
     @FXML
     private VBox vboxcont;
 
+    @FXML
+    private Button next20;
+
+    @FXML
+    private Button prev20;
+
     private final CSVConverter csvConverter = new CSVConverter();
+    private int startIndex = 0;
+    private int endIndex = 20;
 
     public void initialize() {
-        List<? extends News> newsList = csvConverter.fromCSV("D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan_Test.csv");
-        for (News news : newsList) {
+        displayNews(startIndex, endIndex);
+    }
+
+    @FXML
+    void next20(MouseEvent event) {
+        startIndex -= 20;
+        endIndex -= 20;
+        displayNews(startIndex, endIndex);
+    }
+
+    @FXML
+    void prev20(MouseEvent event) {
+        if(startIndex >= 0){
+            startIndex += 20;
+            endIndex += 20;
+            displayNews(startIndex, endIndex);
+        }
+    }
+
+    private void displayNews(int startIndex, int endIndex) {
+        vboxcont.getChildren().clear();
+        List<? extends News> newsList = csvConverter.fromCSV("\"D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv\"");
+        for (int i = startIndex; i < Math.min(endIndex, newsList.size()); i++) {
+            News news = newsList.get(i);
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
                 HBox newsComponent = loader.load();
                 NewsComponentController newsComponentController = loader.getController();
 
-                // Populate the news component with data from the current News object
                 newsComponentController.title.setText(news.getTitle());
                 newsComponentController.author.setText(news.getAuthor());
                 newsComponentController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
                 newsComponentController.createTags(news.getTags());
 
-                // Add the news component to the main container
                 vboxcont.getChildren().add(newsComponent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }

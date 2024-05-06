@@ -43,4 +43,17 @@ public class CSVConverter {
         return null;
 
     }
+
+    public List<? extends News> fromCSV(String filePath, int i) {
+
+        try (InputStreamReader reader = new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8)) {
+            CsvToBean<News> csvToBean = new CsvToBeanBuilder<News>(reader).withType(News.class).withSeparator(',').build();
+            return csvToBean.parse();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return null;
+
+    }
+
 }
