@@ -49,6 +49,8 @@ public class HelloController {
     private int startIndex = 0;
     private int endIndex = 20;
 
+    private List<? extends News> newsList = csvConverter.fromCSV("D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv");
+
     public void initialize() {
         displayNews(startIndex, endIndex);
     }
@@ -71,22 +73,24 @@ public class HelloController {
 
     private void displayNews(int startIndex, int endIndex) {
         vboxcont.getChildren().clear();
-        List<? extends News> newsList = csvConverter.fromCSV("\"D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv\"");
-        for (int i = startIndex; i < Math.min(endIndex, newsList.size()); i++) {
-            News news = newsList.get(i);
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
-                HBox newsComponent = loader.load();
-                NewsComponentController newsComponentController = loader.getController();
+        int size = newsList.size();
+        if (startIndex < size && endIndex <= size) {
+            List<? extends News> subList = newsList.subList(startIndex, endIndex);
+            for (News news : subList) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
+                    HBox newsComponent = loader.load();
+                    NewsComponentController newsComponentController = loader.getController();
 
-                newsComponentController.title.setText(news.getTitle());
-                newsComponentController.author.setText(news.getAuthor());
-                newsComponentController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
-                newsComponentController.createTags(news.getTags());
+                    newsComponentController.title.setText(news.getTitle());
+                    newsComponentController.author.setText(news.getAuthor());
+                    newsComponentController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
+                    newsComponentController.createTags(news.getTags());
 
-                vboxcont.getChildren().add(newsComponent);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    vboxcont.getChildren().add(newsComponent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
