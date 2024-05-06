@@ -49,7 +49,7 @@ public class HelloController {
     private int startIndex = 0;
     private int endIndex = 20;
 
-    private List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
+    private List<? extends News> newsList = csvConverter.fromCSV("D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv");
 
     public void initialize() {
         displayNews(startIndex, endIndex);
@@ -64,11 +64,9 @@ public class HelloController {
 
     @FXML
     void prev20(MouseEvent event) {
-        if(startIndex >= 0){
-            startIndex += 20;
-            endIndex += 20;
-            displayNews(startIndex, endIndex);
-        }
+        startIndex += 20;
+        endIndex += 20;
+        displayNews(startIndex, endIndex);
     }
 
     private void displayNews(int startIndex, int endIndex) {
@@ -82,12 +80,12 @@ public class HelloController {
                     HBox newsComponent = loader.load();
                     NewsController newsController = loader.getController();
 
-                newsController.title.setText(news.getTitle());
-                newsController.author.setText(news.getAuthor());
-                newsController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
-                newsController.createTags(news.getTags());
+                    newsController.title.setText(news.getTitle());
+                    newsController.author.setText(news.getAuthor());
+                    newsController.datetype.setText(news.getCreationDate() + " \\ " + news.getType());
+                    newsController.createTags(news.getTags());
 
-                vboxcont.getChildren().add(newsComponent);
+                    vboxcont.getChildren().add(newsComponent);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
