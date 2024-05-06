@@ -18,7 +18,7 @@
             <Separator prefWidth="200.0" />
             <Button fx:id="title" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="39.0" prefWidth="784.0" stylesheets="@css/style.css" text="Title">
                <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="16.0" />
+                  <Font name="Arial Rounded MT Bold" size="17.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -37,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="13.0" />
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
             <FlowPane fx:id="flowp" alignment="CENTER_LEFT" hgap="10.0" prefHeight="59.0" prefWidth="739.0" styleClass="transparent" stylesheets="@css/style.css" vgap="3.0">
