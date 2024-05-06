@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.HelloController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="600.0" styleClass="white-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -172,7 +172,7 @@
    <center>
       <ScrollPane fx:id="scollableid" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="vboxcont" prefHeight="591.0" prefWidth="988.0" styleClass="white-background" stylesheets="@css/style.css" />
+            <VBox fx:id="vboxcont" maxWidth="1.7976931348623157E308" prefHeight="593.0" prefWidth="981.0" styleClass="white-background" stylesheets="@css/style.css" />
          </content>
       </ScrollPane>
    </center>
