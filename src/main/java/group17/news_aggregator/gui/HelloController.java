@@ -49,7 +49,7 @@ public class HelloController {
     private int startIndex = 0;
     private int endIndex = 20;
 
-    private List<? extends News> newsList = csvConverter.fromCSV("D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv");
+    private List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
 
     public void initialize() {
         displayNews(startIndex, endIndex);
@@ -88,8 +88,9 @@ public class HelloController {
                 newsController.createTags(news.getTags());
 
                 vboxcont.getChildren().add(newsComponent);
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
