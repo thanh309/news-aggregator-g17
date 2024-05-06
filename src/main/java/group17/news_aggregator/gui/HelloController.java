@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -71,18 +70,18 @@ public class HelloController {
 
     private void displayNews(int startIndex, int endIndex) {
         vboxcont.getChildren().clear();
-        List<? extends News> newsList = csvConverter.fromCSV("\"D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv\"");
+        List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
         for (int i = startIndex; i < Math.min(endIndex, newsList.size()); i++) {
             News news = newsList.get(i);
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
                 HBox newsComponent = loader.load();
-                NewsComponentController newsComponentController = loader.getController();
+                NewsController newsController = loader.getController();
 
-                newsComponentController.title.setText(news.getTitle());
-                newsComponentController.author.setText(news.getAuthor());
-                newsComponentController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
-                newsComponentController.createTags(news.getTags());
+                newsController.title.setText(news.getTitle());
+                newsController.author.setText(news.getAuthor());
+                newsController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
+                newsController.createTags(news.getTags());
 
                 vboxcont.getChildren().add(newsComponent);
             } catch (IOException e) {

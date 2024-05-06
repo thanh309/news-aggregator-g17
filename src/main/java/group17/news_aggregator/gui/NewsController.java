@@ -3,13 +3,12 @@ package group17.news_aggregator.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import group17.news_aggregator.news.News;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 import java.util.List;
 
-public class NewsComponentController {
+public class NewsController {
 
     @FXML
     Button author;

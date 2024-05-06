@@ -27,6 +27,7 @@ public class News {
     @CsvBindByName
     protected String category;
 
+
     public String getType() {
         return type;
     }
