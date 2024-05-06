@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="news" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="110.0" prefWidth="981.0" styleClass="white-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.NewsController">
+<HBox fx:id="news" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="981.0" styleClass="white-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.NewsController">
    <children>
       <VBox prefHeight="110.0" prefWidth="739.0" spacing="1.0">
          <children>
@@ -39,7 +40,10 @@
                   <Font name="Berlin Sans FB Demi Bold" size="13.0" />
                </font>
             </Button>
-            <FlowPane fx:id="flowp" prefHeight="200.0" prefWidth="200.0" styleClass="transparent" stylesheets="@css/style.css" />
+            <FlowPane fx:id="flowp" alignment="CENTER_LEFT" hgap="10.0" prefHeight="59.0" prefWidth="739.0" styleClass="transparent" stylesheets="@css/style.css" vgap="3.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></FlowPane>
          </children>
       </VBox>
       <Separator orientation="VERTICAL" prefHeight="200.0" />

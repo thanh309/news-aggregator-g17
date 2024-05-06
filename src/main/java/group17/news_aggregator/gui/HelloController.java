@@ -64,11 +64,9 @@ public class HelloController {
 
     @FXML
     void prev20(MouseEvent event) {
-        if(startIndex >= 0){
-            startIndex += 20;
-            endIndex += 20;
-            displayNews(startIndex, endIndex);
-        }
+        startIndex += 20;
+        endIndex += 20;
+        displayNews(startIndex, endIndex);
     }
 
     private void displayNews(int startIndex, int endIndex) {
@@ -82,14 +80,15 @@ public class HelloController {
                     HBox newsComponent = loader.load();
                     NewsController newsController = loader.getController();
 
-                newsController.title.setText(news.getTitle());
-                newsController.author.setText(news.getAuthor());
-                newsController.datetype.setText(news.getCreationDate() + "\\" + news.getType());
-                newsController.createTags(news.getTags());
+                    newsController.title.setText(news.getTitle());
+                    newsController.author.setText(news.getAuthor());
+                    newsController.datetype.setText(news.getCreationDate() + " \\ " + news.getType());
+                    newsController.createTags(news.getTags());
 
-                vboxcont.getChildren().add(newsComponent);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    vboxcont.getChildren().add(newsComponent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
