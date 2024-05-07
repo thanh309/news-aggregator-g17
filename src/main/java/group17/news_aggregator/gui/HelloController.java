@@ -2,6 +2,7 @@ package group17.news_aggregator.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -12,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.News;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,29 +47,41 @@ public class HelloController {
     @FXML
     private Button prev20;
 
+    private Stage stage;
+    private Scene firstScene;
+
+    private Stage newStage = new Stage();
+
     private final CSVConverter csvConverter = new CSVConverter();
     private int startIndex = 0;
     private int endIndex = 20;
 
-    private List<? extends News> newsList = csvConverter.fromCSV("D:\\kybon\\OOP-NewAggregator\\Project\\output_Cryptopolitan.csv");
+    public HelloController() {
+    }
+    public HelloController(Stage stage, Scene firstScene) {
+        this.stage = stage;
+        this.firstScene = firstScene;
+    }
+
+    private List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
 
     public void initialize() {
         displayNews(startIndex, endIndex);
     }
 
-    @FXML
-    void next20(MouseEvent event) {
-        startIndex -= 20;
-        endIndex -= 20;
-        displayNews(startIndex, endIndex);
-    }
-
-    @FXML
-    void prev20(MouseEvent event) {
-        startIndex += 20;
-        endIndex += 20;
-        displayNews(startIndex, endIndex);
-    }
+//    @FXML
+//    void next20(MouseEvent event) {
+//        startIndex -= 20;
+//        endIndex -= 20;
+//        displayNews(startIndex, endIndex);
+//    }
+//
+//    @FXML
+//    void prev20(MouseEvent event) {
+//        startIndex += 20;
+//        endIndex += 20;
+//        displayNews(startIndex, endIndex);
+//    }
 
     private void displayNews(int startIndex, int endIndex) {
         vboxcont.getChildren().clear();
@@ -77,13 +91,15 @@ public class HelloController {
             for (News news : subList) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
-                    HBox newsComponent = loader.load();
-                    NewsController newsController = loader.getController();
+                    NewsController newsController = new NewsController(newStage, firstScene);
+                    loader.setController(newsController);
 
-                    newsController.title.setText(news.getTitle());
-                    newsController.author.setText(news.getAuthor());
-                    newsController.datetype.setText(news.getCreationDate() + " \\ " + news.getType());
-                    newsController.createTags(news.getTags());
+                    HBox newsComponent = loader.load();
+//                    NewsController newsController = loader.getController();
+
+                    newsController.attachValue(news, stage);
+                    newsController = loader.getController();
+                    newsController.attachValue(news, newStage);
 
                     vboxcont.getChildren().add(newsComponent);
                 } catch (IOException e) {

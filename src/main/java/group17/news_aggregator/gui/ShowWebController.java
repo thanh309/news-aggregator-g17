@@ -25,15 +25,7 @@ public class ShowWebController {
     @FXML
     private AnchorPane webscene;
 
-    @FXML
-    void EnterMouse(MouseEvent event) {
-        Navigator.setVisible(true);
-    }
 
-    @FXML
-    void ExitMouse(MouseEvent event) {
-
-    }
     @FXML
     private ImageView homeImage;
 
@@ -42,6 +34,7 @@ public class ShowWebController {
 
     @FXML
     private ImageView prevImage;
+
     public ShowWebController(Stage stage, Scene scene) {
         this.stageWeb = stage;
         this.sceneWeb = scene;
@@ -49,15 +42,13 @@ public class ShowWebController {
     public void initialize() {
 //        Image home = new Image("house.png");
 //        homeImage.setImage(home);
-        homeImage.setOnMouseClicked(backHome -> {
-            stageWeb.hide();
-        });
-
+//        homeImage.setOnMouseClicked(backHome -> {
+//            stageWeb.hide();
+//        });
     }
     public void showVisitScene(News news) {
         engine = webView.getEngine();
         engine.load(news.getLink());
-
     }
 
 }

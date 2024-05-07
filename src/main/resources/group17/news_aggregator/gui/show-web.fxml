@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="webscene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.ShowWebController">
+<AnchorPane fx:id="webscene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <WebView fx:id="webView" prefHeight="400.0" prefWidth="600.0" />
-      <Pane fx:id="Navigator" layoutX="-6.0" onMouseEntered="#EnterMouse" onMouseExited="#ExitMouse" prefHeight="400.0" prefWidth="76.0">
+      <Pane fx:id="Navigator" layoutX="-6.0" prefHeight="400.0" prefWidth="76.0">
          <children>
             <ImageView fx:id="homeImage" fitHeight="53.0" fitWidth="60.0" layoutX="14.0" layoutY="174.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
