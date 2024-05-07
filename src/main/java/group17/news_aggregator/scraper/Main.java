@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        String outputPath = "src/resources/output_Cryptopolitan.csv";
+        String outputPath = "src/main/resources/data/output_Cryptopolitan.csv";
 
         CryptopolitanScraper scraper = new CryptopolitanScraper();
         List<Article> articleList = scraper.scrapeAll();
