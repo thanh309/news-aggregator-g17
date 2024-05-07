@@ -1,5 +1,5 @@
-from auto_complete import *
-from file_handling import remove_puncts
+from src.python.pythonsearchengine.core.auto_complete import *
+from src.python.pythonsearchengine.core.file_handling import remove_puncts
 import string
 import re
 import pandas as pd
