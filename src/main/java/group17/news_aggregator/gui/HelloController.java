@@ -67,6 +67,21 @@ public class HelloController {
 
     public void initialize() {
         displayNews(startIndex, endIndex);
+        int sizeList = newsList.size();
+        next20.setOnMouseClicked(increase20 -> {
+            if (endIndex + 20 <= sizeList) {
+                this.startIndex += 20;
+                this.endIndex += 20;
+                displayNews(startIndex, endIndex);
+            }
+        });
+        prev20.setOnMouseClicked(decrease20 -> {
+            if (startIndex >= 20) {
+                this.startIndex -= 20;
+                this.endIndex -= 20;
+                displayNews(startIndex, endIndex);
+            }
+        });
     }
 
 //    @FXML
@@ -75,16 +90,20 @@ public class HelloController {
 //        endIndex -= 20;
 //        displayNews(startIndex, endIndex);
 //    }
+
 //
-//    @FXML
-//    void prev20(MouseEvent event) {
-//        startIndex += 20;
-//        endIndex += 20;
-//        displayNews(startIndex, endIndex);
-//    }
+//        prev20.setOnMouseClicked(decrease20 -> {
+//            this.startIndex += 20;
+//            this.endIndex += 20;
+//            displayNews(startIndex, endIndex);
+//        })
+
+
 
     private void displayNews(int startIndex, int endIndex) {
         vboxcont.getChildren().clear();
+
+
         int size = newsList.size();
         if (startIndex < size && endIndex <= size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
