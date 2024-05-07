@@ -6,22 +6,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="webscene" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="webscene" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <WebView fx:id="webView" prefHeight="400.0" prefWidth="600.0" />
-      <Pane fx:id="Navigator" layoutX="-6.0" prefHeight="400.0" prefWidth="76.0">
+      <WebView fx:id="webView" prefHeight="675.0" prefWidth="1200.0" />
+      <Pane fx:id="Navigator" prefHeight="675.0" prefWidth="146.0">
          <children>
-            <ImageView fx:id="homeImage" fitHeight="53.0" fitWidth="60.0" layoutX="14.0" layoutY="174.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeImage" fitHeight="77.0" fitWidth="84.0" layoutX="31.0" layoutY="280.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/pinkHouse.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="nextImage" fitHeight="53.0" fitWidth="60.0" layoutX="14.0" layoutY="104.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="nextImage" fitHeight="77.0" fitWidth="84.0" layoutX="34.0" layoutY="390.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/next.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="prevImage" fitHeight="53.0" fitWidth="60.0" layoutX="14.0" layoutY="251.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="prevImage" fitHeight="77.0" fitWidth="84.0" layoutX="33.0" layoutY="174.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/prev.png" />
                </image>
