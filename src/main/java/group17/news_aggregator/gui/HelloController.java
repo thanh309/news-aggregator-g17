@@ -67,6 +67,8 @@ public class HelloController {
 
     public void initialize() {
         displayNews(startIndex, endIndex);
+
+
         int sizeList = newsList.size();
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= sizeList) {
@@ -84,20 +86,6 @@ public class HelloController {
         });
     }
 
-//    @FXML
-//    void next20(MouseEvent event) {
-//        startIndex -= 20;
-//        endIndex -= 20;
-//        displayNews(startIndex, endIndex);
-//    }
-
-//
-//        prev20.setOnMouseClicked(decrease20 -> {
-//            this.startIndex += 20;
-//            this.endIndex += 20;
-//            displayNews(startIndex, endIndex);
-//        })
-
 
 
     private void displayNews(int startIndex, int endIndex) {
@@ -114,7 +102,7 @@ public class HelloController {
                     loader.setController(newsController);
 
                     HBox newsComponent = loader.load();
-//                    NewsController newsController = loader.getController();
+
 
                     newsController.attachValue(news, stage);
                     newsController = loader.getController();

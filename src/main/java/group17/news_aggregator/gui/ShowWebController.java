@@ -3,6 +3,7 @@ package group17.news_aggregator.gui;
 import group17.news_aggregator.news.News;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -40,11 +41,9 @@ public class ShowWebController {
         this.sceneWeb = scene;
     }
     public void initialize() {
-//        Image home = new Image("house.png");
-//        homeImage.setImage(home);
-//        homeImage.setOnMouseClicked(backHome -> {
-//            stageWeb.hide();
-//        });
+        homeImage.setOnMouseClicked(backHome ->{
+            stageWeb.hide();
+        });
     }
     public void showVisitScene(News news) {
         engine = webView.getEngine();

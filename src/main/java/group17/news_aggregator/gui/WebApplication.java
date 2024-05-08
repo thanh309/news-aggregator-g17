@@ -22,7 +22,7 @@ public class WebApplication extends Application {
         primaryStage.setTitle("JavaFX WebView Example");
 
 
-        String url = "https://www.cryptopolitan.com/enter-the-wasteland-survive-conquer-and-thrive-in-a-post-apocalyptic-playground-with-decimated/";
+        String url = "https://medium.com/@rihot_gusron/traveling-salesman-problem-in-lingo-adbf55da3467";
 
         Document doc = Jsoup
                 .connect(url)
