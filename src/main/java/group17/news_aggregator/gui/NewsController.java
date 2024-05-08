@@ -83,7 +83,24 @@ public class NewsController {
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
+                FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("offline-content.fxml"));
+                OfflineContentController offlineContentController = new OfflineContentController(stage, scene);
+                loadOfflineContent.setController(offlineContentController);
+
+                try {
+                    Parent visitOfflineContent = loadOfflineContent.load();
+
+                    offlineContentController = loadOfflineContent.getController();
+                    offlineContentController.showOfflineContent(news);
+                    stage.setScene(new Scene(visitOfflineContent));
+                    stage.show();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
             }
+
         });
 
     }

@@ -11,6 +11,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
 
 public class ShowWebController {
     private Stage stageWeb;
@@ -45,9 +49,23 @@ public class ShowWebController {
             stageWeb.hide();
         });
     }
-    public void showVisitScene(News news) {
-        engine = webView.getEngine();
-        engine.load(news.getLink());
-    }
+    public void showVisitScene(News news) throws IOException {
+        String url = news.getLink();
+//        String url = "https://aws.amazon.com/vi/what-is/blockchain/?aws-products-all.sort-by=item.additionalFields.productNameLowercase&aws-products-all.sort-order=asc";
+        Document doc = Jsoup
+                .connect(url)
+                .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
+                .get();
+        doc.select("div[class=\"elementor elementor-421319 elementor-location-header\"]").remove();
 
+        String header = doc.head().html();
+
+        String content = doc.html();
+
+        engine = webView.getEngine();
+        engine.loadContent(header + content);
+//        engine = webView.getEngine();
+//        engine.load(news.getLink());
+
+    }
 }
