@@ -20,6 +20,9 @@ public class OfflineContentController {
     private ImageView homeImage;
 
     @FXML
+    private ImageView lostConnection;
+
+    @FXML
     private Pane naviPane;
 
     @FXML
@@ -30,14 +33,23 @@ public class OfflineContentController {
 
     @FXML
     private ScrollPane textPane;
+
     @FXML
     private Text txt;
+
+    @FXML
+    private Text warnText;
     public OfflineContentController(Stage stage, Scene scene) {
         this.stageOffline = stage;
         this.sceneOffline = scene;
     }
 
     public void showOfflineContent(News news){
+        warnText.setText("ERROR: NO INTERNET ACCESS, NO CONNECTION AVAILABLE" + "\n\n" + "Try to:" + "\n" +
+                "        Check network, modem, router\n" +
+                "        Reconnect your wifi\n" +
+                "        Run network diagnostics" + "\n\n\n") ;
+
         List<String> stringList = news.getContent();
 
         for (String str : stringList) {

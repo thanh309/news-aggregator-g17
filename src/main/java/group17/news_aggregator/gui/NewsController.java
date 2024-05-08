@@ -20,8 +20,6 @@ public class NewsController {
     private Stage stage;
     private Scene scene;
 
-    @FXML
-    private Button previewContent;
 
     @FXML
     Button author;

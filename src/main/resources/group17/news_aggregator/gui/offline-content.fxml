@@ -4,8 +4,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
@@ -34,9 +36,27 @@
       </Pane>
    </left>
    <center>
-      <ScrollPane fx:id="textPane" prefHeight="314.0" prefWidth="524.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="textPane" prefHeight="592.0" prefWidth="992.0" BorderPane.alignment="CENTER">
          <content>
-            <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="988.5367431640625" />
+            <VBox prefHeight="587.0" prefWidth="990.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="lostConnection" fitHeight="100.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/lost%20connect.png" />
+                           </image></ImageView>
+                        <Text fx:id="warnText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="396.5367088317871" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="950.0">
+                     <children>
+                        <Region prefHeight="100.0" prefWidth="10.0" />
+                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="958.1368980407715" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </content>
       </ScrollPane>
    </center>
