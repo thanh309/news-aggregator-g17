@@ -17,16 +17,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE;
+import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
+
 public class CryptopolitanScraper extends ArticleScraper {
+
+    private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 40;
 
     @Override
     public List<Article> scrapeAll() throws InterruptedException {
         List<Article> resultList = new ArrayList<>();
         ExecutorService executorService = Executors.newFixedThreadPool(50);
-        final int MAX_RETRIES = 5;
 
         pageLoop:
-        for (int i = 1; i <= getMaxPage(); i++) {
+        for (int i = 1; i <= MAX_PAGE; i++) {
             int retryCount = 0;
             boolean success = false;
 

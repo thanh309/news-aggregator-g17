@@ -22,7 +22,7 @@ public class TestCSV {
         List<String> urls = new ArrayList<>();
 
         // get urls list from file
-        File URLFromTxt = new File("src/resources/cryptopolitan_urls_test.txt");
+        File URLFromTxt = new File("src/main/resources/data/cryptopolitan_urls_test.txt");
         Scanner myReader = new Scanner(URLFromTxt);
         while (myReader.hasNextLine()) {
             String url = myReader.nextLine();
