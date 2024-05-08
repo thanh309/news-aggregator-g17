@@ -6,10 +6,10 @@ import pandas as pd
 
 def create_words_dict(csv_file):
 
-    df = pd.read_csv(csv_file)
+    df = pd.read_csv(csv_file, encoding='utf-8')
 
     # first we need to create the word dicts from csv file and then create dict of each column
-    with open(csv_file, 'r') as csvf:
+    with open(csv_file, 'r', encoding='utf-8') as csvf:
         # header = csvf.readline().split(',')
         words_list = re.split(r'[,| \n]', csvf.read())
 
@@ -53,7 +53,7 @@ def main():
 
     authors_dict = lst[1]
 
-    query = input()
+    query = input("Enter the query here: ")
 
     t = AutoComplete(authors_dict)
 

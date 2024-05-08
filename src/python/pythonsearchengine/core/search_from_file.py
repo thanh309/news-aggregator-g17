@@ -11,12 +11,12 @@ def search_from_file(csv_file, query):
     corpus = []
     corpus_title = []
 
-    df = pd.read_csv(csv_file)
+    df = pd.read_csv(csv_file, encoding='utf-8')
 
     for line in df['TITLE']:
         corpus_title.append(line)
 
-    with open(csv_file, 'r') as csvf:
+    with open(csv_file, 'r', encoding='utf-8') as csvf:
         reader = csv.reader(csvf)
         data_list = list(reader)
 
