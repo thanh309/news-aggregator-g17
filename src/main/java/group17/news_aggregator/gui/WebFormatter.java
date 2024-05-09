@@ -21,6 +21,7 @@ public class WebFormatter {
         // for CryptoSlate
         doc.select("header[id=\"header\"]").remove();
         doc.select("footer[id=\"footer\"]").remove();
+        doc.select("footer[class=\"footer\"]").remove();
         doc.select("div[class=\"scrolling\"]").remove();
         doc.select("div[class=\"sidebar right\"]").remove();
         doc.select("div[class=\"mentioned-items\"]").remove();
@@ -32,5 +33,12 @@ public class WebFormatter {
         doc.select("div[class=\"footer-disclaimer\"]").remove();
         doc.select("div[id=\"hypelab-leaderboard\"]").remove();
         doc.select("div[id=\"hypelab-top-sticky\"]").remove();
+
+        //for Cryptonews
+        doc.select("section[class=\"container container-header-price\"]").remove();
+        doc.select("section[class=\"container newsletter-section\"]").remove();
+        doc.select("div[class=\"container container-post-one\"]").remove();
+        doc.select("div[class=\"col-12 col-lg-3\"]").remove();
+
     }
 }

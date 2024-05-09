@@ -22,7 +22,7 @@ public class WebApplication extends Application {
         primaryStage.setTitle("JavaFX WebView Example");
 
 
-        String url = "https://cryptoslate.com/justin-sun-predicts-sec-rejection-of-ethereum-etf-in-may-citing-need-for-crypto-education/";
+        String url = "https://cryptonews.com/news/top-crypto-gainers-today-on-dexscreener-felon-yield-boob.htm";
 
         Document doc = Jsoup
                 .connect(url)
