@@ -1,4 +1,6 @@
-package javasearchengine.autocomplete;
+package javasearchengine.tester;
+
+import javasearchengine.core.autocomplete.AutoComplete;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package javasearchengine.autocomplete;
+package javasearchengine.core.autocomplete;
 
 import java.util.*;
 

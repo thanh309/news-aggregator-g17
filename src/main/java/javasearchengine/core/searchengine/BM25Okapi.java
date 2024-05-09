@@ -1,4 +1,4 @@
-package javasearchengine.searchengine;
+package javasearchengine.core.searchengine;
 
 import java.util.*;
 
