@@ -10,8 +10,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
@@ -21,10 +23,9 @@ import java.util.concurrent.TimeUnit;
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE;
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
-public class CryptopolitanScraper extends ArticleScraper {
+public class CryptonewsScraper extends ArticleScraper {
 
-    private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 40;
-
+    private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 16;
     @Override
     public List<Article> scrapeAll() throws InterruptedException {
         List<Article> resultList = new ArrayList<>();
@@ -38,7 +39,7 @@ public class CryptopolitanScraper extends ArticleScraper {
             while (retryCount < MAX_RETRIES && !success) {
                 try {
 
-                    String url = String.format("https://www.cryptopolitan.com/news/page/%d/", i);
+                    String url = String.format("https://www.cryptonews.com/news/page/%d/", i);
 
                     Document document = Jsoup
                             .connect(url)
@@ -46,7 +47,7 @@ public class CryptopolitanScraper extends ArticleScraper {
                             .get();
                     Elements links = document
                             .body()
-                            .select("h3[class=\"elementor-heading-title elementor-size-default\"]")
+                            .select("a[class=\"article__title article__title--md\"]")
                             .select("a[href]");
 
 
@@ -97,31 +98,31 @@ public class CryptopolitanScraper extends ArticleScraper {
     public void getInfoFromURL(String url, News news) throws IOException {
 
         news.setLink(url);
-        news.setWebsiteSource("Cryptopolitan");
+        news.setWebsiteSource("Cryptonews");
 
         Document document = Jsoup
                 .connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
+        //get category
+        try {
+            Elements category = document
+                    .body()
+                    .select("div[class=\"breadcrumbs mb-20\"]")
+                    .select("a[href]");
+            category.removeFirst();
+            news.setCategory(category.removeFirst().text());
+        } catch (NoSuchElementException ignored) {
+        }
 
-        // get tags and category
+        // get tags
         try {
             Elements tags = document
                     .body()
-                    .select("div[class=\"elementor-element elementor-element-58c72d8 elementor-align-left elementor-widget elementor-widget-breadcrumbs\"]")
+                    .select("div[class=\"article-tag-box text-lg-right\"]")
                     .select("a[href]");
-            tags.removeFirst();
-            news.setCategory(tags.removeFirst().text());
-
             List<String> tagsList = tags.eachText();
-
-            Elements tags2 = document
-                    .head()
-                    .select("meta[property=\"article:tag\"]");
-            for (Element element : tags2) {
-                tagsList.add(element.attr("content"));
-            }
             news.setTags(tagsList);
         } catch (NoSuchElementException ignored) {
         }
@@ -129,28 +130,27 @@ public class CryptopolitanScraper extends ArticleScraper {
 
         // get author
         String author = document
-                .head()
-                .select("meta[name=\"twitter:data1\"]")
-                .attr("content");
+                .body()
+                .select("div[class=\"author-title\"]")
+                .select("a[href]")
+                .text();
+        if (author.isEmpty()) {
+            author = "Guest";
+        }
         news.setAuthor(author);
 
 
-        // get summary
-        try {
-            String summary = document
-                    .body()
-                    .select("div[class=\"elementor-element elementor-element-bcc212e elementor-widget elementor-widget-shortcode\"]")
-                    .select("ul")
-                    .eachText().getFirst();
-            news.setSummary(summary);
-        } catch (NoSuchElementException ignored) {
-        }
-
+        //get summary (description)
+        String summary = document
+                .head()
+                .select("meta[name=\"twitter:description\"]")
+                .attr("content");
+        news.setSummary(summary);
 
         // get title
         String title = document
                 .body()
-                .select("div[class=\"elementor-element elementor-element-b01a881 elementor-widget__width-inherit elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading\"]")
+                .select("h1[class=\"mb-10\"]")
                 .text();
         news.setTitle(title);
 
@@ -158,10 +158,8 @@ public class CryptopolitanScraper extends ArticleScraper {
         // get content
         try {
             List<String> content = document
-                    .select("div[class=\"elementor-element elementor-element-e3418d0 cp-post-content elementor-widget elementor-widget-theme-post-content\"]")
-                    .select("div[class=\"elementor-widget-container\"]")
-                    .getFirst()
-                    .children()
+                    .select("div[class=\"article-single__content category_contents_details\"]")
+                    .select("p,h2,h3,h4")
                     .eachText();
             news.setContent(content);
         } catch (NoSuchElementException e) {
@@ -171,9 +169,10 @@ public class CryptopolitanScraper extends ArticleScraper {
 
         // get creation date
         String datetime = document
-                .head()
-                .select("meta[property=\"og:updated_time\"]")
-                .attr("content");
+                .body()
+                .select("div[class=\"fs-14 date-section\"]")
+                .select("time[datetime]")
+                .attr("datetime");
 
         if (datetime.isBlank()) {
             news.setCreationDate(0);
@@ -181,14 +180,16 @@ public class CryptopolitanScraper extends ArticleScraper {
             news.setCreationDate(Instant.parse(datetime).toEpochMilli());
         }
 
-
     }
 
     public static void main(String[] args) throws IOException {
-        String url = "https://www.cryptopolitan.com/ubisofts-shooter-xdefiant-postponed-2/";
-        CryptopolitanScraper scraper = new CryptopolitanScraper();
+        CryptonewsScraper scraper = new CryptonewsScraper();
+        String url = "https://cryptonews.com/news/solarai-revolutionary-cryptocurrency-based-on-solar-energy-and-artificial-intelligence-reaches-1-2-million-in-pre-sale.htm";
         News news = new News();
         scraper.getInfoFromURL(url, news);
+        Date date = new Date(news.getCreationDate());
+        System.out.println(DateFormat.getDateInstance(0).format(date));
         System.out.println("done");
+
     }
 }

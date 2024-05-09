@@ -7,10 +7,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        String outputPath = "src/main/resources/data/output_Cryptopolitan.csv";
+        String outputPath = "src/main/resources/data/database.csv";
 
         CryptopolitanScraper scraper = new CryptopolitanScraper();
-        List<Article> articleList = scraper.scrapeAll();
+        List<Article> list = scraper.scrapeAll();
+
+        CryptonewsScraper scraper1 = new CryptonewsScraper();
+        list.addAll(scraper1.scrapeAll());
 
         /*
         --------------------------------------
@@ -21,6 +24,6 @@ public class Main {
          */
 
         CSVConverter converter = new CSVConverter();
-        converter.toCSV(articleList, outputPath, true);
+        converter.toCSV(list, outputPath, true);
     }
 }
