@@ -9,11 +9,14 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         String outputPath = "src/main/resources/data/database.csv";
 
-        CryptopolitanScraper scraper = new CryptopolitanScraper();
-        List<Article> list = scraper.scrapeAll();
+        CryptopolitanScraper scraper0 = new CryptopolitanScraper();
+        List<Article> list = scraper0.scrapeAll();
 
         CryptonewsScraper scraper1 = new CryptonewsScraper();
         list.addAll(scraper1.scrapeAll());
+
+        CryptoSlateScraper scraper2 = new CryptoSlateScraper();
+        list.addAll(scraper2.scrapeAll());
 
         /*
         --------------------------------------
