@@ -5,7 +5,7 @@ import group17.news_aggregator.news.News;
 import java.io.IOException;
 import java.util.List;
 
-public interface Scraper {
+public interface IScraper {
     News scrapeFromURL(String url);
 
     List<? extends News> scrapeAll() throws InterruptedException;
