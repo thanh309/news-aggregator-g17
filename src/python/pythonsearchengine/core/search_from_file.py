@@ -9,12 +9,12 @@ def search_from_file(csv_file, query):
     tokenized_query = remove_puncts(query, string).split()
 
     corpus = []
-    corpus_title = []
+    corpus_index = []
 
     df = pd.read_csv(csv_file, encoding='utf-8')
 
-    for line in df['TITLE']:
-        corpus_title.append(line)
+    for line in df['INDEX']:
+        corpus_index.append(line)
 
     with open(csv_file, 'r', encoding='utf-8') as csvf:
         reader = csv.reader(csvf)
@@ -33,6 +33,6 @@ def search_from_file(csv_file, query):
         if score != 0.0:
             cnt += 1
 
-    lines1 = bm25.get_top_n(tokenized_query, corpus_title, n=cnt)
+    lines1 = bm25.get_top_n(tokenized_query, corpus_index, n=cnt)
 
     return lines1
