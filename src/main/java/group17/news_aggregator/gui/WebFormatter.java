@@ -4,7 +4,7 @@ import org.jsoup.nodes.Document;
 
 public class WebFormatter {
     public static void format(Document doc) {
-        doc.select("a,script,.hidden,form").remove();
+        doc.select("script,.hidden,form").remove();
 
         // for Cryptopolitan
         doc.select("div[class=\"elementor elementor-421319 elementor-location-header\"]").remove();
@@ -18,5 +18,19 @@ public class WebFormatter {
         doc.select("div[class=\"elementor-element elementor-element-3c7a4e8 e-con-full e-flex e-con e-child\"]").remove();
         doc.select("div[class=\"elementor-element elementor-element-a7016d4 e-flex e-con-boxed e-con e-child\"]").remove();
 
+        // for CryptoSlate
+        doc.select("header[id=\"header\"]").remove();
+        doc.select("footer[id=\"footer\"]").remove();
+        doc.select("div[class=\"scrolling\"]").remove();
+        doc.select("div[class=\"sidebar right\"]").remove();
+        doc.select("div[class=\"mentioned-items\"]").remove();
+        doc.select("div[class=\"posted-in\"]").remove();
+        doc.select("div[class=\"post-meta-flex\"]").remove();
+        doc.select("div[class=\"link-page\"]").remove();
+        doc.select("div[class=\"related-articles featured list-feed\"]").remove();
+        doc.select("div[class=\"related-articles press-releases\"]").remove();
+        doc.select("div[class=\"footer-disclaimer\"]").remove();
+        doc.select("div[id=\"hypelab-leaderboard\"]").remove();
+        doc.select("div[id=\"hypelab-top-sticky\"]").remove();
     }
 }
