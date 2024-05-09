@@ -10,6 +10,6 @@ def main():
 
     with open('answer.txt', 'w', encoding='utf-8') as f:
         for line in list_titles:
-            f.write(line + "\n")
+            f.write(str(line) + "\n")
 if __name__ == "__main__":
     main()
