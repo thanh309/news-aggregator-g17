@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -63,7 +61,7 @@ public class HelloController {
         this.firstScene = firstScene;
     }
 
-    private List<? extends News> newsList = csvConverter.fromCSV("src/main/resources/data/output_Cryptopolitan.csv");
+    private List<? extends News> newsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
 
     public void initialize() {
         displayNews(startIndex, endIndex);
