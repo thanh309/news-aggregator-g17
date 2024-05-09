@@ -46,7 +46,7 @@ public class HelloController {
     private Button prev20;
 
     private Stage stage;
-    private Scene firstScene;
+    private Scene mainScene;
 
     private Stage newStage = new Stage();
 
@@ -56,9 +56,9 @@ public class HelloController {
 
     public HelloController() {
     }
-    public HelloController(Stage stage, Scene firstScene) {
+    public HelloController(Stage stage, Scene mainScene) {
         this.stage = stage;
-        this.firstScene = firstScene;
+        this.mainScene = mainScene;
     }
 
     private List<? extends News> newsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
@@ -96,7 +96,7 @@ public class HelloController {
             for (News news : subList) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
-                    NewsController newsController = new NewsController(newStage, firstScene);
+                    NewsController newsController = new NewsController(newStage, mainScene);
                     loader.setController(newsController);
 
                     HBox newsComponent = loader.load();

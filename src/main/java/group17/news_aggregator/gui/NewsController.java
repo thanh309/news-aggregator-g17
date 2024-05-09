@@ -39,9 +39,9 @@ public class NewsController {
     public NewsController() {
     }
 
-    public NewsController(Stage stage, Scene firstScene) {
+    public NewsController(Stage stage, Scene mainScene) {
         this.stage = stage;
-        this.scene = firstScene;
+        this.scene = mainScene;
     }
 
     // Method to update FlowPane with tags
