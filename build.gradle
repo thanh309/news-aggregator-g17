@@ -1,26 +1,42 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+//    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id "org.openjfx.javafxplugin" version "0.1.0"
     id 'java'
+    id 'application'
 }
+
 group = 'org.example'
 version = ''
+
 repositories {
     mavenCentral()
 }
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.jsoup:jsoup:1.17.2'
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.41.0'
-    implementation files('src/libs/darcula.jar')
+//    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.41.0'
+//    implementation files('src/libs/darcula.jar')
     implementation group: 'com.opencsv', name: 'opencsv', version: '5.9'
 }
-tasks.test {
-    useJUnitPlatform()
+
+
+javafx {
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.base', 'javafx.swing', 'javafx.media', 'javafx.graphics']
 }
 
-test
-        {
-            jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED'
-        }
+application {
+    mainClass = 'group17.news_aggregator.gui.Main'
+}
 
+
+
+// for standalone executable jar file
+jar {
+    manifest {
+        attributes 'Main-Class': 'group17.news_aggregator.gui.Main'
+    }
+     duplicatesStrategy DuplicatesStrategy.EXCLUDE
+     from {
+         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+     }
+}

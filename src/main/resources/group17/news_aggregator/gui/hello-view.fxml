@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="600.0" styleClass="white-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="83.0" prefWidth="25.0" />
+            <Label alignment="CENTER" prefHeight="83.0" prefWidth="174.0" text="Aggregator" textFill="#674ea7">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="28.0" />
+               </font>
+            </Label>
+            <Separator maxHeight="-Infinity" maxWidth="-Infinity" orientation="VERTICAL" prefHeight="50.0" prefWidth="30.0" />
+            <Pane prefHeight="83.0" prefWidth="348.0">
+               <children>
+                  <Button fx:id="authorSearch" layoutX="37.0" layoutY="24.0" mnemonicParsing="false" stylesheets="@css/style.css" text="Author">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-moved" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="titleSearch" layoutX="144.0" layoutY="25.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="74.0" stylesheets="@css/style.css" text="Title">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-moved" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="tagsSearch" layoutX="247.0" layoutY="26.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="84.0" stylesheets="@css/style.css" text="Tags">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-moved" />
+                     </styleClass>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </Pane>
+            <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" prefHeight="39.0" prefWidth="338.0" styleClass="round-layout" stylesheets="@css/style.css">
+               <children>
+                  <TextField fx:id="filterText" prefHeight="33.0" prefWidth="270.0" promptText="Search" styleClass="transparent" stylesheets="@css/style.css">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font></TextField>
+                  <ImageView fx:id="search_img" fitHeight="24.0" fitWidth="25.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/search.png" />
+                     </image></ImageView>
+               </children>
+            </HBox>
+            <Pane prefHeight="83.0" prefWidth="22.0" />
+            <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="83.0" prefWidth="165.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="40.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox fx:id="vbox_2" maxHeight="-Infinity" prefHeight="592.0" prefWidth="208.0" spacing="10.0" styleClass="white-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Format">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font></Label>
+            <VBox alignment="TOP_RIGHT" prefHeight="172.0" prefWidth="208.0">
+               <children>
+                  <Pane prefHeight="46.0" prefWidth="208.0" styleClass="selected" stylesheets="@css/style.css">
+                     <children>
+                        <CheckBox layoutX="13.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" selected="true" text="Ariticle">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font></CheckBox>
+                     </children>
+                  </Pane>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" text="CheckBox">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font></CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" text="CheckBox">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font></CheckBox>
+               </children>
+            </VBox>
+            <Label text="Popular Tags">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font></Label>
+            <VBox alignment="TOP_RIGHT" prefHeight="285.0" prefWidth="208.0">
+               <children>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Industry News">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Cryptomarket">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Cryptocurrency">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Cryptocurrency Trading">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Crypto Trading">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="46.0" prefWidth="195.0" styleClass="mouse-moved" stylesheets="@css/style.css" text="Bitcoin News">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></CheckBox>
+               </children>
+            </VBox>
+            <HBox alignment="BASELINE_CENTER" prefHeight="55.0" prefWidth="208.0">
+               <children>
+                  <Button fx:id="prev20" mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" text="Prev" />
+                  <Button fx:id="next20" mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" text="Next" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <ScrollPane fx:id="scollableid" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vboxcont" maxWidth="1.7976931348623157E308" prefHeight="593.0" prefWidth="981.0" styleClass="white-background" stylesheets="@css/style.css" />
+         </content>
+      </ScrollPane>
+   </center>
+</BorderPane>

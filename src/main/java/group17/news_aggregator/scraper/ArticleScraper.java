@@ -7,20 +7,26 @@ import group17.news_aggregator.news.News;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class ArticleScraper implements Scraper {
+import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
-    private int maxPage = 1000;
+public abstract class ArticleScraper implements IScraper {
 
     @Override
     public Article scrapeFromURL(String url) {
         Article article = new Article();
-        try {
-            getInfoFromURL(url, article);
-            return article;
-        } catch (EmptyContentException emptyContentException) {
-            System.out.println(emptyContentException.getMessage());
-        } catch (IOException e) {
-            System.out.println("Error parsing URL: " + url);
+        int retryCount = 0;
+        while (retryCount < MAX_RETRIES) {
+            try {
+                getInfoFromURL(url, article);
+                return article;
+            } catch (EmptyContentException emptyContentException) {
+                System.out.println(emptyContentException.getMessage());
+                return null;
+            } catch (IOException e) {
+                retryCount++;
+                System.out.printf("Error parsing URL: %s. Retrying (%d/%d)...\n", url, retryCount, MAX_RETRIES);
+            }
+
         }
         return null;
     }
@@ -31,11 +37,4 @@ public abstract class ArticleScraper implements Scraper {
     @Override
     public abstract void getInfoFromURL(String url, News news) throws IOException;
 
-    public int getMaxPage() {
-        return maxPage;
-    }
-
-    public void setMaxPage(int maxPage) {
-        this.maxPage = maxPage;
-    }
 }

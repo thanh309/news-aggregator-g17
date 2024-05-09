@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class TestCSV {
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
 
-        String outputPath = "src/resources/output_Cryptopolitan_Test2.csv";
+        String outputPath = "src/main/resources/data/output_Cryptopolitan_Test.csv";
 
         CryptopolitanScraper scraper = new CryptopolitanScraper();
         CSVConverter converter = new CSVConverter();
@@ -22,7 +22,7 @@ public class TestCSV {
         List<String> urls = new ArrayList<>();
 
         // get urls list from file
-        File URLFromTxt = new File("src/resources/cryptopolitan_urls.txt");
+        File URLFromTxt = new File("src/main/resources/data/cryptopolitan_urls_test.txt");
         Scanner myReader = new Scanner(URLFromTxt);
         while (myReader.hasNextLine()) {
             String url = myReader.nextLine();

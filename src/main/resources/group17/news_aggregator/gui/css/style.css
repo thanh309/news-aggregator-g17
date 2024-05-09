@@ -1,0 +1,33 @@
+.white-background{
+    -fx-background-color: #fff;
+}
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.round-layout{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+}
+
+.selected{
+    -fx-background-color: #F3F3F3;
+}
+
+.mouse-moved: hover{
+    -fx-background-color: #E4E4E4;
+}
+
+.check-box .box{
+    -fx-background-color: white;
+    -fx-border-color: grey;
+    -fx-border-radius: 3px;
+}
+
+.check-box: selected .mark{
+    -fx-background-color:white;
+}
+
+.check-box: selected .box{
+    -fx-background-color: #674ea7;
+}
