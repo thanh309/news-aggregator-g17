@@ -1,6 +1,7 @@
 package javasearchengine.core.searchengine;
 
 import group17.news_aggregator.news.News;
+import group17.news_aggregator.search_engine.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,5 +28,14 @@ public class SearchEngine {
     public List<Integer> searchFromFile(List<Integer> toSortList, String query, int maxNumberOfResults) {
         List<String> tokenizedQuery = new ArrayList<>(Arrays.asList(FileHandling.removePuncts(query).split("\\s+")));
         return searchCore.getTopNIndex(tokenizedQuery, toSortList, maxNumberOfResults);
+    }
+
+    public void filterIndices(List<Integer> ids, Query query, List<News> references) {
+        ids.removeIf(id ->
+                !references.get(id).getAuthor().toLowerCase().contains(query.getAuthor())
+                        | !references.get(id).getCategory().toLowerCase().contains(query.getCategory())
+                        | !String.join(" ", references.get(id).getTags()).toLowerCase().contains(query.getTag())
+                        | references.get(id).getCreationDate() > query.getEndDateTime()
+                        | references.get(id).getCreationDate() < query.getStartDateTime());
     }
 }
