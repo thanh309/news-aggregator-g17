@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -16,6 +17,10 @@ public class OfflineContentController {
 
     private Stage stageOffline;
     private Scene sceneOffline;
+
+    @FXML
+    private Region spacer;
+
     @FXML
     private ImageView homeImage;
 
@@ -39,16 +44,14 @@ public class OfflineContentController {
 
     @FXML
     private Text warnText;
+
     public OfflineContentController(Stage stage, Scene scene) {
         this.stageOffline = stage;
         this.sceneOffline = scene;
     }
 
-    public void showOfflineContent(News news){
-        warnText.setText("ERROR: NO INTERNET ACCESS, NO CONNECTION AVAILABLE" + "\n\n" + "Try to:" + "\n" +
-                "        Check network, modem, router\n" +
-                "        Reconnect your wifi\n" +
-                "        Run network diagnostics" + "\n\n\n") ;
+    public void showOfflineContent(News news) {
+        warnText.setText("Error: no internet connection, no access available" + "\n\n");
 
         List<String> stringList = news.getContent();
 

@@ -47,7 +47,7 @@
             </Pane>
             <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" prefHeight="39.0" prefWidth="338.0" styleClass="round-layout" stylesheets="@css/style.css">
                <children>
-                  <TextField fx:id="filterText" prefHeight="33.0" prefWidth="270.0" promptText="Search" styleClass="transparent" stylesheets="@css/style.css">
+                  <TextField fx:id="filterText" prefHeight="40.0" prefWidth="298.0" promptText="Search" styleClass="transparent" stylesheets="@css/style.css">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font></TextField>
