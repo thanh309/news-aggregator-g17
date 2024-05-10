@@ -152,7 +152,7 @@
                   <Pane prefHeight="655.0" prefWidth="36.0" />
                   <ScrollPane fx:id="scollableid" prefHeight="670.0" prefWidth="808.0" styleClass="white-background" stylesheets="@css/style.css">
                      <content>
-                        <VBox fx:id="vboxcont" prefHeight="692.0" prefWidth="809.0" spacing="7.0" styleClass="white-background" stylesheets="@css/style.css" />
+                        <VBox fx:id="vboxcont" prefHeight="692.0" prefWidth="790.0" spacing="7.0" styleClass="white-background" stylesheets="@css/style.css" />
                      </content>
                      <HBox.margin>
                         <Insets bottom="5.0" />
