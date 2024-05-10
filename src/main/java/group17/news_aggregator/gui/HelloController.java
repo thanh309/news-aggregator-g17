@@ -63,7 +63,7 @@ public class HelloController {
         this.mainScene = mainScene;
     }
 
-    private List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
+    private List<News> newsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
     public Boolean[] booleanJoin = {false, false, false};
 
     public Boolean[] getBooleanJoin() {

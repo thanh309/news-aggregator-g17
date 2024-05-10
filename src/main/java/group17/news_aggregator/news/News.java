@@ -3,6 +3,8 @@ package group17.news_aggregator.news;
 import com.opencsv.bean.CsvBindAndSplitByName;
 import com.opencsv.bean.CsvBindByName;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class News {
@@ -19,24 +21,13 @@ public class News {
     @CsvBindAndSplitByName(elementType = String.class, splitOn = "\\|", writeDelimiter = "|")
     protected List<String> content;
     @CsvBindByName
-    protected String creationDate;
+    protected long creationDate;
     @CsvBindAndSplitByName(elementType = String.class, splitOn = "\\|", writeDelimiter = "|")
     protected List<String> tags;
     @CsvBindByName
     protected String author;
     @CsvBindByName
     protected String category;
-
-    public static int MaxOrder = 0;
-
-    // this is not the order news is add to total all news,
-    // it is just the Order of news in difference display turn
-    private int Order;
-
-
-    public News(){
-        MaxOrder += 1;
-    }
 
 
     public String getType() {
@@ -111,15 +102,17 @@ public class News {
         this.content = content;
     }
 
-    public String getCreationDate() {
+    public long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(long creationDate) {
         this.creationDate = creationDate;
     }
 
-    public int getOrder() {return Order;}
 
-    public void setOrder(int order) {Order = order;}
+    public String getCreationDateStr() {
+        Date date = new Date(this.getCreationDate());
+        return DateFormat.getDateInstance(0).format(date);
+    }
 }

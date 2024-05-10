@@ -1,5 +1,6 @@
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.Article;
+import group17.news_aggregator.news.News;
 import group17.news_aggregator.scraper.CryptopolitanScraper;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public class TestCSV {
         List<String> urls = new ArrayList<>();
 
         // get urls list from file
-        File URLFromTxt = new File("src/resources/cryptopolitan_urls_test.txt");
+        File URLFromTxt = new File("src/main/resources/data/cryptopolitan_urls_test.txt");
         Scanner myReader = new Scanner(URLFromTxt);
         while (myReader.hasNextLine()) {
             String url = myReader.nextLine();
@@ -44,7 +45,7 @@ public class TestCSV {
         converter.toCSV(articleList, outputPath, true);
 
         // test getting articles from csv file
-        List<Article> articlesOut = (List<Article>) converter.fromCSV(outputPath);
+        List<News> articlesOut = converter.fromCSV(outputPath);
         System.out.println("Size: " + articlesOut.size());
         System.out.println("Done");
     }

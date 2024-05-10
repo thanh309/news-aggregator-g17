@@ -63,7 +63,7 @@ public class NewsController {
 
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
-        this.datetype.setText(news.getCreationDate() + " \\ " + news.getType());
+        this.datetype.setText(news.getCreationDateStr() + " \\ " + news.getType());
         this.createTags(news.getTags());
         // set prevContent here
 
