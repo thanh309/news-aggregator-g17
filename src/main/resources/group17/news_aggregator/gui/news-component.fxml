@@ -42,7 +42,8 @@
             <FlowPane fx:id="flowp" alignment="CENTER_LEFT" hgap="10.0" prefHeight="75.0" prefWidth="650.0" styleClass="transparent" stylesheets="@css/style.css" vgap="3.0">
                <VBox.margin>
                   <Insets />
-               </VBox.margin></FlowPane>
+               </VBox.margin>
+            </FlowPane>
          </children>
       </VBox>
       <Separator orientation="VERTICAL" prefHeight="200.0" />

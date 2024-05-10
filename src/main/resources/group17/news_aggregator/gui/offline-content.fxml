@@ -20,24 +20,33 @@
          <content>
             <VBox prefHeight="587.0" prefWidth="990.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="86.0" prefWidth="990.0">
                      <children>
-                        <ImageView fx:id="lostConnection" fitHeight="100.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="lostConnection" fitHeight="58.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/logo.png" />
+                              <Image url="@image/lost%20connect.png" />
                            </image>
                         </ImageView>
-                        <Text fx:id="warnText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="895.2033958435059">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Text>
+                        <VBox prefHeight="86.0" prefWidth="362.0">
+                           <children>
+                              <Region prefHeight="27.0" prefWidth="362.0" />
+                              <Text fx:id="warnText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
+                  <Region prefHeight="14.0" prefWidth="990.0" />
                   <HBox prefHeight="26.0" prefWidth="950.0">
                      <children>
                         <Region prefHeight="100.0" prefWidth="10.0" />
-                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="958.1368980407715" />
+                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="958.1368980407715">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Text>
                      </children>
                   </HBox>
                </children>

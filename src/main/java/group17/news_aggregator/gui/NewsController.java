@@ -46,9 +46,12 @@ public class NewsController {
     }
 
     // Method to update FlowPane with tags
-    public void createTags(List<String> tags) {
+
+    public void createTags(List<String> tags, int lim) {
         flowp.getChildren().clear();
+        int count = 0;
         for (String tag : tags) {
+            count += 1;
             Button buttonTag = new Button();
             buttonTag.setPrefWidth(130);
             buttonTag.setPrefHeight(20);
@@ -58,6 +61,9 @@ public class NewsController {
             buttonTag.getStyleClass().add("round-layout");
             buttonTag.setCursor(Cursor.HAND);
             flowp.getChildren().add(buttonTag);
+            if (count > lim){
+                break;
+            }
         }
     }
 
@@ -69,7 +75,7 @@ public class NewsController {
         Text newText = new Text(news.getCreationDateStr() + " \\ " + news.getType());
         newText.setStyle("-fx-font-size: 17px;");
         this.datetype.getChildren().add(newText);
-        this.createTags(news.getTags());
+        this.createTags(news.getTags(),10);
 
         this.title.setOnAction(visitSite -> {
             FXMLLoader loadweb = new FXMLLoader(getClass().getResource("show-web.fxml"));
