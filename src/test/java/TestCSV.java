@@ -1,5 +1,6 @@
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.Article;
+import group17.news_aggregator.news.News;
 import group17.news_aggregator.scraper.CryptopolitanScraper;
 
 import java.io.File;
@@ -44,7 +45,7 @@ public class TestCSV {
         converter.toCSV(articleList, outputPath, true);
 
         // test getting articles from csv file
-        List<Article> articlesOut = (List<Article>) converter.fromCSV(outputPath);
+        List<News> articlesOut = converter.fromCSV(outputPath);
         System.out.println("Size: " + articlesOut.size());
         System.out.println("Done");
     }
