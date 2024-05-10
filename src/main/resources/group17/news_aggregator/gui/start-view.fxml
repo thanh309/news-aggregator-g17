@@ -30,19 +30,23 @@
             <Label prefHeight="57.0" prefWidth="9.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="105.0" prefWidth="1200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="111.0" styleClass="transparent" stylesheets="@css/style.css" text="Home" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="122.0" styleClass="transparent" stylesheets="@css/style.css" text="Home" textFill="WHITE">
                      <font>
-                        <Font name="System Italic" size="28.0" />
+                        <Font name="System Bold Italic" size="28.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="61.0" prefWidth="1200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="147.0" styleClass="transparent" stylesheets="@css/style.css" text="About Us" textFill="WHITE">
+                  <Button fx:id="aboutUs" mnemonicParsing="false" onAction="#aboutus" prefHeight="52.0" prefWidth="147.0" stylesheets="@css/style.css" text="About Us" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="25.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-moved-au" />
+                     </styleClass>
                   </Button>
                </children>
             </HBox>

@@ -3,12 +3,17 @@
     -fx-background-size: cover;
 }
 
-.vbox_background_right{
-    -fx-background-image:url("../image/startSceneBG.jpg");
+.vbox_background_au{
+    -fx-background-image:url("../image/aboutUs.png");
+    -fx-background-size: cover;
 }
 
 .mouse-moved: hover{
     -fx-text-fill: white;
+}
+
+.mouse-moved-au: hover{
+    -fx-text-fill: #5E17EB;
 }
 
 .transparent{
