@@ -4,8 +4,8 @@ import java.util.*;
 
 public class AutoComplete extends Trie {
 
-    public AutoComplete(Map<String, Integer> wordDict) {
-        super(wordDict);
+    public AutoComplete(List<String> words) {
+        super(words);
 
     }
 
@@ -24,11 +24,7 @@ public class AutoComplete extends Trie {
         return results;
     }
 
-    public int calcScore(String word) {
-        return super.getWordDict().get(word);
-    }
-
-    public Map<List<String>, Integer> getSuggestion(String word) {
+    public Map<List<String>, Integer> storeSuggestion(String word) {
 
         Map<List<String>, Integer> res = new HashMap<>();
 
@@ -53,28 +49,44 @@ public class AutoComplete extends Trie {
 
         List<String> listSuggest = this.autoComplete(node, word);
 
-        // we need at most 10-highest-score suggestions
-        Collections.sort(listSuggest, new Comparator<String>() {
-
-            @Override
-            public int compare(String word1, String word2) {
-                // TODO Auto-generated method stub
-                return -calcScore(word1) + calcScore(word2);
-            }
-
-        });
-
         int cnt = 0;
         for (String w : listSuggest) {
             ans.add(w);
             cnt++;
-            if (cnt == 10) {
+            if (cnt == 5) {
                 break;
             }
         }
         res.put(ans, 1);
         return res;
 
+    }
+
+    public List<String> getSuggestion(String word) {
+
+        Map<List<String>, Integer> storage = storeSuggestion(word);
+
+        List<String> ans = new ArrayList<>();
+
+        for (Map.Entry<List<String>, Integer> entry : storage.entrySet()) {
+
+            if (entry.getValue() == -1) {
+
+                return ans;
+
+            } else if (entry.getValue() == 0) {
+
+                return ans;
+
+            } else {
+
+                for (String w : entry.getKey()) {
+
+                    ans.add(w);
+                }
+            }
+        }
+        return ans;
     }
 
 }
