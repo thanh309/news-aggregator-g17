@@ -64,12 +64,15 @@ public class HelloController {
     }
 
     private List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
-    public static Boolean[] booleanJoin = {false, false, false};
+    public Boolean[] booleanJoin = {false, false, false};
+
+    public Boolean[] getBooleanJoin() {
+        return booleanJoin;
+    }
+
     public void initialize() {
         displayNews(startIndex, endIndex);
-
-
-
+        
         int sizeList = News.MaxOrder;
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= sizeList) {
