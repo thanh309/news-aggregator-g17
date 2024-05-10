@@ -50,13 +50,14 @@ public class ShowWebController {
         });
     }
     public void showVisitScene(News news) throws IOException {
-        String url = news.getLink();
-//        String url = "https://aws.amazon.com/vi/what-is/blockchain/?aws-products-all.sort-by=item.additionalFields.productNameLowercase&aws-products-all.sort-order=asc";
+//        String url = news.getLink();
+        String url = "https://cryptonews.com/news/top-crypto-gainers-today-on-dexscreener-felon-yield-boob.htm";
         Document doc = Jsoup
                 .connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
-        doc.select("div[class=\"elementor elementor-421319 elementor-location-header\"]").remove();
+
+        WebFormatter.format(doc);
 
         String header = doc.head().html();
 
