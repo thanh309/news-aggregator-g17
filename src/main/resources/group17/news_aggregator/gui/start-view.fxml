@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,10 +14,14 @@
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="441.0" prefWidth="1200.0" />
-            <Button mnemonicParsing="false" onAction="#startnow" prefHeight="81.0" prefWidth="257.0" styleClass="transparent" stylesheets="@css/style.css" text="Start Now" textFill="#13538a">
+            <Button mnemonicParsing="false" onAction="#startnow" prefHeight="81.0" prefWidth="257.0" stylesheets="@css/start.css" text="Start Now" textFill="#13538a">
                <font>
                   <Font name="System Bold" size="41.0" />
                </font>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
             </Button>
             <Label prefHeight="57.0" prefWidth="9.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="105.0" prefWidth="1200.0">

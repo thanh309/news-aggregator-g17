@@ -35,8 +35,6 @@ public class HelloController {
 
     @FXML
     private CheckBox cateCheckBox;
-    @FXML
-    private VBox vbox_2;
 
     @FXML
     private VBox vboxcont;

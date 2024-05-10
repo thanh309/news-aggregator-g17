@@ -8,5 +8,9 @@
 }
 
 .mouse-moved: hover{
-    -fx-background-text-color: grey;
+    -fx-text-fill: white;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
 }

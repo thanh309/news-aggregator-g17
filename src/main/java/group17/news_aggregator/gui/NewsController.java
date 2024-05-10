@@ -7,9 +7,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class NewsController {
     Button title;
 
     @FXML
-    Label datetype;
+    TextFlow datetype;
 
     public NewsController() {
     }
@@ -46,6 +47,7 @@ public class NewsController {
 
     // Method to update FlowPane with tags
     public void createTags(List<String> tags) {
+        flowp.getChildren().clear();
         for (String tag : tags) {
             Button buttonTag = new Button();
             buttonTag.setPrefWidth(130);
@@ -63,9 +65,11 @@ public class NewsController {
 
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
-        this.datetype.setText(news.getCreationDateStr() + " \\ " + news.getType());
+        this.datetype.getChildren().clear();
+        Text newText = new Text(news.getCreationDateStr() + " \\ " + news.getType());
+        newText.setStyle("-fx-font-size: 17px;");
+        this.datetype.getChildren().add(newText);
         this.createTags(news.getTags());
-        // set prevContent here
 
         this.title.setOnAction(visitSite -> {
             FXMLLoader loadweb = new FXMLLoader(getClass().getResource("show-web.fxml"));

@@ -24,6 +24,10 @@
     -fx-background-color: grey;
 }
 
+.mouse-moved-text: hover{
+    -fx-text-fill: grey;
+}
+
 .check-box .box{
     -fx-background-color: white;
     -fx-border-color: grey;
