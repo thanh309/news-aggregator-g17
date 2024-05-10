@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,7 @@ import java.util.List;
 public class HelloController {
 
     @FXML
-    private Button authorSearch;
+    private CheckBox authorCheckBox;
 
     @FXML
     private TextField filterText;
@@ -30,11 +31,10 @@ public class HelloController {
     private ScrollPane scollableid;
 
     @FXML
-    private Button tagsSearch;
+    private CheckBox tagsCheckBox;
 
     @FXML
-    private Button titleSearch;
-
+    private CheckBox titleCheckBox;
     @FXML
     private VBox vbox_2;
 
@@ -48,7 +48,7 @@ public class HelloController {
     private Button prev20;
 
     private Stage stage;
-    private Scene firstScene;
+    private Scene mainScene;
 
     private Stage newStage = new Stage();
 
@@ -58,16 +58,22 @@ public class HelloController {
 
     public HelloController() {
     }
-    public HelloController(Stage stage, Scene firstScene) {
+    public HelloController(Stage stage, Scene mainScene) {
         this.stage = stage;
-        this.firstScene = firstScene;
+        this.mainScene = mainScene;
     }
 
-    private List<News> newsList = csvConverter.fromCSV("src/main/resources/data/output_Cryptopolitan.csv");
+    private List<News> newsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
+    public Boolean[] booleanJoin = {false, false, false};
+
+    public Boolean[] getBooleanJoin() {
+        return booleanJoin;
+    }
 
     public void initialize() {
         displayNews(startIndex, endIndex);
-        int sizeList = newsList.size();
+        
+        int sizeList = News.MaxOrder;
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= sizeList) {
                 this.startIndex += 20;
@@ -82,21 +88,26 @@ public class HelloController {
                 displayNews(startIndex, endIndex);
             }
         });
+
+
+        authorCheckBox.setOnAction(event -> {
+            if (authorCheckBox.isSelected()) {
+                booleanJoin[0] = true;
+            }
+        });
+        tagsCheckBox.setOnAction(event -> {
+            if (tagsCheckBox.isSelected()) {
+                booleanJoin[1] = true;
+            }
+        });
+
+        titleCheckBox.setOnAction(event -> {
+            if (titleCheckBox.isSelected()) {
+                booleanJoin[2] = true;
+            }
+        });
+
     }
-
-//    @FXML
-//    void next20(MouseEvent event) {
-//        startIndex -= 20;
-//        endIndex -= 20;
-//        displayNews(startIndex, endIndex);
-//    }
-
-//
-//        prev20.setOnMouseClicked(decrease20 -> {
-//            this.startIndex += 20;
-//            this.endIndex += 20;
-//            displayNews(startIndex, endIndex);
-//        })
 
 
 
@@ -104,17 +115,17 @@ public class HelloController {
         vboxcont.getChildren().clear();
 
 
-        int size = newsList.size();
+        int size = News.MaxOrder;
         if (startIndex < size && endIndex <= size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
-                    NewsController newsController = new NewsController(newStage, firstScene);
+                    NewsController newsController = new NewsController(newStage, mainScene);
                     loader.setController(newsController);
 
                     HBox newsComponent = loader.load();
-//                    NewsController newsController = loader.getController();
+
 
                     newsController.attachValue(news, stage);
                     newsController = loader.getController();

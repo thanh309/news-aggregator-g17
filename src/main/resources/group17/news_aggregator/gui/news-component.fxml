@@ -55,7 +55,6 @@
                   <Font name="Arial" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="previewContent" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Preview Content" />
          </children>
       </VBox>
    </children>

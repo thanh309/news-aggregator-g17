@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Pane fx:id="naviPane" prefHeight="602.0" prefWidth="92.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <ScrollPane fx:id="textPane" prefHeight="592.0" prefWidth="992.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox prefHeight="587.0" prefWidth="990.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="lostConnection" fitHeight="100.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/logo.png" />
+                           </image>
+                        </ImageView>
+                        <Text fx:id="warnText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="895.2033958435059">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="950.0">
+                     <children>
+                        <Region prefHeight="100.0" prefWidth="10.0" />
+                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="958.1368980407715" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <top>
+      <Pane prefHeight="73.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="prevImage" fitHeight="39.0" fitWidth="38.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@image/prev.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="homeImage" fitHeight="42.0" fitWidth="41.0" layoutX="65.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/pinkHouse.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="nextImage" fitHeight="39.0" fitWidth="38.0" layoutX="119.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0">
+               <image>
+                  <Image url="@image/next.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

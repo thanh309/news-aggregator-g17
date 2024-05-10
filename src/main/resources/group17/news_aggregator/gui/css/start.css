@@ -1,0 +1,7 @@
+.vbox_background_center{
+    -fx-background-image:url("../image/BG.png")
+}
+
+.vbox_background_right{
+    -fx-background-image:url("../image/startSceneBG.jpg")
+}

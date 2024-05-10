@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="vbox_background_right" stylesheets="@css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.StartController">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@css/start.css" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="92.0" prefWidth="800.0" />
+            <ImageView fitHeight="246.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/logo.png" />
+               </image>
+            </ImageView>
+            <Button mnemonicParsing="false" onAction="#startnow" prefHeight="56.0" prefWidth="203.0" stylesheets="@css/style.css" text="Start Now" textFill="#8f21a6">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
+            </Button>
+            <Label prefHeight="29.0" prefWidth="0.0" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="72.0" prefWidth="800.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="92.0" stylesheets="@css/style.css" text="About Us">
+                     <styleClass>
+                        <String fx:value="round-layout" />
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-moved" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

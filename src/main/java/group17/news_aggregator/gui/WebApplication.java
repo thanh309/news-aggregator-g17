@@ -22,17 +22,16 @@ public class WebApplication extends Application {
         primaryStage.setTitle("JavaFX WebView Example");
 
 
-        String url = "https://www.cryptopolitan.com/enter-the-wasteland-survive-conquer-and-thrive-in-a-post-apocalyptic-playground-with-decimated/";
+        String url = "https://cryptonews.com/news/top-crypto-gainers-today-on-dexscreener-felon-yield-boob.htm";
 
         Document doc = Jsoup
                 .connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
-        // specific to this fucking site; you probably won't need it
-        doc.select("div[class=\"elementor elementor-421319 elementor-location-header\"]").remove();
-
         String header = doc.head().html();
+
+        WebFormatter.format(doc);
 
         String content = doc.html();
 

@@ -20,8 +20,6 @@ public class NewsController {
     private Stage stage;
     private Scene scene;
 
-    @FXML
-    private Button previewContent;
 
     @FXML
     Button author;
@@ -41,9 +39,9 @@ public class NewsController {
     public NewsController() {
     }
 
-    public NewsController(Stage stage, Scene firstScene) {
+    public NewsController(Stage stage, Scene mainScene) {
         this.stage = stage;
-        this.scene = firstScene;
+        this.scene = mainScene;
     }
 
     // Method to update FlowPane with tags
@@ -82,8 +80,25 @@ public class NewsController {
                 stage.setScene(new Scene(visitScene));
                 stage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("offline-content.fxml"));
+                OfflineContentController offlineContentController = new OfflineContentController(stage, scene);
+                loadOfflineContent.setController(offlineContentController);
+
+                try {
+                    Parent visitOfflineContent = loadOfflineContent.load();
+
+                    offlineContentController = loadOfflineContent.getController();
+                    offlineContentController.showOfflineContent(news);
+                    stage.setScene(new Scene(visitOfflineContent));
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+
             }
+
         });
 
     }
