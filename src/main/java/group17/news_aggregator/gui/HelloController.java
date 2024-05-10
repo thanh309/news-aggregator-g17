@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.News;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javasearchengine.core.searchengine.SearchEngine;
 
@@ -24,8 +25,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +71,9 @@ public class HelloController {
     private TextField endDateField;
     @FXML
     private TextField startDateField;
+
+    @FXML
+    private Text errorFormatText;
     private Stage stage;
     private Scene mainScene;
 
@@ -75,7 +81,7 @@ public class HelloController {
 
     private final CSVConverter csvConverter = new CSVConverter();
 
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private int startIndex = 0;
     private int endIndex = 20;
 
@@ -90,15 +96,35 @@ public class HelloController {
     public void search_handle(List<News> originalNewsList, List<News> newsList, SearchEngine searchEngine, List<Integer> ids) {
         String textQuery = filterText.getText();
 
-        String startDate = startDateField.getText();
-        String endDate = endDateField.getText();
+        String startDate = startDateField.getText().trim() + " 00:00:00";
+        String endDate = endDateField.getText().trim() + " 00:00:00";
 
-//            long startDateLong = LocalDate.parse(startDate, dateTimeFormatter).atStartOfDay().toEpochSecond() * 1000;
-//            long endDateLong = LocalDate.parse(endDate, dateTimeFormatter).atStartOfDay().toEpochSecond() * 1000;
+        Query query;
+        try {
+            long startDateMillis;
+            if (Objects.equals(startDateField.getText(), "")) {
+                startDateMillis = 0;
+            } else {
+                startDateMillis = LocalDateTime.parse(startDate, dateTimeFormatter).atZone(ZoneId.systemDefault())
+                        .toInstant().toEpochMilli();
+            }
 
+            long endDateMillis;
+            if (Objects.equals(endDateField.getText(), "")) {
+                endDateMillis = Long.MAX_VALUE;
+            } else {
+                endDateMillis = LocalDateTime.parse(endDate, dateTimeFormatter).atZone(ZoneId.systemDefault())
+                        .toInstant().toEpochMilli();
+            }
 
-        Query query = new Query(textQuery, authorTextField.getText(), cateTextField.getText(), tagTextField.getText());
-        List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 10000);
+            query = new Query(textQuery, authorTextField.getText(), cateTextField.getText(), tagTextField.getText(), startDateMillis, endDateMillis);
+
+        } catch (DateTimeParseException dte) {
+            errorFormatText.setVisible(true);
+            return;
+        }
+
+        List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 100000);
         System.out.println(res);
         searchEngine.filterIndices(res, query, originalNewsList);
         System.out.println(res);
@@ -149,6 +175,8 @@ public class HelloController {
                 search_handle(originalNewsList, newsList, searchEngine, ids);
             }
         });
+        startDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
+        endDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
 
 
         next20.setOnMouseClicked(increase20 -> {
