@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="news" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="981.0" styleClass="white-background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="news" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="981.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="110.0" prefWidth="739.0" spacing="1.0">
          <children>
@@ -40,10 +40,11 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
-            <FlowPane fx:id="flowp" alignment="CENTER_LEFT" hgap="10.0" prefHeight="59.0" prefWidth="739.0" styleClass="transparent" stylesheets="@css/style.css" vgap="3.0">
+            <FlowPane fx:id="flowp" alignment="CENTER_LEFT" hgap="10.0" prefHeight="66.0" prefWidth="739.0" styleClass="transparent" stylesheets="@css/style.css" vgap="3.0">
                <VBox.margin>
                   <Insets />
-               </VBox.margin></FlowPane>
+               </VBox.margin>
+            </FlowPane>
          </children>
       </VBox>
       <Separator orientation="VERTICAL" prefHeight="200.0" />
@@ -58,4 +59,8 @@
          </children>
       </VBox>
    </children>
+   <styleClass>
+      <String fx:value="white-background" />
+      <String fx:value="round-layout" />
+   </styleClass>
 </HBox>
