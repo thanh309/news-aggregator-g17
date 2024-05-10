@@ -73,7 +73,7 @@ public class HelloController {
     public void initialize() {
         displayNews(startIndex, endIndex);
         
-        int sizeList = News.MaxOrder;
+        int sizeList = newsList.size();
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= sizeList) {
                 this.startIndex += 20;
@@ -115,7 +115,7 @@ public class HelloController {
         vboxcont.getChildren().clear();
 
 
-        int size = News.MaxOrder;
+        int size = newsList.size();
         if (startIndex < size && endIndex <= size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
