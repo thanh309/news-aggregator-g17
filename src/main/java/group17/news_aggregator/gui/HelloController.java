@@ -99,6 +99,7 @@ public class HelloController {
             } else{
 
                 next20.setOnMouseClicked(increase20 -> {
+
                     if (endIndex + 20 <= newsList.size()) {
                         this.startIndex += 20;
                         this.endIndex += 20;
