@@ -42,5 +42,24 @@ public class StartController {
             ex.printStackTrace();
         }
     }
+    @FXML
+    void aboutus(ActionEvent event){
+        if (stageStart == null) {
+            stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
 
+        HelloController helloController = new HelloController(stageStart, sceneStart);
+        FXMLLoader loadMain = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        loadMain.setController(helloController);
+
+        try {
+            Parent visitScene = loadMain.load();
+
+            helloController = loadMain.getController();
+            stageStart.setScene(new Scene(visitScene));
+            stageStart.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

@@ -20,30 +20,25 @@
          <content>
             <VBox prefHeight="587.0" prefWidth="990.0">
                <children>
-                  <HBox prefHeight="86.0" prefWidth="990.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="86.0" prefWidth="990.0">
                      <children>
                         <ImageView fx:id="lostConnection" fitHeight="58.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@image/lost%20connect.png" />
                            </image>
                         </ImageView>
-                        <VBox prefHeight="86.0" prefWidth="362.0">
-                           <children>
-                              <Region prefHeight="27.0" prefWidth="362.0" />
-                              <Text fx:id="warnText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </VBox>
+                        <Text fx:id="warnText" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Text>
                      </children>
                   </HBox>
                   <Region prefHeight="14.0" prefWidth="990.0" />
                   <HBox prefHeight="26.0" prefWidth="950.0">
                      <children>
                         <Region prefHeight="100.0" prefWidth="10.0" />
-                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="958.1368980407715">
+                        <Text fx:id="txt" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="958.1368980407715">
                            <font>
                               <Font size="16.0" />
                            </font></Text>

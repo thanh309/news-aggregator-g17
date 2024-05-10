@@ -51,7 +51,7 @@ public class OfflineContentController {
     }
 
     public void showOfflineContent(News news) {
-        warnText.setText("Error: no internet connection, no access available" + "\n\n");
+        warnText.setText("Error: no internet connection, no access available");
 
         List<String> stringList = news.getContent();
 
