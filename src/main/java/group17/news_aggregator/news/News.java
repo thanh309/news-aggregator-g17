@@ -27,6 +27,17 @@ public class News {
     @CsvBindByName
     protected String category;
 
+    public static int MaxOrder = 0;
+
+    // this is not the order news is add to total all news,
+    // it is just the Order of news in difference display turn
+    private int Order;
+
+
+    public News(){
+        MaxOrder += 1;
+    }
+
 
     public String getType() {
         return type;
@@ -107,4 +118,8 @@ public class News {
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
+
+    public int getOrder() {return Order;}
+
+    public void setOrder(int order) {Order = order;}
 }

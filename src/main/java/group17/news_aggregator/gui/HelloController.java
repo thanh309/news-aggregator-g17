@@ -4,8 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -19,7 +22,7 @@ import java.util.List;
 public class HelloController {
 
     @FXML
-    private Button authorSearch;
+    private CheckBox authorCheckBox;
 
     @FXML
     private TextField filterText;
@@ -28,11 +31,10 @@ public class HelloController {
     private ScrollPane scollableid;
 
     @FXML
-    private Button tagsSearch;
+    private CheckBox tagsCheckBox;
 
     @FXML
-    private Button titleSearch;
-
+    private CheckBox titleCheckBox;
     @FXML
     private VBox vbox_2;
 
@@ -61,13 +63,14 @@ public class HelloController {
         this.mainScene = mainScene;
     }
 
-    private List<? extends News> newsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
-
+    private List<? extends News> newsList = csvConverter.fromCSV("src/main/java/group17/news_aggregator/csv_converter/output_Cryptopolitan_Test.csv");
+    public static Boolean[] booleanJoin = {false, false, false};
     public void initialize() {
         displayNews(startIndex, endIndex);
 
 
-        int sizeList = newsList.size();
+
+        int sizeList = News.MaxOrder;
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= sizeList) {
                 this.startIndex += 20;
@@ -82,6 +85,25 @@ public class HelloController {
                 displayNews(startIndex, endIndex);
             }
         });
+
+
+        authorCheckBox.setOnAction(event -> {
+            if (authorCheckBox.isSelected()) {
+                booleanJoin[0] = true;
+            }
+        });
+        tagsCheckBox.setOnAction(event -> {
+            if (tagsCheckBox.isSelected()) {
+                booleanJoin[1] = true;
+            }
+        });
+
+        titleCheckBox.setOnAction(event -> {
+            if (titleCheckBox.isSelected()) {
+                booleanJoin[2] = true;
+            }
+        });
+
     }
 
 
@@ -90,7 +112,7 @@ public class HelloController {
         vboxcont.getChildren().clear();
 
 
-        int size = newsList.size();
+        int size = News.MaxOrder;
         if (startIndex < size && endIndex <= size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
