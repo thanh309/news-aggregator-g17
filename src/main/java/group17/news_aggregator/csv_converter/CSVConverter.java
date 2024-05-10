@@ -32,7 +32,7 @@ public class CSVConverter {
     }
 
 
-    public List<? extends News> fromCSV(String filePath) {
+    public List<News> fromCSV(String filePath) {
 
         try (InputStreamReader reader = new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8)) {
             CsvToBean<News> csvToBean = new CsvToBeanBuilder<News>(reader).withType(News.class).withSeparator(',').build();

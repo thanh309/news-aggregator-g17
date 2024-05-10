@@ -5,18 +5,12 @@ public class FileHandling {
         return input.replaceAll("\\p{Punct}", "").toLowerCase();
     }
 
-    public static void makeJson(String csvFile, String jsonFile) {
-
-    }
-
+    @Deprecated
     public static String removeNonAscii(String text) {
         /*
          * Remove non - ASCII characters
          */
-
         return text.replaceAll("[^\\x00-\\x7F]+", "");
-
     }
-
 }
 

@@ -3,81 +3,50 @@ package javasearchengine.core.searchengine;
 import java.util.*;
 
 public class BM25 {
-    private int corpusSize; // here is the nubmber of documents in corpus
-    private double averageLength; // here is the average length of all documents
-    private List<Map<String, Integer>> termFrequency;
-    private Map<String, Double> inverseDocumentFrequency;
-    private List<Integer> listDocumentLength;
 
-    public int getCorpusSize() {
-        return corpusSize;
+
+    private static final double K1 = 1.5;
+
+    private static final double B = 0.75;
+
+    private static final double EPSILON = 0.25;
+
+    private final int corpusSize; // here is the number of documents in corpus
+
+    private double averageLength = 0; // here is the average length of all documents
+
+    private final List<Map<String, Integer>> termFrequency = new ArrayList<>();
+
+    private final Map<String, Double> inverseDocumentFrequency = new HashMap<>();
+
+    private final List<Integer> listDocumentLength = new ArrayList<>();
+
+
+    public BM25(List<List<String>> tokenizedCorpus) {
+        corpusSize = tokenizedCorpus.size();
+        Map<String, Integer> documentFrequency = initialize(tokenizedCorpus);
+        calcIdf(documentFrequency);
     }
 
-    public void setCorpusSize(int corpusSize) {
-        this.corpusSize = corpusSize;
-    }
 
-    public double getAverageLength() {
-        return averageLength;
-    }
-
-    public void setAverageLength(double averageLength) {
-        this.averageLength = averageLength;
-    }
-
-    public List<Map<String, Integer>> getTermFrequency() {
-        return termFrequency;
-    }
-
-    public void setTermFrequency(List<Map<String, Integer>> termFrequency) {
-        this.termFrequency = termFrequency;
-    }
-
-    public Map<String, Double> getInverseDocumentFrequency() {
-        return inverseDocumentFrequency;
-    }
-
-    public void setInverseDocumentFrequency(Map<String, Double> inverseDocumentFrequency) {
-        this.inverseDocumentFrequency = inverseDocumentFrequency;
-    }
-
-    public List<Integer> getListDocumentLength() {
-        return listDocumentLength;
-    }
-
-    public void setListDocumentLength(List<Integer> listDocumentLength) {
-        this.listDocumentLength = listDocumentLength;
-    }
-
-    public BM25(List<List<String>> corpus) {
-        this.corpusSize = 0;
-        this.averageLength = 0;
-        this.termFrequency = new ArrayList<>();
-        this.inverseDocumentFrequency = new HashMap<>();
-        this.listDocumentLength = new ArrayList<>();
-
-        Map<String, Integer> documentFrequency = this.initialize(corpus);
-        this.calcIdf(documentFrequency);
-    }
-
-    public Map<String, Integer> initialize(List<List<String>> corpus) {
+    public Map<String, Integer> initialize(List<List<String>> tokenizedCorpus) {
         Map<String, Integer> documentFrequency = new HashMap<>();
         long lengthOfDocs = 0;
 
-        for (List<String> document : corpus) {
+        for (List<String> document : tokenizedCorpus) {
             listDocumentLength.add(document.size());
             lengthOfDocs += document.size();
 
             Map<String, Integer> frequencies = new HashMap<>();
             for (String word : document) {
-                if (!frequencies.containsKey(word)) {
-                    frequencies.put(word, 1);
-                } else {
+                if (frequencies.containsKey(word)) {
                     frequencies.put(word, frequencies.get(word) + 1);
+                } else {
+                    frequencies.put(word, 1);
                 }
             }
 
-            this.termFrequency.add(frequencies);
+            termFrequency.add(frequencies);
 
             for (Map.Entry<String, Integer> entry : frequencies.entrySet()) {
                 String word = entry.getKey();
@@ -87,52 +56,81 @@ public class BM25 {
                     documentFrequency.put(word, 1);
                 }
             }
-            this.corpusSize++;
-
         }
 
-        this.averageLength = (double) lengthOfDocs / this.getCorpusSize();
+        this.averageLength = (double) lengthOfDocs / corpusSize;
 
         return documentFrequency;
     }
 
     public void calcIdf(Map<String, Integer> documentFrequency) {
-        throw new UnsupportedOperationException("This method is not implemented");
+        double inverseDocumentFrequencySum = 0.0;
+        List<String> negativeInverseDocumentFrequencies = new ArrayList<>();
+
+        for (Map.Entry<String, Integer> entry : documentFrequency.entrySet()) {
+            double idf = Math.log(corpusSize - entry.getValue() + 0.5) - Math.log(entry.getValue() + 0.5);
+            inverseDocumentFrequency.put(entry.getKey(), idf);
+            inverseDocumentFrequencySum += idf;
+            if (idf < 0) {
+                negativeInverseDocumentFrequencies.add(entry.getKey());
+            }
+        }
+
+        double averageInverseDocumentFrequency = inverseDocumentFrequencySum
+                / inverseDocumentFrequency.size();
+
+        double eps = EPSILON * averageInverseDocumentFrequency;
+
+        for (String word : negativeInverseDocumentFrequencies) {
+            inverseDocumentFrequency.put(word, eps);
+        }
     }
 
-    public List<Double> getScores(List<String> query) {
-        throw new UnsupportedOperationException("This method is not implemented");
+    public List<Double> getScores(List<String> tokenizedQuery) {
+        List<Double> scores = new ArrayList<>();
+        for (int i = 0; i < corpusSize; i++) {
+            scores.add(0.0);
+        }
 
+        for (String q : tokenizedQuery) {
+            List<Double> q_freq = new ArrayList<>();
+            for (int i = 0; i < termFrequency.size(); i++) {
+                if (termFrequency.get(i).containsKey(q)) {
+                    q_freq.add((double) termFrequency.get(i).get(q));
+                } else {
+                    q_freq.add(0.0);
+                }
+            }
+            if (inverseDocumentFrequency.containsKey(q)) {
+                for (int i = 0; i < q_freq.size(); i++) {
+                    double x = inverseDocumentFrequency.get(q) * q_freq.get(i) * (K1 + 1) / (q_freq.get(i)
+                            + K1 * (1 - B + B * listDocumentLength.get(i) / averageLength));
+                    scores.set(i, x);
+                }
+            }
+
+        }
+        return scores;
     }
 
-    public List<String> getTopN(List<String> query, List<String> documents, int n) {
-        assert this.corpusSize == documents.size() : "It's never occurr!!";
-        List<Double> scores = this.getScores(query);
+    public List<Integer> getTopNIndex(List<String> query, List<Integer> toSortList, int maxNumberOfResults) {
+        assert corpusSize == toSortList.size() : "It never occurs!!";
+        List<Double> scores = getScores(query);
         Integer[] indices = new Integer[scores.size()];
 
         for (int i = 0; i < indices.length; i++) {
             indices[i] = i;
         }
 
-        Arrays.sort(indices, new Comparator<Integer>() {
-
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                // TODO Auto-generated method stub
-                if (scores.get(o1) - scores.get(o2) == 0) {
-                    return 0;
-                } else if (scores.get(o1) - scores.get(o2) < 0) {
-                    return 1;
-                }
-                return -1;
-
-            }
-
+        Arrays.sort(indices, (o1, o2) -> {
+            if (scores.get(o1) - scores.get(o2) == 0) return 0;
+            else if (scores.get(o1) - scores.get(o2) < 0) return 1;
+            return -1;
         });
 
-        List<String> topN = new ArrayList<>();
-        for (int i = 0; i < Math.min(n, indices.length); i++) {
-            topN.add(documents.get(indices[i]));
+        List<Integer> topN = new ArrayList<>();
+        for (int i = 0; i < Math.min(maxNumberOfResults, indices.length); i++) {
+            topN.add(toSortList.get(indices[i]));
         }
 
         return topN;
