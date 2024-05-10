@@ -63,7 +63,7 @@ public class HelloController {
         this.firstScene = firstScene;
     }
 
-    private List<? extends News> newsList = csvConverter.fromCSV("src/main/resources/data/output_Cryptopolitan.csv");
+    private List<News> newsList = csvConverter.fromCSV("src/main/resources/data/output_Cryptopolitan.csv");
 
     public void initialize() {
         displayNews(startIndex, endIndex);
