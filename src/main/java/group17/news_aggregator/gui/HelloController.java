@@ -54,7 +54,7 @@ public class HelloController {
 
 
     @FXML
-    private ImageView search_img;
+    private Button search_but;
 
     private Stage stage;
     private Scene mainScene;
@@ -126,7 +126,7 @@ public class HelloController {
         List<News> newsList = new ArrayList<>();
 
 
-        search_img.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, ids));
+        search_but.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, ids));
         filterText.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 search_handle(originalNewsList, newsList, searchEngine, ids);
