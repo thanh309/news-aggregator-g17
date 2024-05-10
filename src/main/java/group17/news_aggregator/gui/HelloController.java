@@ -1,5 +1,6 @@
 package group17.news_aggregator.gui;
 
+import group17.news_aggregator.search_engine.Query;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,9 +16,13 @@ import javafx.scene.layout.VBox;
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.News;
 import javafx.stage.Stage;
+import javasearchengine.core.searchengine.SearchEngine;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class HelloController {
 
@@ -47,6 +52,10 @@ public class HelloController {
     @FXML
     private Button prev20;
 
+
+    @FXML
+    private ImageView search_img;
+
     private Stage stage;
     private Scene mainScene;
 
@@ -63,47 +72,75 @@ public class HelloController {
         this.mainScene = mainScene;
     }
 
-    private List<News> newsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
-    public Boolean[] booleanJoin = {false, false, false};
 
-    public Boolean[] getBooleanJoin() {
-        return booleanJoin;
-    }
 
     public void initialize() {
-        displayNews(startIndex, endIndex);
+        CSVConverter csvConverter = new CSVConverter();
+        List<News> originalNewsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
+
+        int size = originalNewsList.size();
+        displayNews(startIndex, endIndex, originalNewsList);
+
+        // search
+        SearchEngine searchEngine = new SearchEngine();
+        searchEngine.initialize(originalNewsList);
+        List<Integer> ids = IntStream.rangeClosed(0, size - 1).boxed().toList();
+
+        List<News> newsList = new ArrayList<>();
+
+
+        search_img.setOnMouseClicked(search -> {
+            String textQuery =  filterText.getText();
+            if (Objects.equals(textQuery, "")){
+
+                startIndex = 0;
+                endIndex = 20;
+                displayNews(startIndex, endIndex, originalNewsList);
+            } else{
+
+                next20.setOnMouseClicked(increase20 -> {
+                    if (endIndex + 20 <= newsList.size()) {
+                        this.startIndex += 20;
+                        this.endIndex += 20;
+                        displayNews(startIndex, endIndex, newsList);
+
+                    }
+                });
+                prev20.setOnMouseClicked(decrease20 -> {
+                    if (startIndex >= 20) {
+                        this.startIndex -= 20;
+                        this.endIndex -= 20;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
+                });
+                Query query = new Query(textQuery, "", "", "");
+                List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 10000);
+//                searchEngine.filterIndices(res, query, newsList);
+                newsList.clear();
+                System.out.println(res);
+                for (Integer i: res){
+                    newsList.add(originalNewsList.get(i));
+                }
+                startIndex = 0;
+                endIndex = 20;
+                displayNews(startIndex, endIndex, newsList);
+            }
+        });
+
         
-        int sizeList = newsList.size();
+        int sizeList = originalNewsList.size();
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= sizeList) {
                 this.startIndex += 20;
                 this.endIndex += 20;
-                displayNews(startIndex, endIndex);
+                displayNews(startIndex, endIndex, originalNewsList);
             }
         });
         prev20.setOnMouseClicked(decrease20 -> {
             if (startIndex >= 20) {
                 this.startIndex -= 20;
                 this.endIndex -= 20;
-                displayNews(startIndex, endIndex);
-            }
-        });
-
-
-        authorCheckBox.setOnAction(event -> {
-            if (authorCheckBox.isSelected()) {
-                booleanJoin[0] = true;
-            }
-        });
-        tagsCheckBox.setOnAction(event -> {
-            if (tagsCheckBox.isSelected()) {
-                booleanJoin[1] = true;
-            }
-        });
-
-        titleCheckBox.setOnAction(event -> {
-            if (titleCheckBox.isSelected()) {
-                booleanJoin[2] = true;
+                displayNews(startIndex, endIndex, originalNewsList);
             }
         });
 
@@ -111,10 +148,8 @@ public class HelloController {
 
 
 
-    private void displayNews(int startIndex, int endIndex) {
+    private void displayNews(int startIndex, int endIndex, List<News> newsList) {
         vboxcont.getChildren().clear();
-
-
         int size = newsList.size();
         if (startIndex < size && endIndex <= size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
