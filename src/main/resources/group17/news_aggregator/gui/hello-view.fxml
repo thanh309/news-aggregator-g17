@@ -100,7 +100,7 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Text>
-                        <TextField promptText="dd/mm/yyyy" />
+                        <TextField fx:id="startDateField" promptText="dd-mm-yyyy" />
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -113,7 +113,7 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Text>
-                        <TextField promptText="dd/mm/yyyy" />
+                        <TextField fx:id="endDateField" promptText="dd-mm-yyyy" />
                      </children>
                   </VBox>
                </children>

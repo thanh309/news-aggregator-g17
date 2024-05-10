@@ -21,7 +21,13 @@ import javafx.stage.Stage;
 import javasearchengine.core.searchengine.SearchEngine;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -58,12 +64,18 @@ public class HelloController {
     @FXML
     private Button search_but;
 
+    @FXML
+    private TextField endDateField;
+    @FXML
+    private TextField startDateField;
     private Stage stage;
     private Scene mainScene;
 
     private Stage newStage = new Stage();
 
     private final CSVConverter csvConverter = new CSVConverter();
+
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private int startIndex = 0;
     private int endIndex = 20;
 
@@ -77,39 +89,44 @@ public class HelloController {
 
     public void search_handle(List<News> originalNewsList, List<News> newsList, SearchEngine searchEngine, List<Integer> ids) {
         String textQuery = filterText.getText();
-        if (Objects.equals(textQuery, "")) {
-            startIndex = 0;
-            endIndex = 20;
-            displayNews(startIndex, endIndex, originalNewsList);
-        } else {
-            next20.setOnMouseClicked(increase20 -> {
-                if (endIndex + 20 <= newsList.size()) {
-                    startIndex += 20;
-                    endIndex += 20;
-                    displayNews(startIndex, endIndex, newsList);
-                }
-            });
 
-            prev20.setOnMouseClicked(decrease20 -> {
-                if (startIndex >= 20) {
-                    startIndex -= 20;
-                    endIndex -= 20;
-                    displayNews(startIndex, endIndex, newsList);
-                }
-            });
+        String startDate = startDateField.getText();
+        String endDate = endDateField.getText();
 
-            Query query = new Query(textQuery, "", "", "");
-            List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 10000);
-//            searchEngine.filterIndices(res, query, newsList);
-            newsList.clear();
-            System.out.println(res);
-            for (Integer i : res) {
-                newsList.add(originalNewsList.get(i));
-            }
-            startIndex = 0;
-            endIndex = 20;
-            displayNews(startIndex, endIndex, newsList);
+//            long startDateLong = LocalDate.parse(startDate, dateTimeFormatter).atStartOfDay().toEpochSecond() * 1000;
+//            long endDateLong = LocalDate.parse(endDate, dateTimeFormatter).atStartOfDay().toEpochSecond() * 1000;
+
+
+        Query query = new Query(textQuery, authorTextField.getText(), cateTextField.getText(), tagTextField.getText());
+        List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 10000);
+        System.out.println(res);
+        searchEngine.filterIndices(res, query, originalNewsList);
+        System.out.println(res);
+        newsList.clear();
+        System.out.println(res);
+        for (Integer i : res) {
+            newsList.add(originalNewsList.get(i));
         }
+
+        next20.setOnMouseClicked(increase20 -> {
+            if (endIndex + 20 <= newsList.size()) {
+                startIndex += 20;
+                endIndex += 20;
+                displayNews(startIndex, endIndex, newsList);
+            }
+        });
+        prev20.setOnMouseClicked(decrease20 -> {
+            if (startIndex >= 20) {
+                startIndex -= 20;
+                endIndex -= 20;
+                displayNews(startIndex, endIndex, newsList);
+            }
+        });
+
+        startIndex = 0;
+        endIndex = 20;
+
+        displayNews(startIndex, endIndex, newsList);
     }
 
 
@@ -118,8 +135,6 @@ public class HelloController {
         List<News> originalNewsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
 
         int size = originalNewsList.size();
-        displayNews(startIndex, endIndex, originalNewsList);
-
         // search
         SearchEngine searchEngine = new SearchEngine();
         searchEngine.initialize(originalNewsList);
@@ -136,9 +151,8 @@ public class HelloController {
         });
 
 
-        int sizeList = originalNewsList.size();
         next20.setOnMouseClicked(increase20 -> {
-            if (endIndex + 20 <= sizeList) {
+            if (endIndex + 20 <= size) {
                 this.startIndex += 20;
                 this.endIndex += 20;
                 displayNews(startIndex, endIndex, originalNewsList);
@@ -151,6 +165,8 @@ public class HelloController {
                 displayNews(startIndex, endIndex, originalNewsList);
             }
         });
+
+        displayNews(startIndex, endIndex, originalNewsList);
 
     }
 
