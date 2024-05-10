@@ -1,7 +1,12 @@
 .vbox_background_center{
-    -fx-background-image:url("../image/BG.png")
+    -fx-background-image:url("../image/BG.png");
+    -fx-background-size: cover;
 }
 
 .vbox_background_right{
-    -fx-background-image:url("../image/startSceneBG.jpg")
+    -fx-background-image:url("../image/startSceneBG.jpg");
+}
+
+.mouse-moved: hover{
+    -fx-background-text-color: grey;
 }

@@ -34,7 +34,7 @@ public class HelloController {
     private CheckBox tagsCheckBox;
 
     @FXML
-    private CheckBox titleCheckBox;
+    private CheckBox cateCheckBox;
     @FXML
     private VBox vbox_2;
 
@@ -101,8 +101,8 @@ public class HelloController {
             }
         });
 
-        titleCheckBox.setOnAction(event -> {
-            if (titleCheckBox.isSelected()) {
+        cateCheckBox.setOnAction(event -> {
+            if (cateCheckBox.isSelected()) {
                 booleanJoin[2] = true;
             }
         });

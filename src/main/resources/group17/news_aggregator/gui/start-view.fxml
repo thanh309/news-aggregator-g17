@@ -8,31 +8,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="vbox_background_center" stylesheets="@css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.StartController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="vbox_background_center" stylesheets="@css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.StartController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="289.0" prefWidth="800.0" />
-            <Button mnemonicParsing="false" onAction="#startnow" prefHeight="62.0" prefWidth="207.0" styleClass="transparent" stylesheets="@css/style.css" text="Start Now" textFill="#8f21a6">
+            <Pane prefHeight="441.0" prefWidth="1200.0" />
+            <Button mnemonicParsing="false" onAction="#startnow" prefHeight="81.0" prefWidth="257.0" styleClass="transparent" stylesheets="@css/style.css" text="Start Now" textFill="#13538a">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="41.0" />
                </font>
             </Button>
-            <Label prefHeight="29.0" prefWidth="0.0" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="800.0">
+            <Label prefHeight="57.0" prefWidth="9.0" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="105.0" prefWidth="1200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="89.0" styleClass="transparent" stylesheets="@css/style.css" text="Home" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="62.0" prefWidth="111.0" styleClass="transparent" stylesheets="@css/style.css" text="Home" textFill="WHITE">
                      <font>
-                        <Font name="System Italic" size="19.0" />
+                        <Font name="System Italic" size="28.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="51.0" prefWidth="800.0">
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="61.0" prefWidth="1200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="113.0" styleClass="transparent" stylesheets="@css/style.css" text="About Us" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="147.0" styleClass="transparent" stylesheets="@css/style.css" text="About Us" textFill="WHITE">
                      <font>
-                        <Font name="System Italic" size="19.0" />
+                        <Font name="System Italic" size="25.0" />
                      </font>
                   </Button>
                </children>
