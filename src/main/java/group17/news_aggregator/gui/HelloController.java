@@ -28,20 +28,22 @@ import java.util.stream.IntStream;
 
 public class HelloController {
 
-    @FXML
-    private CheckBox authorCheckBox;
 
     @FXML
     private TextField filterText;
 
     @FXML
+    private TextField authorTextField;
+
+    @FXML
+    private TextField cateTextField;
+
+    @FXML
+    private TextField tagTextField;
+
+    @FXML
     private ScrollPane scollableid;
 
-    @FXML
-    private CheckBox tagsCheckBox;
-
-    @FXML
-    private CheckBox cateCheckBox;
 
     @FXML
     private VBox vboxcont;

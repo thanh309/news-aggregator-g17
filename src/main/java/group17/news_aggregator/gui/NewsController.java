@@ -22,6 +22,7 @@ public class NewsController {
     private Scene scene;
 
 
+
     @FXML
     Button author;
 

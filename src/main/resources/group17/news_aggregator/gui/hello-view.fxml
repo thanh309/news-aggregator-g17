@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -54,12 +53,12 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="322.0" spacing="23.0">
                <children>
-                  <CheckBox fx:id="authorCheckBox" mnemonicParsing="false" stylesheets="@css/style.css" text="Author" textFill="WHITE">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
-                  </CheckBox>
-                  <TextField prefHeight="30.0" prefWidth="168.0" styleClass="white-background" stylesheets="@css/style.css" />
+                  </Text>
+                  <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="182.0" styleClass="white-background" stylesheets="@css/style.css" />
                </children>
                <padding>
                   <Insets left="25.0" />
@@ -67,78 +66,57 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="322.0" spacing="5.0">
                <children>
-                  <CheckBox fx:id="cateCheckBox" mnemonicParsing="false" stylesheets="@css/style.css" text="Category" textFill="WHITE">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
-                  </CheckBox>
-                  <TextField prefHeight="30.0" prefWidth="168.0" styleClass="white-background" stylesheets="@css/style.css" />
+                  </Text>
+                  <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" styleClass="white-background" stylesheets="@css/style.css" />
                </children>
                <padding>
                   <Insets left="25.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="298.0" spacing="50.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="298.0" spacing="58.0">
                <children>
-                  <CheckBox fx:id="tagsCheckBox" mnemonicParsing="false" stylesheets="@css/style.css" text="Tag" textFill="WHITE">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tag">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
-                  </CheckBox>
-                  <TextField prefHeight="30.0" prefWidth="169.0" styleClass="white-background" stylesheets="@css/style.css" />
+                  </Text>
+                  <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" styleClass="white-background" stylesheets="@css/style.css" />
                </children>
                <VBox.margin>
                   <Insets left="25.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="322.0">
+            <Pane prefHeight="62.0" prefWidth="322.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="322.0" spacing="10.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="From">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
+                  <VBox prefHeight="55.0" prefWidth="136.0" spacing="10.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="From">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Text>
+                        <TextField promptText="dd/mm/yyyy" />
+                     </children>
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets />
                      </HBox.margin>
-                  </Text>
-               </children></HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="322.0">
-               <children>
-                  <TextField prefHeight="31.0" prefWidth="197.0" promptText="dd/mm/yy" styleClass="white-background" stylesheets="@css/style.css">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </TextField>
+                  </VBox>
+                  <VBox prefHeight="55.0" prefWidth="142.0" spacing="10.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Text>
+                        <TextField promptText="dd/mm/yyyy" />
+                     </children>
+                  </VBox>
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets left="60.0" />
-               </padding></HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="322.0">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="To">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="48.0" prefWidth="322.0">
-               <children>
-                  <TextField prefHeight="31.0" prefWidth="197.0" promptText="dd/mm/yy" styleClass="white-background" stylesheets="@css/style.css">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-               <padding>
-                  <Insets left="60.0" />
-               </padding>
             </HBox>
          </children>
       </VBox>
