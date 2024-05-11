@@ -15,6 +15,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ShowWebController {
     private Stage stageWeb;
@@ -65,6 +66,9 @@ public class ShowWebController {
 
         engine = webView.getEngine();
         engine.loadContent(header + content);
+        if (news.getWebsiteSource().equals("Medium")) {
+            engine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("css/medium-reader.css")).toString());
+        }
 //        engine = webView.getEngine();
 //        engine.load(news.getLink());
 

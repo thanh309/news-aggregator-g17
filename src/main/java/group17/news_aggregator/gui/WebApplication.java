@@ -10,6 +10,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class WebApplication extends Application {
 
@@ -22,7 +23,7 @@ public class WebApplication extends Application {
         primaryStage.setTitle("JavaFX WebView Example");
 
 
-        String url = "https://cryptonews.com/news/top-crypto-gainers-today-on-dexscreener-felon-yield-boob.htm";
+        String url = "https://readmedium.com/surprise-bitcoin-is-back-above-50-000-f943a2fa9de1";
 
         Document doc = Jsoup
                 .connect(url)
@@ -48,6 +49,11 @@ public class WebApplication extends Application {
         WebView webView = new WebView();
         webView.setPrefSize(50000, 50000);
         WebEngine webEngine = webView.getEngine();
+
+
+        if (url.split("/")[2].equals("readmedium.com")) {
+            webEngine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("css/medium-reader.css")).toString());
+        }
 
 
         webEngine.loadContent(header + content);
