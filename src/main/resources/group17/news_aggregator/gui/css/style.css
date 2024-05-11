@@ -1,13 +1,20 @@
+
+.vbox-background{
+    -fx-background-color: #13538A;
+}
+
 .white-background{
     -fx-background-color: #fff;
 }
+
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
 
 .round-layout{
-    -fx-border-radius: 50;
+    -fx-border-radius: 5;
     -fx-border-color: #D7D7D7;
+
 }
 
 .selected{
@@ -15,7 +22,11 @@
 }
 
 .mouse-moved: hover{
-    -fx-background-color: white;
+    -fx-background-color: grey;
+}
+
+.mouse-moved-text: hover{
+    -fx-text-fill: grey;
 }
 
 .check-box .box{
@@ -29,5 +40,6 @@
 }
 
 .check-box: selected .box{
-    -fx-background-color: #674ea7;
+    -fx-background-color: grey;
 }
+

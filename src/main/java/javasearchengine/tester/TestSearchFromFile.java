@@ -18,6 +18,7 @@ public class TestSearchFromFile {
 
         SearchEngine searchEngine = new SearchEngine();
         searchEngine.initialize(newsList);
+        List<Integer> ids = IntStream.rangeClosed(0, newsList.size() - 1).boxed().toList();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Query:");
@@ -26,10 +27,9 @@ public class TestSearchFromFile {
 
         Query query = new Query(textQuery, "lacton", "", "");
 
-
-
-        List<Integer> ids = IntStream.rangeClosed(0, newsList.size() - 1).boxed().toList();
         List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 20);
+
+        searchEngine.filterIndices(res, query, newsList);
 
         System.out.println(res);
 
@@ -38,7 +38,7 @@ public class TestSearchFromFile {
             System.out.println(newsList.get(i).getTitle() + "| " + newsList.get(i).getAuthor() + "| " + newsList.get(i).getCategory() + "| " + newsList.get(i).getTags());
         }
 
-        searchEngine.filterIndices(res, query, newsList);
+
 
         // test
         System.out.println();

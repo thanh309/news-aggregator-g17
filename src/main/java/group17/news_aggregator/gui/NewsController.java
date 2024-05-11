@@ -7,9 +7,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class NewsController {
 
     private Stage stage;
     private Scene scene;
+
 
 
     @FXML
@@ -34,7 +36,7 @@ public class NewsController {
     Button title;
 
     @FXML
-    Label datetype;
+    TextFlow datetype;
 
     public NewsController() {
     }
@@ -45,8 +47,12 @@ public class NewsController {
     }
 
     // Method to update FlowPane with tags
-    public void createTags(List<String> tags) {
+
+    public void createTags(List<String> tags, int lim) {
+        flowp.getChildren().clear();
+        int count = 0;
         for (String tag : tags) {
+            count += 1;
             Button buttonTag = new Button();
             buttonTag.setPrefWidth(130);
             buttonTag.setPrefHeight(20);
@@ -56,6 +62,9 @@ public class NewsController {
             buttonTag.getStyleClass().add("round-layout");
             buttonTag.setCursor(Cursor.HAND);
             flowp.getChildren().add(buttonTag);
+            if (count > lim){
+                break;
+            }
         }
     }
 
@@ -63,9 +72,11 @@ public class NewsController {
 
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
-        this.datetype.setText(news.getCreationDateStr() + " \\ " + news.getType());
-        this.createTags(news.getTags());
-        // set prevContent here
+        this.datetype.getChildren().clear();
+        Text newText = new Text(news.getCreationDateStr() + " \\ " + news.getType());
+        newText.setStyle("-fx-font-size: 17px;");
+        this.datetype.getChildren().add(newText);
+        this.createTags(news.getTags(),10);
 
         this.title.setOnAction(visitSite -> {
             FXMLLoader loadweb = new FXMLLoader(getClass().getResource("show-web.fxml"));
