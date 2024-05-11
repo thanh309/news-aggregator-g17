@@ -94,9 +94,9 @@ public class BM25 {
 
         for (String q : tokenizedQuery) {
             List<Double> q_freq = new ArrayList<>();
-            for (int i = 0; i < termFrequency.size(); i++) {
-                if (termFrequency.get(i).containsKey(q)) {
-                    q_freq.add((double) termFrequency.get(i).get(q));
+            for (Map<String, Integer> stringIntegerMap : termFrequency) {
+                if (stringIntegerMap.containsKey(q)) {
+                    q_freq.add((double) stringIntegerMap.get(q));
                 } else {
                     q_freq.add(0.0);
                 }
@@ -116,21 +116,24 @@ public class BM25 {
     public List<Integer> getTopNIndex(List<String> query, List<Integer> toSortList, int maxNumberOfResults) {
         assert corpusSize == toSortList.size() : "It never occurs!!";
         List<Double> scores = getScores(query);
-        Integer[] indices = new Integer[scores.size()];
+        List<Integer> indices2 = new ArrayList<>();
 
-        for (int i = 0; i < indices.length; i++) {
-            indices[i] = i;
+        for (int i = 0; i < scores.size(); i++) {
+            if (scores.get(i) > 0) {
+                indices2.add(i);
+            }
         }
 
-        Arrays.sort(indices, (o1, o2) -> {
+        indices2.sort((o1, o2) -> {
             if (scores.get(o1) - scores.get(o2) == 0) return 0;
             else if (scores.get(o1) - scores.get(o2) < 0) return 1;
             return -1;
         });
 
+
         List<Integer> topN = new ArrayList<>();
-        for (int i = 0; i < Math.min(maxNumberOfResults, indices.length); i++) {
-            topN.add(toSortList.get(indices[i]));
+        for (int i = 0; i < Math.min(maxNumberOfResults, indices2.size()); i++) {
+            topN.add(toSortList.get(indices2.get(i)));
         }
 
         return topN;

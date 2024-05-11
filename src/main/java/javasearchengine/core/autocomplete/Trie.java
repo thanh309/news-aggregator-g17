@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Trie {
     private TrieNode root = new TrieNode();
-    protected Map<String, Integer> wordDict;
+    protected List<String> words;
 
-    public Trie(Map<String, Integer> wordDict) {
-        this.wordDict = wordDict;
+    public Trie(List<String> words) {
+        this.words = words;
     }
 
     public TrieNode getRoot() {
@@ -18,17 +18,17 @@ public class Trie {
         this.root = root;
     }
 
-    public Map<String, Integer> getWordDict() {
-        return wordDict;
+    public List<String> getWords() {
+        return words;
     }
 
-    public void setWordDict(Map<String, Integer> wordDict) {
-        this.wordDict = wordDict;
+    public void setWords(List<String> words) {
+        this.words = words;
     }
 
     public void createTrie() {
-        for (Map.Entry<String, Integer> entry : this.wordDict.entrySet()) {
-            this.insert(entry.getKey());
+        for (String w : words) {
+            this.insert(w);
         }
 
     }
