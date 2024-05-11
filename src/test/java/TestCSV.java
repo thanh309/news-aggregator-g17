@@ -1,7 +1,7 @@
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.Article;
 import group17.news_aggregator.news.News;
-import group17.news_aggregator.scraper.CryptopolitanScraper;
+import group17.news_aggregator.scraper.article.CryptopolitanScraper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
