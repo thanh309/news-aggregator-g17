@@ -34,11 +34,21 @@ public class WebFormatter {
         doc.select("div[id=\"hypelab-leaderboard\"]").remove();
         doc.select("div[id=\"hypelab-top-sticky\"]").remove();
 
-        //for Cryptonews
+        // for Cryptonews
         doc.select("section[class=\"container container-header-price\"]").remove();
         doc.select("section[class=\"container newsletter-section\"]").remove();
         doc.select("div[class=\"container container-post-one\"]").remove();
         doc.select("div[class=\"col-12 col-lg-3\"]").remove();
 
+        // for MediumReader
+        doc.select("div[class=\"fixed z-10 h-[54px] w-screen flex flex-grow-0 items-center justify-between bg-white dark:bg-black px-4 shadow-md dark:shadow-neutral-900\"]").remove();
+        doc.select("nav").remove();
+        doc.select("span[class=\"flex justify-center items-center w-full py-12 text-2xl divide-y border-t border-gray-300 dark:border-gray-700\"]").remove();
+        doc.select("div[class=\"max-w-[680px]\"]").remove();
+        doc.select("div[class=\"cursor-pointer relative\"]").remove();
+        doc.select("div[class=\"w-full py-8\"]").remove();
+        doc.select("div[class=\"relative mt-4\"]").remove();
+        doc.select("div[class=\"link-block\"]").remove();
+        doc.select("div[class=\" text-sm font-bold mt-12 space-y-[4px]\"]").remove();
     }
 }
