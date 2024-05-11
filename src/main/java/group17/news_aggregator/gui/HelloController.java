@@ -124,12 +124,19 @@ public class HelloController {
             return;
         }
 
-        List<Integer> res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 100000);
-        System.out.println(res);
+        List<Integer> res;
+
+        if (!textQuery.isBlank()) {
+            res = searchEngine.searchFromFile(ids, query.getSearchQuery(), 100000);
+        } else {
+            res = new ArrayList<>(ids);
+        }
+
+//        System.out.println(res);
         searchEngine.filterIndices(res, query, originalNewsList);
-        System.out.println(res);
+//        System.out.println(res);
         newsList.clear();
-        System.out.println(res);
+//        System.out.println(res);
         for (Integer i : res) {
             newsList.add(originalNewsList.get(i));
         }
