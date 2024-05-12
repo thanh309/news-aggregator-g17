@@ -4,9 +4,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -14,36 +17,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <VBox prefHeight="720.0" prefWidth="322.0" styleClass="vbox-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="transparent" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="109.0" prefWidth="322.0">
+            <Pane prefHeight="19.0" prefWidth="943.0" />
+            <VBox prefHeight="39.0" prefWidth="943.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Aggregator">
-                     <font>
-                        <Font name="System Bold Italic" size="35.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <Pane prefHeight="47.0" prefWidth="322.0" />
-            <HBox prefHeight="478.0" prefWidth="322.0">
-               <children>
-                  <Pane prefHeight="519.0" prefWidth="20.0" />
-                  <VBox prefHeight="519.0" prefWidth="302.0" stylesheets="@css/style.css">
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="1200.0" styleClass="transparent" stylesheets="@css/style.css">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="63.0" prefWidth="322.0">
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="689.0" styleClass="round-layout" stylesheets="@css/style.css">
                            <children>
-                              <TextField fx:id="filterText" prefHeight="33.0" prefWidth="234.0" styleClass="round-layout" stylesheets="@css/style.css" />
-                              <Button fx:id="search_but" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" stylesheets="@css/style.css" text="Search">
+                              <TextField fx:id="filterText" prefHeight="34.0" prefWidth="609.0" promptText="Search here" styleClass="transparent" stylesheets="@css/style.css" />
+                              <Button fx:id="search_but" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@css/style.css" text="Search">
                                  <font>
                                     <Font name="System Italic" size="13.0" />
                                  </font>
                                  <styleClass>
                                     <String fx:value="mouse-moved" />
-                                    <String fx:value="white-background" />
-                                    <String fx:value="round-layout" />
+                                    <String fx:value="transparent" />
                                  </styleClass>
                               </Button>
                            </children>
@@ -51,94 +43,168 @@
                               <Insets left="5.0" />
                            </padding>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="322.0">
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane prefHeight="23.0" prefWidth="1200.0" />
+            <HBox alignment="CENTER" prefHeight="595.0" prefWidth="943.0" styleClass="transparent" stylesheets="@css/style.css">
+               <children>
+                  <Pane prefHeight="594.0" prefWidth="120.0" />
+                  <VBox prefHeight="594.0" prefWidth="747.0">
+                     <children>
+                        <HBox prefHeight="567.0" prefWidth="733.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filter">
+                              <ScrollPane fx:id="scollableid" prefHeight="562.0" prefWidth="733.0" styleClass="transparent" stylesheets="@css/style.css">
+                                 <content>
+                                    <VBox fx:id="vboxcont" prefHeight="544.0" prefWidth="725.0" spacing="4.0" styleClass="transparent" stylesheets="@css/style.css" />
+                                 </content>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </HBox.margin>
+                              </ScrollPane>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="596.0" stylesheets="@css">
+                           <children>
+                              <Pagination fx:id="pagination" prefHeight="44.0" prefWidth="109.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Pagination>
+                              <TextField fx:id="toPage" prefHeight="22.0" prefWidth="35.0" promptText="Go to">
+                                 <HBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets right="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Pane prefHeight="594.0" prefWidth="120.0" stylesheets="@css/style.css" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="77.0" prefWidth="130.0">
+               <children>
+                  <ImageView fitHeight="46.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="30.0" prefWidth="114.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="122.0" styleClass="white-background" stylesheets="@css/start.css" text="Home">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" styleClass="white-background" stylesheets="@css/style.css" text="About Us">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" styleClass="home-selected" stylesheets="@css/style.css" text="Discover">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="674.0" prefWidth="246.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="103.0" prefWidth="246.0" />
+            <VBox prefHeight="493.0" prefWidth="246.0" styleClass="round-layout" stylesheets="@css/style.css">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="224.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filter">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="75.0" prefWidth="224.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="75.0" prefWidth="224.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="106.0" prefWidth="221.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tag">
+                           <font>
+                              <Font name="System Italic" size="18.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@css/style.css" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <VBox prefHeight="85.0" prefWidth="221.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>
                               </Text>
+                              <TextField fx:id="startDateField" promptText="YYYY/MM/DD" />
                            </children>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="322.0" spacing="25.0">
+                        </VBox>
+                        <VBox prefHeight="55.0" prefWidth="142.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To">
                                  <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font name="System Bold" size="22.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="182.0" styleClass="round-layout" stylesheets="@css/style.css" />
+                              <TextField fx:id="endDateField" promptText="YYYY/MM/DD" />
                            </children>
-                           <padding>
-                              <Insets left="25.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="322.0" spacing="8.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" styleClass="round-layout" stylesheets="@css/style.css" />
-                           </children>
-                           <padding>
-                              <Insets left="25.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="298.0" spacing="52.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tag">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Text>
-                              <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" styleClass="round-layout" stylesheets="@css/style.css" />
-                           </children>
-                           <VBox.margin>
-                              <Insets left="25.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <Pane prefHeight="41.0" prefWidth="294.0" />
-                        <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="322.0" spacing="10.0">
-                           <children>
-                              <VBox prefHeight="55.0" prefWidth="136.0" spacing="10.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="From">
-                                       <font>
-                                          <Font name="System Bold" size="22.0" />
-                                       </font>
-                                    </Text>
-                                    <TextField fx:id="startDateField" promptText="YYYY/MM/DD" />
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox prefHeight="55.0" prefWidth="142.0" spacing="10.0">
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To">
-                                       <font>
-                                          <Font name="System Bold" size="22.0" />
-                                       </font>
-                                    </Text>
-                                    <TextField fx:id="endDateField" promptText="YYYY/MM/DD" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
+                        </VBox>
                      </children>
-                     <styleClass>
-                        <String fx:value="search-box" />
-                        <String fx:value="round-layout" />
-                     </styleClass>
                   </VBox>
-                  <Pane prefHeight="519.0" prefWidth="20.0" />
                </children>
-            </HBox>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </VBox>
             <Pane prefHeight="98.0" prefWidth="322.0">
                <children>
                   <Text fx:id="errorFormatText" fill="#ff3a3a" layoutX="21.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong DateTime format" visible="false">
@@ -149,49 +215,9 @@
                </children>
             </Pane>
          </children>
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin>
       </VBox>
    </left>
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="white-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="24.0" prefWidth="758.0" />
-            <HBox prefHeight="701.0" prefWidth="878.0">
-               <children>
-                  <Pane prefHeight="692.0" prefWidth="74.0" />
-                  <ScrollPane fx:id="scollableid" prefHeight="670.0" prefWidth="808.0" stylesheets="@css/style.css">
-                     <content>
-                        <VBox fx:id="vboxcont" prefHeight="692.0" prefWidth="785.0" spacing="4.0" styleClass="white-background" stylesheets="@css/style.css" />
-                     </content>
-                     <HBox.margin>
-                        <Insets bottom="5.0" />
-                     </HBox.margin>
-                     <styleClass>
-                        <String fx:value="white-background" />
-                        <String fx:value="search-box" />
-                     </styleClass>
-                  </ScrollPane>
-                  <Pane prefHeight="692.0" prefWidth="20.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="878.0">
-               <children>
-                  <Pane prefHeight="44.0" prefWidth="727.0" />
-                  <Pagination fx:id="pagination" prefHeight="44.0" prefWidth="109.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Pagination>
-                  <TextField fx:id="toPage" prefHeight="21.0" prefWidth="30.0">
-                     <HBox.margin>
-                        <Insets bottom="9.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="9.0" />
-                     </font>
-                  </TextField>
-                  <Pane prefHeight="44.0" prefWidth="16.0" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
 </BorderPane>

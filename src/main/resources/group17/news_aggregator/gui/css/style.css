@@ -3,8 +3,9 @@
 }
 
 .round-layout{
-    -fx-border-radius: 5;
-    -fx-border-color: #D7D7D7;
+    -fx-border-radius: 20;
+    -fx-border-color: #4D788D;
+    -fx-border-width: 3;
 
 }
 
@@ -27,8 +28,17 @@
     -fx-border-color: grey;
 }
 
-.background_center{
+.background{
     -fx-background-image:url("../image/BG.png");
     -fx-background-size: cover;
+}
+
+.home-selected{
+    -fx-background-radius: 20;
+    -fx-background-color: #EDF5F9;
+}
+
+.white-background{
+    -fx-background-color: white;
 }
 
