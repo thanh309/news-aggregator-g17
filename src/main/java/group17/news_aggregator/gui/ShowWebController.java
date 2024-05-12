@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.List;
 
 public class ShowWebController {
     private Stage stageWeb;
@@ -39,18 +40,47 @@ public class ShowWebController {
     @FXML
     private ImageView prevImage;
 
-    public ShowWebController(Stage stage, Scene scene) {
+    private List<News> newsList;
+    private int currentIndex;
+
+    public ShowWebController(Stage stage, Scene scene, List<News> newsList) {
         this.stageWeb = stage;
         this.sceneWeb = scene;
+        this.newsList = newsList;
     }
 
     public void initialize() {
         homeImage.setOnMouseClicked(backHome -> {
             stageWeb.hide();
         });
+
+
+        nextImage.setOnMouseClicked(nextOn -> {
+
+            if (currentIndex < newsList.size() - 1) {
+                currentIndex += 1;
+                try {
+                    showVisitScene(newsList.get(currentIndex));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        prevImage.setOnMouseClicked(prevOn -> {
+
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                try {
+                    showVisitScene(newsList.get(currentIndex));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void showVisitScene(News news) throws IOException {
+        currentIndex = newsList.indexOf(news);
         String url = news.getLink();
 //        String url = "https://cryptonews.com/news/top-crypto-gainers-today-on-dexscreener-felon-yield-boob.htm";
         Document doc = Jsoup
@@ -65,12 +95,15 @@ public class ShowWebController {
         String content = doc.html();
 
         engine = webView.getEngine();
-        engine.loadContent(header + content);
+
         if (news.getWebsiteSource().equals("Medium")) {
             engine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("css/medium-reader.css")).toString());
         }
+
 //        engine = webView.getEngine();
 //        engine.load(news.getLink());
+
+        engine.loadContent(header + content);
 
     }
 }
