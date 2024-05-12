@@ -1,12 +1,3 @@
-
-.vbox-background{
-    -fx-background-color: #13538A;
-}
-
-.white-background{
-    -fx-background-color: #fff;
-}
-
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
@@ -29,24 +20,15 @@
     -fx-text-fill: grey;
 }
 
-.check-box .box{
-    -fx-background-color: white;
-    -fx-border-color: grey;
-    -fx-border-radius: 3px;
-}
-
-.check-box: selected .mark{
-    -fx-background-color:white;
-}
-
-.check-box: selected .box{
-    -fx-background-color: grey;
-}
-
 .search-box{
     -fx-background-color: white;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
     -fx-border-color: grey;
+}
+
+.background_center{
+    -fx-background-image:url("../image/BG.png");
+    -fx-background-size: cover;
 }
 

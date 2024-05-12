@@ -6,6 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -19,6 +22,9 @@ public class StartController {
     @FXML
     private Button aboutUs;
 
+    @FXML
+    private TextField homeSearch;
+
     public StartController() {
     }
     public StartController(Stage stage, Scene scene){
@@ -27,7 +33,7 @@ public class StartController {
     }
 
     @FXML
-    void startnow(ActionEvent event) {
+    void startnow(MouseEvent event) {
         if (stageStart == null) {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
@@ -44,6 +50,17 @@ public class StartController {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    void initialize() {
+        homeSearch.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                startnow(null);
+            }
+        });
+    }
+
+
     @FXML
     void aboutus(ActionEvent event){
         if (stageStart == null) {
@@ -62,5 +79,6 @@ public class StartController {
             ex.printStackTrace();
         }
     }
+
 
 }
