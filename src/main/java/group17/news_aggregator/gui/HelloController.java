@@ -38,50 +38,35 @@ import java.util.stream.IntStream;
 public class HelloController {
 
 
+    private final CSVConverter csvConverter = new CSVConverter();
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     @FXML
     private TextField filterText;
-
     @FXML
     private TextField authorTextField;
-
     @FXML
     private TextField cateTextField;
-
     @FXML
     private TextField tagTextField;
-
     @FXML
     private ScrollPane scollableid;
-
-
     @FXML
     private VBox vboxcont;
-
     @FXML
     private Button next20;
-
     @FXML
     private Button prev20;
-
-
     @FXML
     private Button search_but;
-
     @FXML
     private TextField endDateField;
     @FXML
     private TextField startDateField;
-
     @FXML
     private Text errorFormatText;
     private Stage stage;
     private Scene mainScene;
-
     private Stage newStage = new Stage();
-
-    private final CSVConverter csvConverter = new CSVConverter();
-
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private int startIndex = 0;
     private int endIndex = 20;
 
@@ -214,15 +199,15 @@ public class HelloController {
             for (News news : subList) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
-                    NewsController newsController = new NewsController(newStage, mainScene);
+                    NewsController newsController = new NewsController(newStage, mainScene, newsList);
                     loader.setController(newsController);
 
                     HBox newsComponent = loader.load();
 
 
-                    newsController.attachValue(news, stage);
+                    newsController.attachValue(news, stage, newsList);
                     newsController = loader.getController();
-                    newsController.attachValue(news, newStage);
+                    newsController.attachValue(news, newStage, newsList);
 
                     vboxcont.getChildren().add(newsComponent);
                 } catch (IOException e) {

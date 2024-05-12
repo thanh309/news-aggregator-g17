@@ -18,32 +18,27 @@ import java.util.List;
 
 public class NewsController {
 
-    private Stage stage;
-    private Scene scene;
-
-
-
     @FXML
     Button author;
-
-    @FXML
-    private FlowPane flowp;
-
-    @FXML
-    private HBox news;
-
     @FXML
     Button title;
-
     @FXML
     TextFlow datetype;
+    private Stage stage;
+    private Scene scene;
+    @FXML
+    private FlowPane flowp;
+    @FXML
+    private HBox news;
+    private List<News> newsList;
 
     public NewsController() {
     }
 
-    public NewsController(Stage stage, Scene mainScene) {
+    public NewsController(Stage stage, Scene mainScene, List<News> newsList) {
         this.stage = stage;
         this.scene = mainScene;
+        this.newsList = newsList;
     }
 
     // Method to update FlowPane with tags
@@ -62,13 +57,13 @@ public class NewsController {
             buttonTag.getStyleClass().add("round-layout");
             buttonTag.setCursor(Cursor.HAND);
             flowp.getChildren().add(buttonTag);
-            if (count > lim){
+            if (count > lim) {
                 break;
             }
         }
     }
 
-    public void attachValue (News news, Stage stage){
+    public void attachValue(News news, Stage stage, List<News> newsList) {
 
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
@@ -76,11 +71,11 @@ public class NewsController {
         Text newText = new Text(news.getCreationDateStr() + " \\ " + news.getType());
         newText.setStyle("-fx-font-size: 17px;");
         this.datetype.getChildren().add(newText);
-        this.createTags(news.getTags(),10);
+        this.createTags(news.getTags(), 10);
 
         this.title.setOnAction(visitSite -> {
             FXMLLoader loadweb = new FXMLLoader(getClass().getResource("show-web.fxml"));
-            ShowWebController showWebController = new ShowWebController(stage, scene);
+            ShowWebController showWebController = new ShowWebController(stage, scene, newsList);
             loadweb.setController(showWebController);
 
             try {
@@ -93,7 +88,7 @@ public class NewsController {
             } catch (IOException e) {
 //                e.printStackTrace();
                 FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("offline-content.fxml"));
-                OfflineContentController offlineContentController = new OfflineContentController(stage, scene);
+                OfflineContentController offlineContentController = new OfflineContentController(stage, scene, newsList);
                 loadOfflineContent.setController(offlineContentController);
 
                 try {
@@ -106,12 +101,8 @@ public class NewsController {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
-
             }
-
         });
-
     }
 
 
