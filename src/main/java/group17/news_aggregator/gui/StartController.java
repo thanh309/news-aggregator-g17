@@ -22,44 +22,12 @@ public class StartController {
     @FXML
     private Button aboutUs;
 
-    @FXML
-    private TextField homeSearch;
-
     public StartController() {
     }
     public StartController(Stage stage, Scene scene){
         this.stageStart = stage;
         this.sceneStart = scene;
     }
-
-    @FXML
-    void startnow(MouseEvent event) {
-        if (stageStart == null) {
-            stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        }
-
-        HelloController helloController = new HelloController(stageStart, sceneStart);
-        FXMLLoader loadMain = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-        loadMain.setController(helloController);
-
-        try {
-            Parent visitScene = loadMain.load();
-            stageStart.setScene(new Scene(visitScene));
-            stageStart.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    void initialize() {
-        homeSearch.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                startnow(null);
-            }
-        });
-    }
-
 
     @FXML
     void aboutus(ActionEvent event){
