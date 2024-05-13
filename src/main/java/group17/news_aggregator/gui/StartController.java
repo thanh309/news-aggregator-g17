@@ -68,11 +68,26 @@ public class StartController {
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("about-us.fxml"));
-        AboutUsController aboutUsController = new AboutUsController(stageStart, sceneStart);
-        loader.setController(aboutUsController);
 
         try {
             Parent aboutScene = loader.load();
+            stageStart.setScene(new Scene(aboutScene));
+            stageStart.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void discover(ActionEvent event){
+        if (stageStart == null) {
+            stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+
+        try {
+            Parent aboutScene = searchLoader.load();
             stageStart.setScene(new Scene(aboutScene));
             stageStart.show();
         } catch (IOException ex) {

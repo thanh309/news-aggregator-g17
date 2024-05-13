@@ -68,19 +68,23 @@
                   <Font size="28.0" />
                </font>
             </Button>
-            <Button fx:id="aboutUs" mnemonicParsing="false" onAction="#aboutus" prefHeight="63.0" prefWidth="139.0" stylesheets="@css/style.css" text="About Us">
+            <Button fx:id="aboutUs" mnemonicParsing="false" onAction="#aboutus" prefHeight="63.0" prefWidth="139.0" stylesheets="@css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
                <styleClass>
                   <String fx:value="transparent" />
-                  <String fx:value="mouse-moved-au" />
+                  <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="63.0" styleClass="transparent" stylesheets="@css/start.css" text="Discover">
+            <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" stylesheets="@css/start.css" text="Discover">
                <font>
                   <Font size="25.0" />
                </font>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
             </Button>
          </children>
       </HBox>

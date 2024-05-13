@@ -19,7 +19,6 @@ public class HelloApplication extends Application {
         stage.setTitle("Group 17 OOP");
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("start-view.fxml"));
-        StartController startController = new StartController(stage, firstScene);
 //        Scene scene = new Scene(fxmlLoader.load(), 1200, 675);
 
         try {

@@ -1,9 +1,12 @@
 package group17.news_aggregator.gui;
 
 import group17.news_aggregator.search_engine.Query;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -247,4 +250,37 @@ public class HelloController {
             }
         }
     }
+
+    @FXML
+    void aboutus(ActionEvent event){
+        if (stage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("about-us.fxml"));
+        try {
+            Parent aboutScene = loader.load();
+            stage.setScene(new Scene(aboutScene));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void home(MouseEvent event){
+        if (stage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-view.fxml"));
+        try {
+            Parent mainScene = loader.load();
+            stage.setScene(new Scene(mainScene));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

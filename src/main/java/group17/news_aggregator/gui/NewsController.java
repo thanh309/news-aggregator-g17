@@ -62,7 +62,7 @@ public class NewsController {
             buttonTag.getStyleClass().add("transparent");
             buttonTag.setCursor(Cursor.HAND);
             flowp.getChildren().add(buttonTag);
-            if (count > lim){
+            if (count >= lim){
                 break;
             }
         }
@@ -73,8 +73,8 @@ public class NewsController {
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
         this.datetype.getChildren().clear();
-        Text newText = new Text(news.getCreationDateStr() + " || " + news.getType());
-        newText.setStyle("-fx-font-size: 17px;");
+        Text newText = new Text(news.getCreationDateStr() + " | " + news.getType());
+        newText.setStyle("-fx-font-size: 15px;");
         this.datetype.getChildren().add(newText);
         this.createTags(news.getTags(),10);
 

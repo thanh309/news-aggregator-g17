@@ -44,7 +44,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font name="System Bold" size="15.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
                </children>
@@ -58,7 +58,7 @@
                </VBox.margin></TextFlow>
             <FlowPane fx:id="flowp" alignment="CENTER_LEFT" hgap="10.0" prefHeight="56.0" prefWidth="761.0" vgap="3.0">
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </FlowPane>
          </children>

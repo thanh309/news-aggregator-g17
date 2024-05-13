@@ -39,7 +39,11 @@
 }
 
 .new-round-background{
-    -fx-background-color: #D8E3E4;
+    -fx-background-color: #f7fcfc;
     -fx-background-radius: 20px;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
 }
 
