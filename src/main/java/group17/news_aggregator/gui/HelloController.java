@@ -58,13 +58,13 @@ public class HelloController {
     private VBox vboxcont;
 
     @FXML
-    private Button next20;
+    private ImageView next20;
 
     @FXML
-    private Button prev20;
+    private ImageView prev20;
 
     @FXML
-    private Pagination pagination;
+    private Label totalPg;
     @FXML
     private Button search_but;
 
@@ -88,6 +88,7 @@ public class HelloController {
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private int startIndex = 0;
     private int endIndex = 20;
+    private int currentPage = 0;
 
     public HelloController() {
     }
@@ -147,30 +148,44 @@ public class HelloController {
             newsList.add(originalNewsList.get(i));
         }
 
-        pagination.setPageCount(totalNewPage);
-        pagination.setPageFactory(pageIndex -> {
-            int fromIndex = pageIndex * 20;
-            int toIndex = Math.min(fromIndex + 20, newsList.size());
-            displayNews(fromIndex, toIndex, newsList);
-            return new VBox();
+        next20.setOnMouseClicked(increase20 -> {
+                    if (endIndex + 20 <= newsList.size()) {
+                        startIndex += 20;
+                        endIndex += 20;
+                        currentPage++;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
         });
 
-        pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> {
-            int fromIndex = newIndex.intValue() * 20;
-            int toIndex = Math.min(fromIndex + 20, newsList.size());
-            displayNews(fromIndex, toIndex, newsList);
+        prev20.setOnMouseClicked(decrease20 -> {
+                    if (startIndex >= 20) {
+                        startIndex -= 20;
+                        endIndex -= 20;
+                        currentPage--;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
         });
 
-        toPage.setOnAction(event -> {
-            int pageNumber = Integer.parseInt(toPage.getText());
-            if (pageNumber >= 1 && pageNumber <= totalNewPage) {
-                pagination.setCurrentPageIndex(pageNumber - 1);
+        toPage.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                String pageNumberText = toPage.getText();
+                if (!pageNumberText.isEmpty()) {
+                    int pageNumber = Integer.parseInt(pageNumberText);
+                    if (pageNumber >= 1 && pageNumber <= totalNewPage) {
+                        currentPage = pageNumber - 1;
+                        startIndex = currentPage*20;
+                        endIndex = startIndex + 20;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
+                }
             }
         });
 
 
         startIndex = 0;
         endIndex = 20;
+        currentPage = 0;
+        toPage.setText("1");
 
         displayNews(startIndex, endIndex, newsList);
     }
@@ -182,6 +197,7 @@ public class HelloController {
 
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
+
         // search
         SearchEngine searchEngine = new SearchEngine();
         searchEngine.initialize(originalNewsList);
@@ -199,24 +215,35 @@ public class HelloController {
         startDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
         endDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
 
-        pagination.setPageCount(totalPage);
-        pagination.setPageFactory(pageIndex -> {
-            int fromIndex = pageIndex * 20;
-            int toIndex = Math.min(fromIndex + 20, originalNewsList.size());
-            displayNews(fromIndex, toIndex, originalNewsList);
-            return new VBox();
+        next20.setOnMouseClicked(increase20 -> {
+            if (endIndex <= originalNewsList.size()) {
+                startIndex += 20;
+                endIndex += 20;
+                currentPage ++;
+                displayNews(startIndex, endIndex, originalNewsList);
+            }
         });
 
-        pagination.currentPageIndexProperty().addListener((obs, oldIndex, newIndex) -> {
-            int fromIndex = newIndex.intValue() * 20;
-            int toIndex = Math.min(fromIndex + 20, originalNewsList.size());
-            displayNews(fromIndex, toIndex, originalNewsList);
+        prev20.setOnMouseClicked(decrease20 -> {
+            if (startIndex >= 20) {
+                startIndex -= 20;
+                endIndex -= 20;
+                currentPage --;
+                displayNews(startIndex, endIndex, originalNewsList);
+            }
         });
 
-        toPage.setOnAction(event -> {
-            int pageNumber = Integer.parseInt(toPage.getText());
-            if (pageNumber >= 1 && pageNumber <= totalPage) {
-                pagination.setCurrentPageIndex(pageNumber - 1);
+        toPage.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                String pageNumberText = toPage.getText();
+                int pageNumber = Integer.parseInt(pageNumberText);
+                if (pageNumber >= 1 && pageNumber <= totalPage) {
+                    currentPage = pageNumber - 1;
+                    startIndex = currentPage*20;
+                    endIndex = startIndex + 20;
+                    displayNews(startIndex, endIndex, originalNewsList);
+                }
+
             }
         });
 
@@ -228,7 +255,8 @@ public class HelloController {
     private void displayNews(int startIndex, int endIndex, List<News> newsList) {
         vboxcont.getChildren().clear();
         int size = newsList.size();
-        if (startIndex < size && endIndex <= size) {
+        endIndex = Math.min(endIndex, size);
+        if (startIndex < size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
                 try {
@@ -249,6 +277,12 @@ public class HelloController {
                 }
             }
         }
+
+        toPage.setText(String.valueOf(currentPage + 1));
+        prev20.setDisable(currentPage <= 0);
+        next20.setDisable(endIndex >= size);
+        int total = (int) Math.floor((double) size / 20);
+        totalPg.setText("/"+ total);
     }
 
     @FXML
