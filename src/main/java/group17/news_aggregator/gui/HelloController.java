@@ -282,7 +282,7 @@ public class HelloController {
         prev20.setDisable(currentPage <= 0);
         next20.setDisable(endIndex >= size);
         int total = (int) Math.floor((double) size / 20);
-        totalPg.setText("/"+ total);
+        totalPg.setText("/  "+ total);
     }
 
     @FXML

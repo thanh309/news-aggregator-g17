@@ -26,16 +26,16 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="84.0" prefWidth="1200.0">
                <children>
-                  <Label prefHeight="82.0" prefWidth="356.0" text="New Aggregator" textAlignment="CENTER" textFill="#1881b4">
+                  <Label prefHeight="82.0" prefWidth="373.0" text="News Aggregator" textAlignment="CENTER" textFill="#1d8496">
                      <font>
                         <Font name="System Bold" size="45.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="76.0" prefWidth="1200.0">
+            <VBox alignment="CENTER" prefHeight="98.0" prefWidth="1200.0">
                <children>
-                  <Label text="Just a product of Group 17 OOP">
+                  <Label prefHeight="36.0" prefWidth="842.0" text="A product of Group 17 using search engines based on the TF-IDF algorithm">
                      <font>
                         <Font size="25.0" />
                      </font>

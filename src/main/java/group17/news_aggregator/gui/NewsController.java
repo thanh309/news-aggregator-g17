@@ -58,7 +58,7 @@ public class NewsController {
             buttonTag.setPrefHeight(20);
             buttonTag.setText(capitalize(tag));
             buttonTag.getClass().getResource("css/news.css");
-            buttonTag.getStyleClass().add("round-layout");
+            buttonTag.getStyleClass().add("round-layout-tag");
             buttonTag.getStyleClass().add("transparent");
             buttonTag.setCursor(Cursor.HAND);
             flowp.getChildren().add(buttonTag);

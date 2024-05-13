@@ -24,16 +24,19 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="1200.0" styleClass="transparent" stylesheets="@css/style.css">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="689.0" styleClass="round-layout" stylesheets="@css/style.css">
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="645.0" styleClass="round-layout" stylesheets="@css/style.css">
                            <children>
-                              <TextField fx:id="filterText" prefHeight="34.0" prefWidth="609.0" promptText="Search here" styleClass="transparent" stylesheets="@css/style.css" />
+                              <TextField fx:id="filterText" prefHeight="32.0" prefWidth="590.0" promptText="Type here to search" styleClass="transparent" stylesheets="@css/style.css">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></TextField>
                               <Button fx:id="search_but" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@css/style.css" text="Search">
                                  <font>
-                                    <Font name="System Italic" size="13.0" />
+                                    <Font name="System Italic" size="15.0" />
                                  </font>
                                  <styleClass>
-                                    <String fx:value="mouse-moved" />
                                     <String fx:value="transparent" />
+                                    <String fx:value="mouse-moved" />
                                  </styleClass>
                               </Button>
                            </children>
@@ -73,30 +76,33 @@
                               </ScrollPane>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="596.0" spacing="5.0" stylesheets="@css">
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="22.0" prefWidth="802.0" stylesheets="@css">
                            <children>
-                              <ImageView fx:id="prev20" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="prev20" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@image/Prev20.png" />
                                  </image></ImageView>
-                              <TextField fx:id="toPage" prefHeight="27.0" prefWidth="37.0" promptText="Go To">
+                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="35.0" promptText="Go To">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" />
                                  </HBox.margin>
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </TextField>
-                              <Label fx:id="totalPg" prefHeight="26.0" prefWidth="33.0" text="Label">
+                              <Label fx:id="totalPg" alignment="CENTER" prefHeight="30.0" prefWidth="46.0" text="Label">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
                               </Label>
-                              <ImageView fx:id="next20" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="next20" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@image/Next20.png" />
                                  </image></ImageView>
-                              <Pane prefHeight="30.0" prefWidth="15.0" />
+                              <Pane prefHeight="30.0" prefWidth="30.0" />
                            </children>
                            <padding>
                               <Insets right="5.0" />
