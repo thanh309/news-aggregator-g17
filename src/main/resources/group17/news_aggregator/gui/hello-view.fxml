@@ -44,20 +44,23 @@
                            </padding>
                         </HBox>
                      </children>
+                     <padding>
+                        <Insets right="60.0" />
+                     </padding>
                   </HBox>
                </children>
             </VBox>
             <Pane prefHeight="23.0" prefWidth="1200.0" />
-            <HBox alignment="CENTER" prefHeight="595.0" prefWidth="943.0" styleClass="transparent" stylesheets="@css/style.css">
+            <HBox alignment="CENTER" prefHeight="595.0" prefWidth="943.0">
                <children>
-                  <Pane prefHeight="594.0" prefWidth="120.0" />
+                  <Pane prefHeight="594.0" prefWidth="90.0" />
                   <VBox prefHeight="594.0" prefWidth="747.0">
                      <children>
-                        <HBox prefHeight="567.0" prefWidth="733.0">
+                        <HBox prefHeight="550.0" prefWidth="879.0" styleClass="transparent" stylesheets="@css/style.css">
                            <children>
-                              <ScrollPane fx:id="scollableid" prefHeight="562.0" prefWidth="733.0" styleClass="transparent" stylesheets="@css/style.css">
+                              <ScrollPane fx:id="scollableid" prefHeight="546.0" prefWidth="974.0">
                                  <content>
-                                    <VBox fx:id="vboxcont" prefHeight="544.0" prefWidth="725.0" spacing="4.0" styleClass="transparent" stylesheets="@css/style.css" />
+                                    <VBox fx:id="vboxcont" prefHeight="544.0" prefWidth="735.0" spacing="15.0" stylesheets="@css/style.css" />
                                  </content>
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -87,7 +90,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Pane prefHeight="594.0" prefWidth="120.0" stylesheets="@css/style.css" />
+                  <Pane prefHeight="594.0" prefWidth="90.0" stylesheets="@css/style.css" />
                </children>
             </HBox>
          </children>
@@ -216,7 +219,7 @@
             </Pane>
          </children>
          <BorderPane.margin>
-            <Insets left="10.0" />
+            <Insets left="30.0" />
          </BorderPane.margin>
       </VBox>
    </left>
