@@ -45,16 +45,41 @@ public class OfflineContentController {
     @FXML
     private Text warnText;
 
-    public OfflineContentController(Stage stage, Scene scene) {
+    private int currentIndex;
+    private List<News> newsList;
+
+    public OfflineContentController(Stage stage, Scene scene, List<News> newsList) {
         this.stageOffline = stage;
         this.sceneOffline = scene;
+        this.newsList = newsList;
+    }
+
+    public void initialize() {
+        homeImage.setOnMouseClicked(backHome -> {
+            stageOffline.hide();
+        });
+        nextImage.setOnMouseClicked(nextOffline -> {
+
+            if (currentIndex < newsList.size() - 1) {
+                currentIndex += 1;
+                showOfflineContent(newsList.get(currentIndex));
+            }
+        });
+        prevImage.setOnMouseClicked(prevOffline -> {
+
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                showOfflineContent(newsList.get(currentIndex));
+            }
+        });
     }
 
     public void showOfflineContent(News news) {
         warnText.setText("Error: no internet connection, no access available");
-
+        currentIndex = newsList.indexOf(news);
         List<String> stringList = news.getContent();
 
+        txt.setText("");
         for (String str : stringList) {
             txt.setText(txt.getText() + str + "\n\n");
         }

@@ -261,15 +261,15 @@ public class HelloController {
             for (News news : subList) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
-                    NewsController newsController = new NewsController(newStage, mainScene);
+                    NewsController newsController = new NewsController(newStage, mainScene, newsList);
                     loader.setController(newsController);
 
                     HBox newsComponent = loader.load();
 
 
-                    newsController.attachValue(news, stage);
+                    newsController.attachValue(news, stage, newsList);
                     newsController = loader.getController();
-                    newsController.attachValue(news, newStage);
+                    newsController.attachValue(news, newStage, newsList);
 
                     vboxcont.getChildren().add(newsComponent);
                 } catch (IOException e) {
