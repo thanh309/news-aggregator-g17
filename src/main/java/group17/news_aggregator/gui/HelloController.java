@@ -38,26 +38,22 @@ import java.util.stream.IntStream;
 public class HelloController {
 
 
+    private final CSVConverter csvConverter = new CSVConverter();
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     @FXML
     private TextField filterText;
-
     @FXML
     private TextField authorTextField;
-
     @FXML
     private TextField cateTextField;
-
     @FXML
     private TextField tagTextField;
-
     @FXML
     private ScrollPane scollableid;
-
-
     @FXML
     private VBox vboxcont;
-
     @FXML
+
     private ImageView next20;
 
     @FXML
@@ -67,12 +63,10 @@ public class HelloController {
     private Label totalPg;
     @FXML
     private Button search_but;
-
     @FXML
     private TextField endDateField;
     @FXML
     private TextField startDateField;
-
     @FXML
     private TextField toPage;
 
@@ -80,12 +74,7 @@ public class HelloController {
     private Text errorFormatText;
     private Stage stage;
     private Scene mainScene;
-
     private Stage newStage = new Stage();
-
-    private final CSVConverter csvConverter = new CSVConverter();
-
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private int startIndex = 0;
     private int endIndex = 20;
     private int currentPage = 0;

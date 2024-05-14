@@ -57,6 +57,7 @@ public class NewsController {
             buttonTag.getStyleClass().add("transparent");
             buttonTag.setCursor(Cursor.HAND);
             flowp.getChildren().add(buttonTag);
+          
             if (count >= lim){
                 break;
             }
@@ -71,7 +72,7 @@ public class NewsController {
         Text newText = new Text(news.getCreationDateStr() + " | " + news.getType());
         newText.setStyle("-fx-font-size: 15px;");
         this.datetype.getChildren().add(newText);
-        this.createTags(news.getTags(),10);
+        this.createTags(news.getTags(), 10);
 
         this.title.setOnAction(visitSite -> {
             FXMLLoader loadweb = new FXMLLoader(getClass().getResource("show-web.fxml"));
@@ -101,12 +102,8 @@ public class NewsController {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
-
             }
-
         });
-
     }
 
 
