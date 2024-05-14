@@ -1,14 +1,14 @@
 package group17.news_aggregator.gui;
 
 import group17.news_aggregator.search_engine.Query;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -53,9 +53,14 @@ public class HelloController {
     @FXML
     private VBox vboxcont;
     @FXML
-    private Button next20;
+
+    private ImageView next20;
+
     @FXML
-    private Button prev20;
+    private ImageView prev20;
+
+    @FXML
+    private Label totalPg;
     @FXML
     private Button search_but;
     @FXML
@@ -63,12 +68,16 @@ public class HelloController {
     @FXML
     private TextField startDateField;
     @FXML
+    private TextField toPage;
+
+    @FXML
     private Text errorFormatText;
     private Stage stage;
     private Scene mainScene;
     private Stage newStage = new Stage();
     private int startIndex = 0;
     private int endIndex = 20;
+    private int currentPage = 0;
 
     public HelloController() {
     }
@@ -83,6 +92,8 @@ public class HelloController {
 
         String startDate = startDateField.getText().trim() + " 00:00:00";
         String endDate = endDateField.getText().trim() + " 00:00:00";
+
+        int totalNewPage = (int) Math.ceil((double) newsList.size() / 20);
 
         Query query;
         try {
@@ -127,22 +138,43 @@ public class HelloController {
         }
 
         next20.setOnMouseClicked(increase20 -> {
-            if (endIndex + 20 <= newsList.size()) {
-                startIndex += 20;
-                endIndex += 20;
-                displayNews(startIndex, endIndex, newsList);
-            }
+                    if (endIndex + 20 <= newsList.size()) {
+                        startIndex += 20;
+                        endIndex += 20;
+                        currentPage++;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
         });
+
         prev20.setOnMouseClicked(decrease20 -> {
-            if (startIndex >= 20) {
-                startIndex -= 20;
-                endIndex -= 20;
-                displayNews(startIndex, endIndex, newsList);
+                    if (startIndex >= 20) {
+                        startIndex -= 20;
+                        endIndex -= 20;
+                        currentPage--;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
+        });
+
+        toPage.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                String pageNumberText = toPage.getText();
+                if (!pageNumberText.isEmpty()) {
+                    int pageNumber = Integer.parseInt(pageNumberText);
+                    if (pageNumber >= 1 && pageNumber <= totalNewPage) {
+                        currentPage = pageNumber - 1;
+                        startIndex = currentPage*20;
+                        endIndex = startIndex + 20;
+                        displayNews(startIndex, endIndex, newsList);
+                    }
+                }
             }
         });
 
+
         startIndex = 0;
         endIndex = 20;
+        currentPage = 0;
+        toPage.setText("1");
 
         displayNews(startIndex, endIndex, newsList);
     }
@@ -153,6 +185,8 @@ public class HelloController {
         List<News> originalNewsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
 
         int size = originalNewsList.size();
+        int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
+
         // search
         SearchEngine searchEngine = new SearchEngine();
         searchEngine.initialize(originalNewsList);
@@ -170,19 +204,35 @@ public class HelloController {
         startDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
         endDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
 
-
         next20.setOnMouseClicked(increase20 -> {
-            if (endIndex + 20 <= size) {
-                this.startIndex += 20;
-                this.endIndex += 20;
+            if (endIndex <= originalNewsList.size()) {
+                startIndex += 20;
+                endIndex += 20;
+                currentPage ++;
                 displayNews(startIndex, endIndex, originalNewsList);
             }
         });
+
         prev20.setOnMouseClicked(decrease20 -> {
             if (startIndex >= 20) {
-                this.startIndex -= 20;
-                this.endIndex -= 20;
+                startIndex -= 20;
+                endIndex -= 20;
+                currentPage --;
                 displayNews(startIndex, endIndex, originalNewsList);
+            }
+        });
+
+        toPage.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                String pageNumberText = toPage.getText();
+                int pageNumber = Integer.parseInt(pageNumberText);
+                if (pageNumber >= 1 && pageNumber <= totalPage) {
+                    currentPage = pageNumber - 1;
+                    startIndex = currentPage*20;
+                    endIndex = startIndex + 20;
+                    displayNews(startIndex, endIndex, originalNewsList);
+                }
+
             }
         });
 
@@ -194,7 +244,8 @@ public class HelloController {
     private void displayNews(int startIndex, int endIndex, List<News> newsList) {
         vboxcont.getChildren().clear();
         int size = newsList.size();
-        if (startIndex < size && endIndex <= size) {
+        endIndex = Math.min(endIndex, size);
+        if (startIndex < size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
                 try {
@@ -215,5 +266,44 @@ public class HelloController {
                 }
             }
         }
+
+        toPage.setText(String.valueOf(currentPage + 1));
+        prev20.setDisable(currentPage <= 0);
+        next20.setDisable(endIndex >= size);
+        int total = (int) Math.floor((double) size / 20);
+        totalPg.setText("/  "+ total);
     }
+
+    @FXML
+    void aboutus(ActionEvent event){
+        if (stage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("about-us.fxml"));
+        try {
+            Parent aboutScene = loader.load();
+            stage.setScene(new Scene(aboutScene));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void home(MouseEvent event){
+        if (stage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-view.fxml"));
+        try {
+            Parent mainScene = loader.load();
+            stage.setScene(new Scene(mainScene));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-.vbox_background_center{
+.background_center{
     -fx-background-image:url("../image/BG.png");
     -fx-background-size: cover;
 }
@@ -9,7 +9,8 @@
 }
 
 .mouse-moved: hover{
-    -fx-text-fill: white;
+    -fx-background-radius: 20;
+    -fx-background-color: #EDF5F9;
 }
 
 .mouse-moved-au: hover{
@@ -18,4 +19,28 @@
 
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
+}
+
+.white-background{
+    -fx-background-color: white;
+}
+
+.home-selected{
+    -fx-background-radius: 20;
+    -fx-background-color: #EDF5F9;
+}
+
+.round-layout{
+    -fx-border-radius: 20;
+    -fx-border-color: #4D788D;
+    -fx-border-width: 3;
+
+}
+
+.card-au{
+    -fx-background-color: white;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30;
+    -fx-border-color: #4D788D;
+    -fx-border-width: 3;
 }

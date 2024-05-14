@@ -1,45 +1,56 @@
-
-.vbox-background{
-    -fx-background-color: #13538A;
-}
-
-.white-background{
-    -fx-background-color: #fff;
-}
-
 .transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
 
 .round-layout{
-    -fx-border-radius: 5;
-    -fx-border-color: #D7D7D7;
+    -fx-border-radius: 20;
+    -fx-border-color: #4D788D;
+    -fx-border-width: 3;
 
-}
-
-.selected{
-    -fx-background-color: #F3F3F3;
 }
 
 .mouse-moved: hover{
     -fx-background-color: grey;
+    -fx-background-radius: 15;
+    -fx-background-color: #F1F1F2;
 }
 
 .mouse-moved-text: hover{
     -fx-text-fill: grey;
 }
 
-.check-box .box{
+.search-box{
     -fx-background-color: white;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
     -fx-border-color: grey;
-    -fx-border-radius: 3px;
 }
 
-.check-box: selected .mark{
-    -fx-background-color:white;
+.background{
+    -fx-background-image:url("../image/BG.png");
+    -fx-background-size: cover;
 }
 
-.check-box: selected .box{
-    -fx-background-color: grey;
+.home-selected{
+    -fx-background-radius: 20;
+    -fx-background-color: #EDF5F9;
+}
+
+.white-background{
+    -fx-background-color: white;
+}
+
+.new-round-background{
+    -fx-background-color: #f7fcfc;
+    -fx-background-radius: 20px;
+}
+
+.scroll-pane .viewport {
+       -fx-background-color: transparent;
+}
+
+.round-layout-tag{
+    -fx-border-radius: 20;
+    -fx-border-color: #4D788D;
 }
 

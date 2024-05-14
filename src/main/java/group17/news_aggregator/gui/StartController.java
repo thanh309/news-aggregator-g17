@@ -6,6 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
@@ -27,32 +30,12 @@ public class StartController {
     }
 
     @FXML
-    void startnow(ActionEvent event) {
-        if (stageStart == null) {
-            stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        }
-
-        HelloController helloController = new HelloController(stageStart, sceneStart);
-        FXMLLoader loadMain = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-        loadMain.setController(helloController);
-
-        try {
-            Parent visitScene = loadMain.load();
-            stageStart.setScene(new Scene(visitScene));
-            stageStart.show();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-    @FXML
     void aboutus(ActionEvent event){
         if (stageStart == null) {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("about-us.fxml"));
-        AboutUsController aboutUsController = new AboutUsController(stageStart, sceneStart);
-        loader.setController(aboutUsController);
 
         try {
             Parent aboutScene = loader.load();
@@ -62,5 +45,23 @@ public class StartController {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    void discover(ActionEvent event){
+        if (stageStart == null) {
+            stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+
+        try {
+            Parent aboutScene = searchLoader.load();
+            stageStart.setScene(new Scene(aboutScene));
+            stageStart.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }
