@@ -1,6 +1,6 @@
 package group17.news_aggregator.gui.controller;
 
-import group17.news_aggregator.gui.DataLoader;
+import group17.news_aggregator.gui.utils.DataLoader;
 import group17.news_aggregator.search_engine.Query;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

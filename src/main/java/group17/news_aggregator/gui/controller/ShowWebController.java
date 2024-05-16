@@ -1,6 +1,6 @@
 package group17.news_aggregator.gui.controller;
 
-import group17.news_aggregator.gui.WebFormatter;
+import group17.news_aggregator.gui.utils.WebFormatter;
 import group17.news_aggregator.news.News;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -68,7 +68,7 @@ public class ShowWebController {
         engine = webView.getEngine();
         engine.loadContent(header + content);
         if (news.getWebsiteSource().equals("Medium")) {
-            engine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("css/medium-reader.css")).toString());
+            engine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("/group17/news_aggregator/gui/css/medium-reader.css")).toString());
         }
 //        engine = webView.getEngine();
 //        engine.load(news.getLink());

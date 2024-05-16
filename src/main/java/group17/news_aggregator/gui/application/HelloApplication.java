@@ -1,17 +1,12 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.application;
 
-import group17.news_aggregator.csv_converter.CSVConverter;
-import group17.news_aggregator.news.News;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class HelloApplication extends Application {
@@ -21,7 +16,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Group 17 OOP");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("home-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/home-view.fxml"));
 
         try {
             root = fxmlLoader.load();

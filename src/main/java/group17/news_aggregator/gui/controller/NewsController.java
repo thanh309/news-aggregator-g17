@@ -79,7 +79,7 @@ public class NewsController {
         this.createTags(news.getTags(),10);
 
         this.title.setOnAction(visitSite -> {
-            FXMLLoader loadweb = new FXMLLoader(getClass().getResource("show-web.fxml"));
+            FXMLLoader loadweb = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/show-web.fxml"));
             ShowWebController showWebController = new ShowWebController(stage, scene);
             loadweb.setController(showWebController);
 
@@ -92,7 +92,7 @@ public class NewsController {
                 stage.show();
             } catch (IOException e) {
 //                e.printStackTrace();
-                FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("offline-content.fxml"));
+                FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/offline-content.fxml"));
                 OfflineContentController offlineContentController = new OfflineContentController(stage, scene);
                 loadOfflineContent.setController(offlineContentController);
 

@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.utils;
 
 import org.jsoup.nodes.Document;
 

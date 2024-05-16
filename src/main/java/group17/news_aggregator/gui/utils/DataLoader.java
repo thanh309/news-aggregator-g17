@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.utils;
 
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.csv_converter.CSVConverter;

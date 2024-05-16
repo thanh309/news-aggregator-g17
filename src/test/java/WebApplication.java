@@ -1,5 +1,4 @@
-package group17.news_aggregator.gui;
-
+import group17.news_aggregator.gui.utils.WebFormatter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
@@ -51,9 +50,9 @@ public class WebApplication extends Application {
         WebEngine webEngine = webView.getEngine();
 
 
-        if (url.split("/")[2].equals("readmedium.com")) {
-            webEngine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("css/medium-reader.css")).toString());
-        }
+//        if (url.split("/")[2].equals("readmedium.com")) {
+//            webEngine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("css/medium-reader.css")).toString());
+//        }
 
 
         webEngine.loadContent(header + content);
