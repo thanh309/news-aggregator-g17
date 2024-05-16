@@ -21,13 +21,14 @@ public class HomeController {
 
     public HomeController() {
     }
+
     public HomeController(Stage stage, Scene scene){
         this.stageStart = stage;
         this.sceneStart = scene;
     }
 
     @FXML
-    void aboutus(ActionEvent event){
+    void aboutUs(ActionEvent event){
         if (stageStart == null) {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }

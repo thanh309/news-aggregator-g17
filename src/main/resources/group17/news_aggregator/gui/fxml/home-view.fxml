@@ -67,7 +67,7 @@
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button fx:id="aboutUs" mnemonicParsing="false" onAction="#aboutus" prefHeight="63.0" prefWidth="139.0" stylesheets="@../css/start.css" text="About Us">
+            <Button fx:id="aboutUs" mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" prefWidth="139.0" stylesheets="@../css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
