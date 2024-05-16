@@ -25,7 +25,6 @@ public class AboutUsController {
         this.sceneAu = sceneAu;
     }
 
-
     @FXML
     void returnHome(ActionEvent event) {
         if (stageAu == null) {

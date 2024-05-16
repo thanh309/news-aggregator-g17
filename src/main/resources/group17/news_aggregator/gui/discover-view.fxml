@@ -125,7 +125,7 @@
                         <Image url="@image/logo.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="30.0" prefWidth="114.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="125.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>

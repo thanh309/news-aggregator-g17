@@ -188,14 +188,11 @@ public class DiscoverController {
         originalNewsList = DataLoader.getInstance().getNews();
         SearchEngine searchEngine = DataLoader.getInstance().getSearchEngine();
 
-
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
 
         List<Integer> ids = IntStream.rangeClosed(0, size - 1).boxed().toList();
-
         List<News> newsList = new ArrayList<>();
-
 
         search_but.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, ids));
         filterText.setOnKeyPressed(event -> {
@@ -214,7 +211,6 @@ public class DiscoverController {
                 displayNews(startIndex, endIndex, originalNewsList);
             }
         });
-
         prev20.setOnMouseClicked(decrease20 -> {
             if (startIndex >= 20) {
                 startIndex -= 20;
@@ -223,7 +219,6 @@ public class DiscoverController {
                 displayNews(startIndex, endIndex, originalNewsList);
             }
         });
-
         toPage.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER){
                 String pageNumberText = toPage.getText();
