@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,15 +6,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class StartController {
+public class HomeController {
 
     private Stage stageStart;
     private Scene sceneStart;
@@ -22,9 +19,9 @@ public class StartController {
     @FXML
     private Button aboutUs;
 
-    public StartController() {
+    public HomeController() {
     }
-    public StartController(Stage stage, Scene scene){
+    public HomeController(Stage stage, Scene scene){
         this.stageStart = stage;
         this.sceneStart = scene;
     }
@@ -35,7 +32,7 @@ public class StartController {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("about-us.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/about-us.fxml"));
 
         try {
             Parent aboutScene = loader.load();
@@ -52,7 +49,7 @@ public class StartController {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/discover-view.fxml"));
 
         try {
             Parent aboutScene = searchLoader.load();

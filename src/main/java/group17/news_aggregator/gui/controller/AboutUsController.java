@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +32,7 @@ public class AboutUsController {
             stageAu = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loaderAu = new FXMLLoader(getClass().getResource("start-view.fxml"));
+        FXMLLoader loaderAu = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/home-view.fxml"));
 
         try {
             Parent aboutScene = loaderAu.load();
@@ -49,7 +49,7 @@ public class AboutUsController {
             stageAu = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/discover-view.fxml"));
         try {
             Parent aboutScene = searchLoader.load();
             stageAu.setScene(new Scene(aboutScene));

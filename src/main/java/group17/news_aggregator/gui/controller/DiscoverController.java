@@ -1,8 +1,8 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.controller;
 
+import group17.news_aggregator.gui.DataLoader;
 import group17.news_aggregator.search_engine.Query;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,27 +15,22 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.news.News;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javasearchengine.core.searchengine.SearchEngine;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
-public class HelloController {
+public class DiscoverController {
 
 
     @FXML
@@ -80,20 +75,18 @@ public class HelloController {
     private Text errorFormatText;
     private Stage stage;
     private Scene mainScene;
-
     private Stage newStage = new Stage();
-
-    private final CSVConverter csvConverter = new CSVConverter();
-
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private int startIndex = 0;
     private int endIndex = 20;
     private int currentPage = 0;
 
-    public HelloController() {
+    private List<News> originalNewsList;
+
+    public DiscoverController() {
     }
 
-    public HelloController(Stage stage, Scene mainScene) {
+    public DiscoverController(Stage stage, Scene mainScene) {
         this.stage = stage;
         this.mainScene = mainScene;
     }
@@ -192,15 +185,13 @@ public class HelloController {
 
 
     public void initialize() {
-        CSVConverter csvConverter = new CSVConverter();
-        List<News> originalNewsList = csvConverter.fromCSV("src/main/resources/data/database.csv");
+        originalNewsList = DataLoader.getInstance().getNews();
+        SearchEngine searchEngine = DataLoader.getInstance().getSearchEngine();
+
 
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
 
-        // search
-        SearchEngine searchEngine = new SearchEngine();
-        searchEngine.initialize(originalNewsList);
         List<Integer> ids = IntStream.rangeClosed(0, size - 1).boxed().toList();
 
         List<News> newsList = new ArrayList<>();
@@ -260,7 +251,7 @@ public class HelloController {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("news-component.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/news-component.fxml"));
                     NewsController newsController = new NewsController(newStage, mainScene);
                     loader.setController(newsController);
 
@@ -291,7 +282,7 @@ public class HelloController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("about-us.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/about-us.fxml"));
         try {
             Parent aboutScene = loader.load();
             stage.setScene(new Scene(aboutScene));
@@ -307,7 +298,7 @@ public class HelloController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("start-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/home-view.fxml"));
         try {
             Parent mainScene = loader.load();
             stage.setScene(new Scene(mainScene));

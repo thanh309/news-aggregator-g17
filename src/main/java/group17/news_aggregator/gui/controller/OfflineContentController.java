@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui;
+package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.news.News;
 import javafx.fxml.FXML;

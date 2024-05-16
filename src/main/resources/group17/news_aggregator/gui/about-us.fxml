@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="750.0" prefWidth="1200.0" styleClass="background_center" stylesheets="@css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.AboutUsController">
+<BorderPane prefHeight="750.0" prefWidth="1200.0" styleClass="background_center" stylesheets="@css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.AboutUsController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@css/start.css" BorderPane.alignment="CENTER">
          <children>
@@ -33,7 +33,7 @@
             </VBox>
             <Button fx:id="homeButton" mnemonicParsing="false" onAction="#returnHome" prefHeight="63.0" prefWidth="122.0" stylesheets="@css/start.css" text="Home">
                <font>
-                  <Font size="28.0" />
+                  <Font size="25.0" />
                </font>
                <styleClass>
                   <String fx:value="white-background" />
