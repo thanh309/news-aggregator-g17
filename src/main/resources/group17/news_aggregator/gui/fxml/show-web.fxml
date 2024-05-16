@@ -13,17 +13,17 @@
          <children>
             <ImageView fx:id="homeImage" fitHeight="53.0" fitWidth="38.0" layoutX="47.0" layoutY="3.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@image/pinkHouse.png" />
+                  <Image url="@../image/pinkHouse.png" />
                </image>
             </ImageView>
             <ImageView fx:id="nextImage" fitHeight="39.0" fitWidth="38.0" layoutX="4.0" layoutY="3.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@image/next.png" />
+                  <Image url="@../image/next.png" />
                </image>
             </ImageView>
             <ImageView fx:id="prevImage" fitHeight="39.0" fitWidth="38.0" layoutX="92.0" layoutY="3.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@image/prev.png" />
+                  <Image url="@../image/prev.png" />
                </image>
             </ImageView>
          </children>

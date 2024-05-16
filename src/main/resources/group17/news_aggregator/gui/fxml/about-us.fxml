@@ -13,15 +13,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="750.0" prefWidth="1200.0" styleClass="background_center" stylesheets="@css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.AboutUsController">
+<BorderPane prefHeight="750.0" prefWidth="1200.0" styleClass="background_center" stylesheets="@../css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.AboutUsController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@css/start.css" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@../css/start.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="77.0" prefWidth="130.0">
                <children>
                   <ImageView fitHeight="46.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/logo.png" />
+                        <Image url="@../image/logo.png" />
                      </image>
                   </ImageView>
                   <Label prefHeight="30.0" prefWidth="110.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
@@ -31,7 +31,7 @@
                   </Label>
                </children>
             </VBox>
-            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#returnHome" prefHeight="63.0" prefWidth="122.0" stylesheets="@css/start.css" text="Home">
+            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#returnHome" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Home">
                <font>
                   <Font size="25.0" />
                </font>
@@ -40,12 +40,12 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="139.0" styleClass="home-selected" stylesheets="@css/start.css" text="About Us">
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="139.0" styleClass="home-selected" stylesheets="@../css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" stylesheets="@css/start.css" text="Discover">
+            <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" stylesheets="@../css/start.css" text="Discover">
                <font>
                   <Font size="25.0" />
                </font>
@@ -71,11 +71,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="260.0" prefWidth="1200.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@css/start.css">
+                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@../css/start.css">
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/vtt.jpg" />
+                              <Image url="@../image/vtt.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Vũ Trung Thành">
@@ -88,15 +88,15 @@
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" stylesheets="@css/start.css" />
+                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" stylesheets="@../css/start.css" />
                      </children>
                   </VBox>
                   <Pane prefHeight="260.0" prefWidth="150.0" />
-                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@css/start.css">
+                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@../css/start.css">
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/vdoan.jpg" />
+                              <Image url="@../image/vdoan.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Đoàn Anh Vũ">
@@ -113,11 +113,11 @@
                      </children>
                   </VBox>
                   <Pane prefHeight="260.0" prefWidth="150.0" />
-                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@css/start.css">
+                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@../css/start.css">
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/lht.jpg" />
+                              <Image url="@../image/lht.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Lương Hữu Thành">
@@ -137,11 +137,11 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="260.0" prefWidth="1200.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@css/start.css">
+                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@../css/start.css">
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/nmt.jpg" />
+                              <Image url="@../image/nmt.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Nguyễn Mậu Trung">
@@ -158,11 +158,11 @@
                      </children>
                   </VBox>
                   <Pane prefHeight="260.0" prefWidth="150.0" />
-                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@css/start.css">
+                  <VBox alignment="CENTER" prefHeight="260.0" prefWidth="237.0" spacing="5.0" styleClass="card-au" stylesheets="@../css/start.css">
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/ttv.jpg" />
+                              <Image url="@../image/ttv.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Trần Thành Vinh">

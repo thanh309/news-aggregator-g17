@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui.auto_complete;
+package group17.news_aggregator.gui.utils.auto_complete_field;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,4 +1,4 @@
-package group17.news_aggregator.gui.auto_complete;
+package group17.news_aggregator.gui.utils.auto_complete_field;
 
 import group17.news_aggregator.auto_complete.AutoComplete;
 import group17.news_aggregator.csv_converter.CSVConverter;
@@ -28,7 +28,7 @@ public abstract class AutoCompleteTextField extends TextField implements Initial
 
     public AutoCompleteTextField() {
         try {
-            FXMLLoader l = new FXMLLoader(getClass().getResource("ac.fxml"));
+            FXMLLoader l = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/ac.fxml"));
             l.setController(this);
             l.setRoot(this);
             l.load();

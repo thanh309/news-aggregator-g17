@@ -32,7 +32,7 @@ public class HomeController {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/about-us.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/about-us.fxml"));
 
         try {
             Parent aboutScene = loader.load();
@@ -49,7 +49,7 @@ public class HomeController {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/discover-view.fxml"));
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/discover-view.fxml"));
 
         try {
             Parent aboutScene = searchLoader.load();

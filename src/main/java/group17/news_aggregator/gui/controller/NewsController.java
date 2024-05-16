@@ -57,7 +57,7 @@ public class NewsController {
             buttonTag.setPrefWidth(130);
             buttonTag.setPrefHeight(20);
             buttonTag.setText(capitalize(tag));
-            buttonTag.getClass().getResource("css/news.css");
+//            buttonTag.getClass().getResource("css/news.css");
             buttonTag.getStyleClass().add("round-layout-tag");
             buttonTag.getStyleClass().add("transparent");
             buttonTag.setCursor(Cursor.HAND);
@@ -79,7 +79,7 @@ public class NewsController {
         this.createTags(news.getTags(),10);
 
         this.title.setOnAction(visitSite -> {
-            FXMLLoader loadweb = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/show-web.fxml"));
+            FXMLLoader loadweb = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/show-web.fxml"));
             ShowWebController showWebController = new ShowWebController(stage, scene);
             loadweb.setController(showWebController);
 
@@ -92,7 +92,7 @@ public class NewsController {
                 stage.show();
             } catch (IOException e) {
 //                e.printStackTrace();
-                FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/offline-content.fxml"));
+                FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/offline-content.fxml"));
                 OfflineContentController offlineContentController = new OfflineContentController(stage, scene);
                 loadOfflineContent.setController(offlineContentController);
 

@@ -246,7 +246,7 @@ public class DiscoverController {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/news-component.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/news-component.fxml"));
                     NewsController newsController = new NewsController(newStage, mainScene);
                     loader.setController(newsController);
 
@@ -277,7 +277,7 @@ public class DiscoverController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/about-us.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/about-us.fxml"));
         try {
             Parent aboutScene = loader.load();
             stage.setScene(new Scene(aboutScene));
@@ -293,7 +293,7 @@ public class DiscoverController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/home-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/home-view.fxml"));
         try {
             Parent mainScene = loader.load();
             stage.setScene(new Scene(mainScene));

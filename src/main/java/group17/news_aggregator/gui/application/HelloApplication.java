@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Group 17 OOP");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/home-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/home-view.fxml"));
 
         try {
             root = fxmlLoader.load();

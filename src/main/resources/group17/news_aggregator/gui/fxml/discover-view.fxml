@@ -15,22 +15,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.DiscoverController">
+<?import group17.news_aggregator.gui.utils.auto_complete_field.AuthorTextField?>
+<?import group17.news_aggregator.gui.utils.auto_complete_field.TagTextField?>
+<?import group17.news_aggregator.gui.utils.auto_complete_field.CategoryTextField?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.DiscoverController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="transparent" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="transparent" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="19.0" prefWidth="943.0" />
             <VBox prefHeight="39.0" prefWidth="943.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="1200.0" styleClass="transparent" stylesheets="@css/style.css">
+                  <HBox alignment="CENTER" prefHeight="39.0" prefWidth="1200.0" styleClass="transparent" stylesheets="@../css/style.css">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="645.0" styleClass="round-layout" stylesheets="@css/style.css">
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="645.0" styleClass="round-layout" stylesheets="@../css/style.css">
                            <children>
-                              <TextField fx:id="filterText" prefHeight="32.0" prefWidth="590.0" promptText="Type here to search" styleClass="transparent" stylesheets="@css/style.css">
+                              <TextField fx:id="filterText" prefHeight="32.0" prefWidth="590.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../css/style.css">
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <Button fx:id="search_but" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@css/style.css" text="Search">
+                              <Button fx:id="search_but" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@../css/style.css" text="Search">
                                  <font>
                                     <Font name="System Italic" size="15.0" />
                                  </font>
@@ -52,14 +56,14 @@
                </children>
             </VBox>
             <Pane prefHeight="23.0" prefWidth="1200.0" />
-            <HBox alignment="CENTER" prefHeight="595.0" prefWidth="943.0" styleClass="transparent" stylesheets="@css/style.css">
+            <HBox alignment="CENTER" prefHeight="595.0" prefWidth="943.0" styleClass="transparent" stylesheets="@../css/style.css">
                <children>
                   <Pane prefHeight="594.0" prefWidth="60.0" />
                   <VBox prefHeight="594.0" prefWidth="801.0">
                      <children>
                         <HBox prefHeight="550.0" prefWidth="879.0">
                            <children>
-                              <ScrollPane fx:id="scollableid" prefHeight="546.0" prefWidth="838.0" stylesheets="@css/style.css">
+                              <ScrollPane fx:id="scollableid" prefHeight="546.0" prefWidth="838.0" stylesheets="@../css/style.css">
                                  <content>
                                     <VBox fx:id="vboxcont" prefHeight="544.0" prefWidth="770.0" spacing="15.0">
                                        <padding>
@@ -76,11 +80,11 @@
                               </ScrollPane>
                            </children>
                         </HBox>
-                        <HBox alignment="BOTTOM_RIGHT" prefHeight="22.0" prefWidth="802.0" stylesheets="@css">
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="22.0" prefWidth="802.0" stylesheets="@../css/style.css">
                            <children>
                               <ImageView fx:id="prev20" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@image/Prev20.png" />
+                                    <Image url="@../image/Prev20.png" />
                                  </image></ImageView>
                               <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="35.0" promptText="Go To">
                                  <HBox.margin>
@@ -100,7 +104,7 @@
                               </Label>
                               <ImageView fx:id="next20" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@image/Next20.png" />
+                                    <Image url="@../image/Next20.png" />
                                  </image></ImageView>
                               <Pane prefHeight="30.0" prefWidth="30.0" />
                            </children>
@@ -116,13 +120,13 @@
       </VBox>
    </center>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="77.0" prefWidth="130.0">
                <children>
                   <ImageView fitHeight="46.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/logo.png" />
+                        <Image url="@../image/logo.png" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" prefHeight="42.0" prefWidth="125.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
@@ -132,7 +136,7 @@
                   </Label>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" onMouseClicked="#home" prefHeight="63.0" prefWidth="122.0" stylesheets="@css/start.css" text="Home">
+            <Button mnemonicParsing="false" onMouseClicked="#home" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Home">
                <font>
                   <Font size="25.0" />
                </font>
@@ -141,7 +145,7 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#aboutus" prefHeight="63.0" stylesheets="@css/start.css" text="About Us">
+            <Button mnemonicParsing="false" onAction="#aboutus" prefHeight="63.0" stylesheets="@../css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
@@ -150,7 +154,7 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="63.0" styleClass="home-selected" stylesheets="@css/style.css" text="Discover">
+            <Button mnemonicParsing="false" prefHeight="63.0" styleClass="home-selected" stylesheets="@../css/style.css" text="Discover">
                <font>
                   <Font size="25.0" />
                </font>
@@ -162,7 +166,7 @@
       <VBox prefHeight="674.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="103.0" prefWidth="246.0" />
-            <VBox prefHeight="486.0" prefWidth="282.0" styleClass="round-layout" stylesheets="@css/style.css">
+            <VBox prefHeight="486.0" prefWidth="282.0" styleClass="round-layout" stylesheets="@../css/style.css">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="224.0">
                      <children>
@@ -180,7 +184,8 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@css/style.css" />
+<!--                        <AuthorTextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />-->
+                        <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />
                      </children>
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="224.0">
@@ -190,7 +195,8 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@css/style.css" />
+<!--                        <CategoryTextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />-->
+                        <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />
                      </children>
                   </VBox>
                   <VBox prefHeight="106.0" prefWidth="221.0">
@@ -203,7 +209,8 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@css/style.css" />
+<!--                        <TagTextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />-->
+                        <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />
                      </children>
                   </VBox>
                   <VBox>
