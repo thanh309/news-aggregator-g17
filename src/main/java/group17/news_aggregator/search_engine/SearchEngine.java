@@ -1,7 +1,6 @@
-package javasearchengine.core.searchengine;
+package group17.news_aggregator.search_engine;
 
 import group17.news_aggregator.news.News;
-import group17.news_aggregator.search_engine.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;

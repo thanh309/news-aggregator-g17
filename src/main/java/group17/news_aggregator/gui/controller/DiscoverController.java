@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import group17.news_aggregator.news.News;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javasearchengine.core.searchengine.SearchEngine;
+import group17.news_aggregator.search_engine.SearchEngine;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

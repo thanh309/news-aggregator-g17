@@ -1,4 +1,4 @@
-package javasearchengine.core.searchengine;
+package group17.news_aggregator.search_engine;
 
 public class FileHandling {
     public static String removePuncts(String input) {

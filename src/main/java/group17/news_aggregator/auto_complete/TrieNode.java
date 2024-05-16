@@ -1,4 +1,4 @@
-package javasearchengine.core.autocomplete;
+package group17.news_aggregator.auto_complete;
 
 import java.util.*;
 

@@ -1,6 +1,4 @@
-package javasearchengine.tester;
-
-import javasearchengine.core.autocomplete.AutoComplete;
+import group17.news_aggregator.auto_complete.AutoComplete;
 
 import java.util.*;
 
