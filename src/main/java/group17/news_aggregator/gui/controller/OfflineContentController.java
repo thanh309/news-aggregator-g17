@@ -84,5 +84,8 @@ public class OfflineContentController {
         for (String str : stringList) {
             txt.setText(txt.getText() + str + "\n\n");
         }
+        Text blueUnderlinedLink = new Text(news.getLink());
+//        blueUnderlinedLink.setStyle("/group17/news_aggregator/gui/css/style.css");
+        txt.setText(txt.getText() + blueUnderlinedLink);
     }
 }

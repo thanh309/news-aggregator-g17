@@ -18,7 +18,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="739.0">
                <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconImage" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/Article.png" />
                      </image></ImageView>

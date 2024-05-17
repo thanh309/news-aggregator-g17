@@ -7,6 +7,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -24,6 +26,8 @@ public class NewsController {
     private List<News> newsList;
 
     @FXML
+    private ImageView iconImage;
+    @FXML
     Button author;
 
     @FXML
@@ -38,6 +42,9 @@ public class NewsController {
     @FXML
     private HBox news;
 
+    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/cryptopolitan.png");
+    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/cryptoslate.png");
+    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/cryptonews.png");
     public NewsController() {
     }
 
@@ -69,6 +76,13 @@ public class NewsController {
     }
 
     public void attachValue(News news, Stage stage, List<News> newsList) {
+        if (news.getLink().contains("cryptopolitan")){
+            iconImage.setImage(cryptopolitanImage);
+        } else if (news.getLink().contains("cryptoslate")){
+            iconImage.setImage(cryptoslateImage);
+        } else if (news.getLink().contains("cryptonews")){
+            iconImage.setImage(cryptonewsImage);
+        }
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
         this.datetype.getChildren().clear();

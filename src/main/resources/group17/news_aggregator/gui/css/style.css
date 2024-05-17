@@ -54,3 +54,7 @@
     -fx-border-color: #4D788D;
 }
 
+  .link-style {
+    -fx-underline: true;
+    -fx-text-color: blue;
+  }
