@@ -108,6 +108,7 @@ public class NewsController {
                 stage.setScene(new Scene(visitScene));
                 stage.show();
             } catch (IOException e) {
+                e.printStackTrace();
                 FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/offline-content.fxml"));
                 OfflineContentController offlineContentController = new OfflineContentController(stage, scene, newsList);
 
