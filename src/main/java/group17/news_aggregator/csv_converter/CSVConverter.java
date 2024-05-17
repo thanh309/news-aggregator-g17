@@ -22,7 +22,6 @@ public class CSVConverter {
     }
 
     public void toCSV(News article, String filePath, boolean overwrite) {
-
         try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filePath, !overwrite), StandardCharsets.UTF_8)) {
             StatefulBeanToCsv beanToCsv = new StatefulBeanToCsvBuilder<>(writer).build();
             beanToCsv.write(article);
@@ -31,9 +30,7 @@ public class CSVConverter {
         }
     }
 
-
     public List<News> fromCSV(String filePath) {
-
         try (InputStreamReader reader = new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8)) {
             CsvToBean<News> csvToBean = new CsvToBeanBuilder<News>(reader).withType(News.class).withSeparator(',').build();
             return csvToBean.parse();
@@ -41,7 +38,5 @@ public class CSVConverter {
             System.out.println(exception.getMessage());
         }
         return null;
-
     }
-
 }

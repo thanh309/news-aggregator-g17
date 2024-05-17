@@ -34,7 +34,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <Button fx:id="search_but" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@../css/style.css" text="Search">
+                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@../css/style.css" text="Search">
                                  <font>
                                     <Font name="System Italic" size="15.0" />
                                  </font>
@@ -63,9 +63,9 @@
                      <children>
                         <HBox prefHeight="550.0" prefWidth="879.0">
                            <children>
-                              <ScrollPane fx:id="scollableid" prefHeight="546.0" prefWidth="838.0" stylesheets="@../css/style.css">
+                              <ScrollPane fx:id="scrollableID" prefHeight="546.0" prefWidth="838.0" stylesheets="@../css/style.css">
                                  <content>
-                                    <VBox fx:id="vboxcont" prefHeight="544.0" prefWidth="770.0" spacing="15.0">
+                                    <VBox fx:id="vboxContainer" prefHeight="544.0" prefWidth="770.0" spacing="15.0">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding></VBox>
@@ -94,7 +94,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </TextField>
-                              <Label fx:id="totalPg" alignment="CENTER" prefHeight="30.0" prefWidth="46.0" text="Label">
+                              <Label fx:id="totalPages" alignment="CENTER" prefHeight="30.0" prefWidth="46.0" text="Label">
                                  <font>
                                     <Font size="13.0" />
                                  </font>

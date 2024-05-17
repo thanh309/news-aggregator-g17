@@ -15,8 +15,8 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 public class HomeController {
-
     private Stage stageStart;
+
     private Scene sceneStart;
 
     @FXML
@@ -25,13 +25,13 @@ public class HomeController {
     public HomeController() {
     }
 
-    public HomeController(Stage stage, Scene scene){
+    public HomeController(Stage stage, Scene scene) {
         this.stageStart = stage;
         this.sceneStart = scene;
     }
 
     @FXML
-    void aboutUs(ActionEvent event){
+    void aboutUs(ActionEvent event) {
         if (stageStart == null) {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
@@ -48,7 +48,7 @@ public class HomeController {
     }
 
     @FXML
-    void discover(ActionEvent event){
+    void discover(ActionEvent event) {
         if (stageStart == null) {
             stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }

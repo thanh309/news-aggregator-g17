@@ -2,24 +2,26 @@ package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.gui.utils.DataLoader;
+import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
+import group17.news_aggregator.search_engine.SearchEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import group17.news_aggregator.news.News;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import group17.news_aggregator.search_engine.SearchEngine;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,48 +34,65 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class DiscoverController {
-
-
     private final CSVConverter csvConverter = new CSVConverter();
+
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    @FXML
-    private TextField filterText;
-    @FXML
-    private TextField authorTextField;
-    @FXML
-    private TextField cateTextField;
-    @FXML
-    private TextField tagTextField;
-    @FXML
-    private ScrollPane scollableid;
-    @FXML
-    private VBox vboxcont;
-    @FXML
-    private ImageView next20;
-    @FXML
-    private ImageView prev20;
-    @FXML
-    private Label totalPg;
-    @FXML
-    private Button search_but;
-    @FXML
-    private TextField endDateField;
-    @FXML
-    private TextField startDateField;
-    @FXML
-    private TextField toPage;
 
-
-    @FXML
-    private Text errorFormatText;
     private Stage stage;
+
     private Scene mainScene;
+
     private Stage newStage = new Stage();
+
     private int startIndex = 0;
+
     private int endIndex = 20;
+
     private int currentPage = 0;
 
     private List<News> originalNewsList;
+
+    @FXML
+    private TextField filterText;
+
+    @FXML
+    private TextField authorTextField;
+
+    @FXML
+    private TextField cateTextField;
+
+    @FXML
+    private TextField tagTextField;
+
+    @FXML
+    private ScrollPane scrollableID;
+
+    @FXML
+    private VBox vboxContainer;
+
+    @FXML
+    private ImageView next20;
+
+    @FXML
+    private ImageView prev20;
+
+    @FXML
+    private Label totalPages;
+
+    @FXML
+    private Button searchButton;
+
+    @FXML
+    private TextField endDateField;
+
+    @FXML
+    private TextField startDateField;
+
+    @FXML
+    private TextField toPage;
+
+    @FXML
+    private Text errorFormatText;
 
     public DiscoverController() {
     }
@@ -85,7 +104,6 @@ public class DiscoverController {
 
     public void search_handle(List<News> originalNewsList, List<News> newsList, SearchEngine searchEngine, List<Integer> ids) {
         String textQuery = filterText.getText();
-
         String startDate = startDateField.getText().trim() + " 00:00:00";
         String endDate = endDateField.getText().trim() + " 00:00:00";
 
@@ -124,48 +142,45 @@ public class DiscoverController {
             res = new ArrayList<>(ids);
         }
 
-//        System.out.println(res);
+
         searchEngine.filterIndices(res, query, originalNewsList);
-//        System.out.println(res);
         newsList.clear();
-//        System.out.println(res);
         for (Integer i : res) {
             newsList.add(originalNewsList.get(i));
         }
 
         next20.setOnMouseClicked(increase20 -> {
-                    if (endIndex + 20 <= newsList.size()) {
-                        startIndex += 20;
-                        endIndex += 20;
-                        currentPage++;
-                        displayNews(startIndex, endIndex, newsList);
-                    }
+            if (endIndex + 20 <= newsList.size()) {
+                startIndex += 20;
+                endIndex += 20;
+                currentPage++;
+                displayNews(startIndex, endIndex, newsList);
+            }
         });
 
         prev20.setOnMouseClicked(decrease20 -> {
-                    if (startIndex >= 20) {
-                        startIndex -= 20;
-                        endIndex -= 20;
-                        currentPage--;
-                        displayNews(startIndex, endIndex, newsList);
-                    }
+            if (startIndex >= 20) {
+                startIndex -= 20;
+                endIndex -= 20;
+                currentPage--;
+                displayNews(startIndex, endIndex, newsList);
+            }
         });
 
         toPage.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER){
+            if (event.getCode() == KeyCode.ENTER) {
                 String pageNumberText = toPage.getText();
                 if (!pageNumberText.isEmpty()) {
                     int pageNumber = Integer.parseInt(pageNumberText);
                     if (pageNumber >= 1 && pageNumber <= totalNewPage) {
                         currentPage = pageNumber - 1;
-                        startIndex = currentPage*20;
+                        startIndex = currentPage * 20;
                         endIndex = startIndex + 20;
                         displayNews(startIndex, endIndex, newsList);
                     }
                 }
             }
         });
-
 
         startIndex = 0;
         endIndex = 20;
@@ -174,7 +189,6 @@ public class DiscoverController {
 
         displayNews(startIndex, endIndex, newsList);
     }
-
 
     public void initialize() {
         originalNewsList = DataLoader.getInstance().getNews();
@@ -186,12 +200,13 @@ public class DiscoverController {
         List<Integer> ids = IntStream.rangeClosed(0, size - 1).boxed().toList();
         List<News> newsList = new ArrayList<>();
 
-        search_but.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, ids));
+        searchButton.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, ids));
         filterText.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 search_handle(originalNewsList, newsList, searchEngine, ids);
             }
         });
+
         startDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
         endDateField.setOnMouseClicked(mouseEvent -> errorFormatText.setVisible(false));
 
@@ -199,7 +214,7 @@ public class DiscoverController {
             if (endIndex <= originalNewsList.size()) {
                 startIndex += 20;
                 endIndex += 20;
-                currentPage ++;
+                currentPage++;
                 displayNews(startIndex, endIndex, originalNewsList);
             }
         });
@@ -208,52 +223,49 @@ public class DiscoverController {
             if (startIndex >= 20) {
                 startIndex -= 20;
                 endIndex -= 20;
-                currentPage --;
+                currentPage--;
                 displayNews(startIndex, endIndex, originalNewsList);
             }
         });
+
         toPage.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER){
+            if (event.getCode() == KeyCode.ENTER) {
                 String pageNumberText = toPage.getText();
                 int pageNumber = Integer.parseInt(pageNumberText);
                 if (pageNumber >= 1 && pageNumber <= totalPage) {
                     currentPage = pageNumber - 1;
-                    startIndex = currentPage*20;
+                    startIndex = currentPage * 20;
                     endIndex = startIndex + 20;
                     displayNews(startIndex, endIndex, originalNewsList);
                 }
-
             }
         });
 
         toPage.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER){
+            if (event.getCode() == KeyCode.ENTER) {
                 String pageNumberText = toPage.getText();
                 int pageNumber = Integer.parseInt(pageNumberText);
                 if (pageNumber >= 1 && pageNumber <= totalPage) {
                     currentPage = pageNumber - 1;
-                    startIndex = currentPage*20;
+                    startIndex = currentPage * 20;
                     endIndex = startIndex + 20;
                     displayNews(startIndex, endIndex, originalNewsList);
                 }
-
             }
         });
 
         displayNews(startIndex, endIndex, originalNewsList);
-
     }
 
-
     private void displayNews(int startIndex, int endIndex, List<News> newsList) {
-        vboxcont.getChildren().clear();
+        vboxContainer.getChildren().clear();
         int size = newsList.size();
         endIndex = Math.min(endIndex, size);
+
         if (startIndex < size) {
             List<? extends News> subList = newsList.subList(startIndex, endIndex);
             for (News news : subList) {
                 try {
-
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/news-component.fxml"));
                     NewsController newsController = new NewsController(newStage, mainScene, newsList);
 
@@ -264,7 +276,7 @@ public class DiscoverController {
                     newsController = loader.getController();
                     newsController.attachValue(news, newStage, newsList);
 
-                    vboxcont.getChildren().add(newsComponent);
+                    vboxContainer.getChildren().add(newsComponent);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -275,17 +287,17 @@ public class DiscoverController {
         prev20.setDisable(currentPage <= 0);
         next20.setDisable(endIndex >= size);
         int total = (int) Math.floor((double) size / 20);
-        totalPg.setText("/  "+ total);
+        totalPages.setText("/  " + total);
     }
 
     @FXML
-    void aboutUs(ActionEvent event){
+    void aboutUs(ActionEvent event) {
         if (stage == null) {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/about-us.fxml"));
-        
+
         try {
             Parent aboutScene = loader.load();
             stage.setScene(new Scene(aboutScene));
@@ -296,13 +308,13 @@ public class DiscoverController {
     }
 
     @FXML
-    void home(MouseEvent event){
+    void home(MouseEvent event) {
         if (stage == null) {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/home-view.fxml"));
-        
+
         try {
             Parent mainScene = loader.load();
             stage.setScene(new Scene(mainScene));
@@ -311,5 +323,4 @@ public class DiscoverController {
             ex.printStackTrace();
         }
     }
-
 }

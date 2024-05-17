@@ -12,14 +12,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AboutUsController {
-
     private Stage stageAu;
+
     private Scene sceneAu;
+
     @FXML
     private Button homeButton;
 
     public AboutUsController() {
     }
+
     public AboutUsController(Stage stageAu, Scene sceneAu) {
         this.stageAu = stageAu;
         this.sceneAu = sceneAu;
@@ -43,7 +45,7 @@ public class AboutUsController {
     }
 
     @FXML
-    void discover(ActionEvent event){
+    void discover(ActionEvent event) {
         if (stageAu == null) {
             stageAu = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }
@@ -58,6 +60,4 @@ public class AboutUsController {
             ex.printStackTrace();
         }
     }
-
-
 }
