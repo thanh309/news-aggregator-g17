@@ -11,12 +11,12 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     private Parent root;
+
     private Scene firstScene;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         stage.setTitle("Group 17 OOP");
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/home-view.fxml"));
 
         try {
@@ -24,12 +24,9 @@ public class HelloApplication extends Application {
             firstScene = new Scene(root);
             stage.setScene(firstScene);
             stage.show();
-
         } catch (IOException e) {
-
             e.printStackTrace();
             System.out.println("Wrong fxml");
         }
     }
-
 }

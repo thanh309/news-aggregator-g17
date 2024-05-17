@@ -7,6 +7,7 @@ public class WebFormatter {
         doc.select("script,.hidden,form").remove();
 
         // for Cryptopolitan
+        // TODO more formatting to make this page look better
         doc.select("div[class=\"elementor elementor-421319 elementor-location-header\"]").remove();
         doc.select("div[class=\"elementor elementor-421294 elementor-location-footer\"]").remove();
         doc.select("div[class=\"elementor-element elementor-element-4642d81 e-flex e-con-boxed e-con e-child\"]").remove();

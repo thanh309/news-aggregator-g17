@@ -18,12 +18,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public abstract class AutoCompleteTextField extends TextField implements Initializable {
-    private static final int maxEntries = 5;
-    protected static List<News> newsList = new CSVConverter().fromCSV("src/main/resources/data/database.csv");
-    private final List<String> wordDict = new ArrayList<>();
-    private final ContextMenu entriesPopup = new ContextMenu();
     protected String fieldType;
+
+    protected static List<News> newsList = new CSVConverter().fromCSV("src/main/resources/data/database.csv");
+
+    private final List<String> wordDict = new ArrayList<>();
+
+    private final ContextMenu entriesPopup = new ContextMenu();
+
+    private static final int maxEntries = 5;
+
     private List<String> res;
+
     private AutoComplete autoComplete;
 
     public AutoCompleteTextField() {
@@ -40,6 +46,7 @@ public abstract class AutoCompleteTextField extends TextField implements Initial
     private void populatePopup(List<String> res) {
         List<CustomMenuItem> menuItems = new ArrayList<>();
         int count = Math.min(res.size(), maxEntries);
+
         for (int i = 0; i < count; i++) {
             final String result = res.get(i);
             Label entryLabel = new Label(result);
@@ -50,6 +57,7 @@ public abstract class AutoCompleteTextField extends TextField implements Initial
             });
             menuItems.add(item);
         }
+
         entriesPopup.getItems().clear();
         entriesPopup.getItems().addAll(menuItems);
     }

@@ -10,7 +10,6 @@ import java.util.List;
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public abstract class ArticleScraper implements IScraper {
-
     @Override
     public Article scrapeFromURL(String url) {
         Article article = new Article();
@@ -26,7 +25,6 @@ public abstract class ArticleScraper implements IScraper {
                 retryCount++;
                 System.out.printf("Error parsing URL: %s. Retrying (%d/%d)...\n", url, retryCount, MAX_RETRIES);
             }
-
         }
         return null;
     }
@@ -36,5 +34,4 @@ public abstract class ArticleScraper implements IScraper {
 
     @Override
     public abstract void getInfoFromURL(String url, News news) throws IOException;
-
 }

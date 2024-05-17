@@ -1,19 +1,18 @@
 package group17.news_aggregator.search_engine;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BM25 {
-
-
     private static final double K1 = 1.5;
 
     private static final double B = 0.75;
 
     private static final double EPSILON = 0.25;
 
-    private final int corpusSize; // here is the number of documents in corpus
-
-    private double averageLength = 0; // here is the average length of all documents
+    private final int corpusSize;           // here is the number of documents in corpus
 
     private final List<Map<String, Integer>> termFrequency = new ArrayList<>();
 
@@ -21,13 +20,13 @@ public class BM25 {
 
     private final List<Integer> listDocumentLength = new ArrayList<>();
 
+    private double averageLength = 0;       // here is the average length of all documents
 
     public BM25(List<List<String>> tokenizedCorpus) {
         corpusSize = tokenizedCorpus.size();
         Map<String, Integer> documentFrequency = initialize(tokenizedCorpus);
         calcIdf(documentFrequency);
     }
-
 
     public Map<String, Integer> initialize(List<List<String>> tokenizedCorpus) {
         Map<String, Integer> documentFrequency = new HashMap<>();
@@ -130,7 +129,6 @@ public class BM25 {
             return -1;
         });
 
-
         List<Integer> topN = new ArrayList<>();
         for (int i = 0; i < Math.min(maxNumberOfResults, indices2.size()); i++) {
             topN.add(toSortList.get(indices2.get(i)));
@@ -138,5 +136,4 @@ public class BM25 {
 
         return topN;
     }
-
 }

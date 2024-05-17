@@ -10,25 +10,33 @@ import java.util.List;
 public class News {
     @CsvBindByName
     protected String type;
+
     @CsvBindByName
     protected String link;
+
     @CsvBindByName
     protected String websiteSource;
+
     @CsvBindByName
     protected String summary;
+
     @CsvBindByName
     protected String title;
+
     @CsvBindAndSplitByName(elementType = String.class, splitOn = "\\|", writeDelimiter = "|")
     protected List<String> content;
+
     @CsvBindByName
     protected long creationDate;
+
     @CsvBindAndSplitByName(elementType = String.class, splitOn = "\\|", writeDelimiter = "|")
     protected List<String> tags;
+
     @CsvBindByName
     protected String author;
+
     @CsvBindByName
     protected String category;
-
 
     public String getType() {
         return type;
@@ -109,7 +117,6 @@ public class News {
     public void setCreationDate(long creationDate) {
         this.creationDate = creationDate;
     }
-
 
     public String getCreationDateStr() {
         Date date = new Date(this.getCreationDate());

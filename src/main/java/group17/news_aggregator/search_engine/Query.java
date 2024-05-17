@@ -1,12 +1,16 @@
 package group17.news_aggregator.search_engine;
 
 public class Query {
+    private final String searchQuery;
 
-    private String searchQuery;
-    private String author;
-    private String category;
-    private String tag;
+    private final String author;
+
+    private final String category;
+
+    private final String tag;
+
     private long startDateTime = 0;
+
     private long endDateTime = Long.MAX_VALUE;
 
     public String getSearchQuery() {

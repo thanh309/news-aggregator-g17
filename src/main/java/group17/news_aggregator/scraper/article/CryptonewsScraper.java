@@ -25,8 +25,19 @@ import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public class CryptonewsScraper extends ArticleScraper {
-
     private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 16;
+
+    public static void main(String[] args) throws IOException {
+        CryptonewsScraper scraper = new CryptonewsScraper();
+        String url = "https://cryptonews.com/news/solarai-revolutionary-cryptocurrency-based-on-solar-energy-and-artificial-intelligence-reaches-1-2-million-in-pre-sale.htm";
+        News news = new News();
+
+        scraper.getInfoFromURL(url, news);
+        Date date = new Date(news.getCreationDate());
+        System.out.println(DateFormat.getDateInstance(0).format(date));
+        System.out.println("done");
+    }
+
     @Override
     public List<Article> scrapeAll() throws InterruptedException {
         List<Article> resultList = new ArrayList<>();
@@ -39,9 +50,7 @@ public class CryptonewsScraper extends ArticleScraper {
 
             while (retryCount < MAX_RETRIES && !success) {
                 try {
-
                     String url = String.format("https://www.cryptonews.com/news/page/%d/", i);
-
                     Document document = Jsoup
                             .connect(url)
                             .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
@@ -50,7 +59,6 @@ public class CryptonewsScraper extends ArticleScraper {
                             .body()
                             .select("a[class=\"article__title article__title--md\"]")
                             .select("a[href]");
-
 
                     for (Element link : links) {
                         executorService.execute(
@@ -66,8 +74,6 @@ public class CryptonewsScraper extends ArticleScraper {
                     System.out.println("Number of links: " + links.size());
 
                     success = true;
-
-
                 } catch (HttpStatusException httpStatusException) {
                     int statusCode = httpStatusException.getStatusCode();
                     if (statusCode == 404) {
@@ -81,23 +87,19 @@ public class CryptonewsScraper extends ArticleScraper {
                     System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                 }
             }
-
         }
 
         System.out.println("-----------------");
         System.out.println("Finished scraping");
         System.out.println("-----------------");
 
-
         executorService.shutdown();
         boolean ignored = executorService.awaitTermination(300, TimeUnit.SECONDS);
         return resultList;
-
     }
 
     @Override
     public void getInfoFromURL(String url, News news) throws IOException {
-
         news.setLink(url);
         news.setWebsiteSource("Cryptonews");
 
@@ -106,7 +108,7 @@ public class CryptonewsScraper extends ArticleScraper {
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
-        //get category
+        /* get category */
         try {
             Elements category = document
                     .body()
@@ -117,7 +119,7 @@ public class CryptonewsScraper extends ArticleScraper {
         } catch (NoSuchElementException ignored) {
         }
 
-        // get tags
+        /* get tags */
         try {
             Elements tags = document
                     .body()
@@ -128,8 +130,7 @@ public class CryptonewsScraper extends ArticleScraper {
         } catch (NoSuchElementException ignored) {
         }
 
-
-        // get author
+        /* get author */
         String author = document
                 .body()
                 .select("div[class=\"author-title\"]")
@@ -140,23 +141,21 @@ public class CryptonewsScraper extends ArticleScraper {
         }
         news.setAuthor(author);
 
-
-        //get summary (description)
+        /* get summary (description) */
         String summary = document
                 .head()
                 .select("meta[name=\"twitter:description\"]")
                 .attr("content");
         news.setSummary(summary);
 
-        // get title
+        /* get title */
         String title = document
                 .body()
                 .select("h1[class=\"mb-10\"]")
                 .text();
         news.setTitle(title);
 
-
-        // get content
+        /* get content */
         try {
             List<String> content = document
                     .select("div[class=\"article-single__content category_contents_details\"]")
@@ -167,8 +166,7 @@ public class CryptonewsScraper extends ArticleScraper {
             throw new EmptyContentException(news.getLink());
         }
 
-
-        // get creation date
+        /* get creation date */
         String datetime = document
                 .body()
                 .select("div[class=\"fs-14 date-section\"]")
@@ -180,17 +178,5 @@ public class CryptonewsScraper extends ArticleScraper {
         } else {
             news.setCreationDate(Instant.parse(datetime).toEpochMilli());
         }
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        CryptonewsScraper scraper = new CryptonewsScraper();
-        String url = "https://cryptonews.com/news/solarai-revolutionary-cryptocurrency-based-on-solar-energy-and-artificial-intelligence-reaches-1-2-million-in-pre-sale.htm";
-        News news = new News();
-        scraper.getInfoFromURL(url, news);
-        Date date = new Date(news.getCreationDate());
-        System.out.println(DateFormat.getDateInstance(0).format(date));
-        System.out.println("done");
-
     }
 }

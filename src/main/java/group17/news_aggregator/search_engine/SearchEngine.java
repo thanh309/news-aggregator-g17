@@ -14,7 +14,7 @@ public class SearchEngine {
         List<List<String>> resultList = new ArrayList<>();
         for (News news : newsList) {
             String row = news.getTitle() + " " + news.getContent();
-            resultList.add(Arrays.asList(FileHandling.removePuncts(row).split("\\s+")));
+            resultList.add(Arrays.asList(FileHandling.removePunctuations(row).split("\\s+")));
         }
         return resultList;
     }
@@ -25,7 +25,7 @@ public class SearchEngine {
     }
 
     public List<Integer> searchFromFile(List<Integer> toSortList, String query, int maxNumberOfResults) {
-        List<String> tokenizedQuery = new ArrayList<>(Arrays.asList(FileHandling.removePuncts(query).split("\\s+")));
+        List<String> tokenizedQuery = new ArrayList<>(Arrays.asList(FileHandling.removePunctuations(query).split("\\s+")));
         return searchCore.getTopNIndex(tokenizedQuery, toSortList, maxNumberOfResults);
     }
 

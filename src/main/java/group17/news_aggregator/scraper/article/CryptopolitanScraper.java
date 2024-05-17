@@ -23,8 +23,15 @@ import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public class CryptopolitanScraper extends ArticleScraper {
-
     private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 40;
+
+    public static void main(String[] args) throws IOException {
+        String url = "https://www.cryptopolitan.com/ubisofts-shooter-xdefiant-postponed-2/";
+        CryptopolitanScraper scraper = new CryptopolitanScraper();
+        News news = new News();
+        scraper.getInfoFromURL(url, news);
+        System.out.println("done");
+    }
 
     @Override
     public List<Article> scrapeAll() throws InterruptedException {
@@ -38,7 +45,6 @@ public class CryptopolitanScraper extends ArticleScraper {
 
             while (retryCount < MAX_RETRIES && !success) {
                 try {
-
                     String url = String.format("https://www.cryptopolitan.com/news/page/%d/", i);
 
                     Document document = Jsoup
@@ -49,7 +55,6 @@ public class CryptopolitanScraper extends ArticleScraper {
                             .body()
                             .select("h3[class=\"elementor-heading-title elementor-size-default\"]")
                             .select("a[href]");
-
 
                     for (Element link : links) {
                         executorService.execute(
@@ -65,7 +70,6 @@ public class CryptopolitanScraper extends ArticleScraper {
                     System.out.println("Number of links: " + links.size());
 
                     success = true;
-
 
                 } catch (HttpStatusException httpStatusException) {
                     int statusCode = httpStatusException.getStatusCode();
@@ -87,16 +91,13 @@ public class CryptopolitanScraper extends ArticleScraper {
         System.out.println("Finished scraping");
         System.out.println("-----------------");
 
-
         executorService.shutdown();
         boolean ignored = executorService.awaitTermination(300, TimeUnit.SECONDS);
         return resultList;
-
     }
 
     @Override
     public void getInfoFromURL(String url, News news) throws IOException {
-
         news.setLink(url);
         news.setWebsiteSource("Cryptopolitan");
 
@@ -105,8 +106,7 @@ public class CryptopolitanScraper extends ArticleScraper {
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
-
-        // get tags and category
+        /* get tags and category */
         try {
             Elements tags = document
                     .body()
@@ -127,8 +127,7 @@ public class CryptopolitanScraper extends ArticleScraper {
         } catch (NoSuchElementException ignored) {
         }
 
-
-        // get author
+        /* get author */
         String author = document
                 .head()
                 .select("meta[name=\"twitter:data1\"]")
@@ -136,7 +135,7 @@ public class CryptopolitanScraper extends ArticleScraper {
         news.setAuthor(author);
 
 
-        // get summary
+        /* get summary */
         try {
             String summary = document
                     .body()
@@ -148,15 +147,14 @@ public class CryptopolitanScraper extends ArticleScraper {
         }
 
 
-        // get title
+        /* get title */
         String title = document
                 .body()
                 .select("div[class=\"elementor-element elementor-element-b01a881 elementor-widget__width-inherit elementor-widget elementor-widget-theme-post-title elementor-page-title elementor-widget-heading\"]")
                 .text();
         news.setTitle(title);
 
-
-        // get content
+        /* get content */
         try {
             List<String> content = document
                     .select("div[class=\"elementor-element elementor-element-e3418d0 cp-post-content elementor-widget elementor-widget-theme-post-content\"]")
@@ -169,8 +167,7 @@ public class CryptopolitanScraper extends ArticleScraper {
             throw new EmptyContentException(news.getLink());
         }
 
-
-        // get creation date
+        /* get creation date */
         String datetime = document
                 .head()
                 .select("meta[property=\"og:updated_time\"]")
@@ -181,15 +178,5 @@ public class CryptopolitanScraper extends ArticleScraper {
         } else {
             news.setCreationDate(Instant.parse(datetime).toEpochMilli());
         }
-
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        String url = "https://www.cryptopolitan.com/ubisofts-shooter-xdefiant-postponed-2/";
-        CryptopolitanScraper scraper = new CryptopolitanScraper();
-        News news = new News();
-        scraper.getInfoFromURL(url, news);
-        System.out.println("done");
     }
 }
