@@ -29,7 +29,7 @@ public class Trie {
 
     public void createTrie() {
         for (String w : words) {
-            this.insert(w);
+            this.insert(w.toLowerCase());
         }
     }
 

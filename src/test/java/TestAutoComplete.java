@@ -7,7 +7,7 @@ public class TestAutoComplete {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<String> words = List.of("hello", "dog", "hell", "cat", "a", "hel", "help", "helps", "helping", "heo", "heo");
+        List<String> words = List.of("Hello", "dog", "hell", "cat", "a", "hel", "help", "helps", "helping", "heo", "heo");
 
         System.out.println("Enter query here: ");
         String query = sc.nextLine();

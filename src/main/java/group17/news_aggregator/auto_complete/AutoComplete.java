@@ -1,9 +1,6 @@
 package group17.news_aggregator.auto_complete;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AutoComplete extends Trie {
     public AutoComplete(List<String> words) {
@@ -27,7 +24,7 @@ public class AutoComplete extends Trie {
         List<String> ans = new ArrayList<>();
         TrieNode node = super.getRoot();
 
-        for (char c : word.toCharArray()) {
+        for (char c : word.toLowerCase().toCharArray()) {
             if (!node.getChildren().containsKey(c)) {
                 res.put(ans, 0);
                 return res;
@@ -35,12 +32,7 @@ public class AutoComplete extends Trie {
             node = node.getChildren().get(c);
         }
 
-        if (node.getChildren() == null) {
-            res.put(ans, -1);
-            return res;
-        }
-
-        List<String> listSuggest = this.autoComplete(node, word);
+        List<String> listSuggest = this.autoComplete(node, word.toLowerCase());
 
         int cnt = 0;
         for (String w : listSuggest) {
@@ -55,11 +47,11 @@ public class AutoComplete extends Trie {
     }
 
     public List<String> getSuggestion(String word) {
-        Map<List<String>, Integer> storage = storeSuggestion(word);
+        Map<List<String>, Integer> storage = storeSuggestion(word.toLowerCase());
         List<String> ans = new ArrayList<>();
 
         for (Map.Entry<List<String>, Integer> entry : storage.entrySet()) {
-            if (entry.getValue() == -1 || entry.getValue() == 0) {
+            if (entry.getValue() == 0) {
                 return ans;
             }
             ans.addAll(entry.getKey());
