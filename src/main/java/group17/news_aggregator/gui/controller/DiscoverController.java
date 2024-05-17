@@ -52,6 +52,8 @@ public class DiscoverController {
 
     private List<News> originalNewsList;
 
+    private List<News> newsList;
+
     @FXML
     private TextField filterText;
 
@@ -93,6 +95,15 @@ public class DiscoverController {
 
     @FXML
     private Text errorFormatText;
+
+    @FXML
+    private Button noneSort;
+
+    @FXML
+    private Button titleSort;
+
+    @FXML
+    private Button cdSort;
 
     public DiscoverController() {
     }
@@ -149,6 +160,11 @@ public class DiscoverController {
             newsList.add(originalNewsList.get(i));
         }
 
+        List<Integer> originalIds = new ArrayList<>();
+        for (Integer id : res) {
+            originalIds.add(Integer.valueOf(id));
+        }
+
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= newsList.size()) {
                 startIndex += 20;
@@ -188,6 +204,20 @@ public class DiscoverController {
         toPage.setText("1");
 
         displayNews(startIndex, endIndex, newsList);
+
+        titleSort.setOnMouseClicked(titleSort -> {
+            searchEngine.sortByTitle(res, originalNewsList);
+            updateSortedList(newsList, res);
+        });
+
+        cdSort.setOnMouseClicked(cdSort -> {
+            searchEngine.sortByCreationDate(res, originalNewsList);
+            updateSortedList(newsList, res);
+        });
+
+        noneSort.setOnMouseClicked(noneSort -> {
+            updateSortedList(newsList, originalIds);
+        });
     }
 
     public void initialize() {
@@ -197,13 +227,23 @@ public class DiscoverController {
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
 
-        List<Integer> ids = IntStream.rangeClosed(0, size - 1).boxed().toList();
-        List<News> newsList = new ArrayList<>();
+//        List<Integer> ids = new ArrayList<>();
+//        for (int i = 0; i < size; i ++){
+//            ids.add(i);
+//        }
+        List<Integer> ids = new ArrayList<>(IntStream.rangeClosed(0, size-1).boxed().toList());
+        List<Integer> originalIds = new ArrayList<>();
+        newsList = new ArrayList<>();
 
-        searchButton.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, ids));
+        for (Integer id : ids) {
+            originalIds.add(Integer.valueOf(id));
+            newsList.add(originalNewsList.get(id));
+        }
+
+        searchButton.setOnMouseClicked(mouseEvent -> search_handle(originalNewsList, newsList, searchEngine, originalIds));
         filterText.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                search_handle(originalNewsList, newsList, searchEngine, ids);
+                search_handle(originalNewsList, newsList, searchEngine, originalIds);
             }
         });
 
@@ -228,18 +268,6 @@ public class DiscoverController {
             }
         });
 
-        toPage.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                String pageNumberText = toPage.getText();
-                int pageNumber = Integer.parseInt(pageNumberText);
-                if (pageNumber >= 1 && pageNumber <= totalPage) {
-                    currentPage = pageNumber - 1;
-                    startIndex = currentPage * 20;
-                    endIndex = startIndex + 20;
-                    displayNews(startIndex, endIndex, originalNewsList);
-                }
-            }
-        });
 
         toPage.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -255,6 +283,34 @@ public class DiscoverController {
         });
 
         displayNews(startIndex, endIndex, originalNewsList);
+
+        titleSort.setOnMouseClicked(titleSort -> {
+            searchEngine.sortByTitle(ids, originalNewsList);
+            updateSortedList(newsList, ids);
+
+        });
+
+        cdSort.setOnMouseClicked(cdSort -> {
+            searchEngine.sortByCreationDate(ids, originalNewsList);
+            updateSortedList(newsList, ids);
+        });
+
+        noneSort.setOnMouseClicked(noneSort -> {
+            updateSortedList(newsList, originalIds);
+        });
+    }
+
+    private void updateSortedList(List<News> aNewsList, List<Integer> sortedIds) {
+        aNewsList.clear();
+        for (int i = 0; i < sortedIds.size(); i++) {
+            aNewsList.add(originalNewsList.get(sortedIds.get(i)));
+        }
+
+        startIndex = 0;
+        endIndex = 20;
+        currentPage = 0;
+        toPage.setText("1");
+        displayNews(startIndex, endIndex, aNewsList);
     }
 
     private void displayNews(int startIndex, int endIndex, List<News> newsList) {
@@ -286,7 +342,7 @@ public class DiscoverController {
         toPage.setText(String.valueOf(currentPage + 1));
         prev20.setDisable(currentPage <= 0);
         next20.setDisable(endIndex >= size);
-        int total = (int) Math.floor((double) size / 20);
+        int total = (int) Math.ceil((double) size / 20);
         totalPages.setText("/  " + total);
     }
 
