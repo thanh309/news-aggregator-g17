@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class AutoComplete extends Trie {
-
     public AutoComplete(List<String> words) {
         super(words);
     }
@@ -17,11 +16,9 @@ public class AutoComplete extends Trie {
         if (node.getCheckIsWord()) {
             results.add(word);
         }
-
         for (Map.Entry<Character, TrieNode> entry : node.getChildren().entrySet()) {
             results.addAll(this.autoComplete(entry.getValue(), word + entry.getKey()));
         }
-
         return results;
     }
 
@@ -53,7 +50,6 @@ public class AutoComplete extends Trie {
                 break;
             }
         }
-
         res.put(ans, 1);
         return res;
     }
@@ -68,7 +64,6 @@ public class AutoComplete extends Trie {
             }
             ans.addAll(entry.getKey());
         }
-
         return ans;
     }
 }
