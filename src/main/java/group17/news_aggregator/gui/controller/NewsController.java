@@ -25,8 +25,17 @@ public class NewsController {
 
     private List<News> newsList;
 
+    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/cryptopolitan.png");
+
+    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/cryptoslate.png");
+
+    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/cryptonews.png");
+
+    private Image mediumImage = new Image("group17/news_aggregator/gui/image/medium.png");
+
     @FXML
     private ImageView iconImage;
+
     @FXML
     Button author;
 
@@ -42,9 +51,6 @@ public class NewsController {
     @FXML
     private HBox news;
 
-    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/cryptopolitan.png");
-    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/cryptoslate.png");
-    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/cryptonews.png");
     public NewsController() {
     }
 
@@ -76,12 +82,11 @@ public class NewsController {
     }
 
     public void attachValue(News news, Stage stage, List<News> newsList) {
-        if (news.getLink().contains("cryptopolitan")){
-            iconImage.setImage(cryptopolitanImage);
-        } else if (news.getLink().contains("cryptoslate")){
-            iconImage.setImage(cryptoslateImage);
-        } else if (news.getLink().contains("cryptonews")){
-            iconImage.setImage(cryptonewsImage);
+        switch (news.getWebsiteSource()) {
+            case "Cryptopolitan" -> iconImage.setImage(cryptopolitanImage);
+            case "Cryptoslate" -> iconImage.setImage(cryptoslateImage);
+            case "Cryptonews" -> iconImage.setImage(cryptonewsImage);
+            case "Medium" -> iconImage.setImage(mediumImage);
         }
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
