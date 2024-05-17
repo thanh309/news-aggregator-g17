@@ -2,9 +2,7 @@ package group17.news_aggregator.search_engine;
 
 import group17.news_aggregator.news.News;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SearchEngine {
 
@@ -36,5 +34,44 @@ public class SearchEngine {
                         | !String.join(" ", references.get(id).getTags()).toLowerCase().contains(query.getTag())
                         | references.get(id).getCreationDate() > query.getEndDateTime()
                         | references.get(id).getCreationDate() < query.getStartDateTime());
+    }
+
+    public void sortByTitle(List<Integer> ids, List<News> references) {
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < references.size(); i++) {
+            map.put(i, references.get(i).getTitle());
+        }
+
+        List<Map.Entry<Integer, String>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+
+        List<Integer> res = new ArrayList<>();
+        for (Map.Entry<Integer, String> entry : list) {
+            res.add(entry.getKey());
+        }
+
+        for (int i = 0; i < ids.size(); i++) {
+            ids.set(i, res.get(i));
+        }
+    }
+
+    public void sortByCreationDate(List<Integer> ids, List<News> references) {
+        Map<Integer, Long> map = new HashMap<>();
+        for (int i = 0; i < references.size(); i++) {
+            map.put(i, references.get(i).getCreationDate());
+        }
+
+        List<Map.Entry<Integer, Long>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+
+        List<Integer> res = new ArrayList<>();
+        for (Map.Entry<Integer, Long> entry : list) {
+            res.add(entry.getKey());
+        }
+
+        for (int i = 0; i < ids.size(); i++) {
+            ids.set(i, res.get(i));
+        }
+
     }
 }
