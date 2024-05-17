@@ -279,7 +279,7 @@ public class DiscoverController {
     }
 
     @FXML
-    void aboutus(ActionEvent event){
+    void aboutUs(ActionEvent event){
         if (stage == null) {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         }

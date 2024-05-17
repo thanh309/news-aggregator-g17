@@ -145,7 +145,7 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#aboutus" prefHeight="63.0" stylesheets="@../css/start.css" text="About Us">
+            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" stylesheets="@../css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
@@ -184,8 +184,8 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-<!--                        <AuthorTextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />-->
-                        <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />
+                        <AuthorTextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />
+<!--                        <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />-->
                      </children>
                   </VBox>
                   <VBox prefHeight="75.0" prefWidth="224.0">
@@ -195,8 +195,8 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-<!--                        <CategoryTextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />-->
-                        <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />
+                        <CategoryTextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />
+<!--                        <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />-->
                      </children>
                   </VBox>
                   <VBox prefHeight="106.0" prefWidth="221.0">
@@ -209,8 +209,8 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-<!--                        <TagTextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />-->
-                        <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />
+                        <TagTextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />
+<!--                        <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />-->
                      </children>
                   </VBox>
                   <VBox>

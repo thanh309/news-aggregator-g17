@@ -1,9 +1,11 @@
 package group17.news_aggregator.auto_complete;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrieNode {
     private Map<Character, TrieNode> children;
+
     private boolean checkIsWord;
 
     public TrieNode() {
@@ -26,6 +28,5 @@ public class TrieNode {
     public void setCheckIsWord(boolean checkIsWord) {
         this.checkIsWord = checkIsWord;
     }
-
 }
 
