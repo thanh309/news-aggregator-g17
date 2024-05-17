@@ -23,7 +23,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MediumScraper extends BlogScraper {
-
     public MediumScraper() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/libs/chromedriver.exe");
     }
@@ -32,7 +31,6 @@ public class MediumScraper extends BlogScraper {
         MediumScraper scraper = new MediumScraper();
         List<Blog> x = scraper.scrapeAll();
         System.out.println("done");
-
     }
 
     public void addURLsWithCategory(List<String> URLList, String fromURL, String category) {
@@ -47,6 +45,7 @@ public class MediumScraper extends BlogScraper {
                 e.printStackTrace();
             }
         }
+
         String htmlSource = driver.getPageSource();
         driver.quit();
 
@@ -66,14 +65,12 @@ public class MediumScraper extends BlogScraper {
 
     @Override
     public List<Blog> scrapeAll() throws InterruptedException {
-
         List<Blog> resultList = new ArrayList<>();
 
         ExecutorService executorService = Executors.newFixedThreadPool(50);
         final String[] mediumCategories =
                 {"bitcoin", "cryptocurrency", "decentralized-finance", "ethereum", "nft", "web3"};
         List<String> urls = new ArrayList<>();
-
 
         for (String mediumCategory : mediumCategories) {
             executorService.execute(
@@ -127,7 +124,7 @@ public class MediumScraper extends BlogScraper {
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
-        // get tags
+        /* get tags */
         try {
             Elements tags = Objects.requireNonNull(
                     readDoc
@@ -140,7 +137,7 @@ public class MediumScraper extends BlogScraper {
         } catch (NoSuchElementException | NullPointerException ignored) {
         }
 
-        //get author
+        /* get author */
         String author = doc
                 .head()
                 .select("meta[name=\"author\"]")
@@ -150,7 +147,7 @@ public class MediumScraper extends BlogScraper {
         }
         news.setAuthor(author);
 
-        //get summary (description)
+        /* get summary (description) */
         try {
             String summary = readDoc
                     .select("div[class=\"prose break-words dark:prose-invert prose-p:leading-relaxed " +
@@ -163,14 +160,14 @@ public class MediumScraper extends BlogScraper {
         } catch (IndexOutOfBoundsException ignored) {
         }
 
-        // get title
+        /* get title */
         String title = doc
                 .head()
                 .select("meta[property=\"og:title\"]")
                 .attr("content");
         news.setTitle(title);
 
-        // get content
+        /* get content */
         try {
             List<String> content = readDoc
                     .select("article")
@@ -182,7 +179,7 @@ public class MediumScraper extends BlogScraper {
             throw new EmptyContentException(news.getLink());
         }
 
-        // get creation date
+        /* get creation date */
         String datetime = doc
                 .head()
                 .select("meta[property=\"article:published_time\"]")
@@ -194,5 +191,4 @@ public class MediumScraper extends BlogScraper {
             news.setCreationDate(Instant.parse(datetime).toEpochMilli());
         }
     }
-
 }

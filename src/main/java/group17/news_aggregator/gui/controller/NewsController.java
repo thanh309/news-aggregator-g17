@@ -17,20 +17,26 @@ import java.io.IOException;
 import java.util.List;
 
 public class NewsController {
+    private Scene scene;
+
+    private Stage stage;
+
+    private List<News> newsList;
 
     @FXML
     Button author;
+
     @FXML
     Button title;
+
     @FXML
     TextFlow datetype;
-    private Stage stage;
-    private Scene scene;
+
     @FXML
-    private FlowPane flowp;
+    private FlowPane flowPane;
+
     @FXML
     private HBox news;
-    private List<News> newsList;
 
     public NewsController() {
     }
@@ -41,11 +47,10 @@ public class NewsController {
         this.newsList = newsList;
     }
 
-    // Method to update FlowPane with tags
-
     public void createTags(List<String> tags, int lim) {
-        flowp.getChildren().clear();
+        flowPane.getChildren().clear();
         int count = 0;
+
         for (String tag : tags) {
             count += 1;
             Button buttonTag = new Button();
@@ -56,15 +61,14 @@ public class NewsController {
             buttonTag.getStyleClass().add("round-layout-tag");
             buttonTag.getStyleClass().add("transparent");
             buttonTag.setCursor(Cursor.HAND);
-            flowp.getChildren().add(buttonTag);
-            if (count >= lim){
+            flowPane.getChildren().add(buttonTag);
+            if (count >= lim) {
                 break;
             }
         }
     }
 
     public void attachValue(News news, Stage stage, List<News> newsList) {
-
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
         this.datetype.getChildren().clear();
@@ -74,29 +78,23 @@ public class NewsController {
         this.createTags(news.getTags(), 10);
 
         this.title.setOnAction(visitSite -> {
-
             FXMLLoader loadweb = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/show-web.fxml"));
             ShowWebController showWebController = new ShowWebController(stage, scene, newsList);
             loadweb.setController(showWebController);
 
             try {
                 Parent visitScene = loadweb.load();
-
                 showWebController = loadweb.getController();
                 showWebController.showVisitScene(news);
                 stage.setScene(new Scene(visitScene));
                 stage.show();
-                
             } catch (IOException e) {
-
                 FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/offline-content.fxml"));
                 OfflineContentController offlineContentController = new OfflineContentController(stage, scene, newsList);
 
                 loadOfflineContent.setController(offlineContentController);
-
                 try {
                     Parent visitOfflineContent = loadOfflineContent.load();
-
                     offlineContentController = loadOfflineContent.getController();
                     offlineContentController.showOfflineContent(news);
                     stage.setScene(new Scene(visitOfflineContent));
@@ -108,13 +106,10 @@ public class NewsController {
         });
     }
 
-
     private String capitalize(String text) {
         if (text == null || text.isEmpty()) {
             return "Unknown";
         }
         return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
-
 }
-

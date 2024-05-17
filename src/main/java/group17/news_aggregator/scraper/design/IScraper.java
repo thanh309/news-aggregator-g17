@@ -11,5 +11,4 @@ public interface IScraper {
     List<? extends News> scrapeAll() throws InterruptedException;
 
     void getInfoFromURL(String url, News news) throws IOException;
-
 }

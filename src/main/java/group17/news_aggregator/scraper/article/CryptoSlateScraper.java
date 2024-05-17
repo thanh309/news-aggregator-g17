@@ -23,8 +23,15 @@ import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public class CryptoSlateScraper extends ArticleScraper {
-
     private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 10;
+
+    public static void main(String[] args) throws IOException {
+        String url = "https://cryptoslate.com/jury-finds-do-kwon-terraform-labs-liable-for-multi-billion-dollar-fraud/";
+        CryptoSlateScraper scraper = new CryptoSlateScraper();
+        News news = new News();
+        scraper.getInfoFromURL(url, news);
+        System.out.println("done");
+    }
 
     @Override
     public List<Article> scrapeAll() throws InterruptedException {
@@ -38,7 +45,6 @@ public class CryptoSlateScraper extends ArticleScraper {
 
             while (retryCount < MAX_RETRIES && !success) {
                 try {
-
                     String url = String.format("https://cryptoslate.com/news/page/%d/", i);
 
                     Document document = Jsoup
@@ -50,7 +56,6 @@ public class CryptoSlateScraper extends ArticleScraper {
                             .select("div[class=\"list-feed slate\"]")
                             .select("div[class=\"list-post\"]")
                             .select("a[href]");
-
 
                     for (Element link : links) {
                         executorService.execute(
@@ -64,9 +69,7 @@ public class CryptoSlateScraper extends ArticleScraper {
 
                     System.out.printf("Page %d scraped. ", i);
                     System.out.println("Number of links: " + links.size());
-
                     success = true;
-
 
                 } catch (HttpStatusException httpStatusException) {
                     int statusCode = httpStatusException.getStatusCode();
@@ -81,18 +84,15 @@ public class CryptoSlateScraper extends ArticleScraper {
                     System.out.printf("Error fetching page %d. Retrying (%d/%d)...\n", i, retryCount, MAX_RETRIES);
                 }
             }
-
         }
 
         System.out.println("-----------------");
         System.out.println("Finished scraping");
         System.out.println("-----------------");
 
-
         executorService.shutdown();
         boolean ignored = executorService.awaitTermination(300, TimeUnit.SECONDS);
         return resultList;
-
     }
 
     @Override
@@ -106,7 +106,7 @@ public class CryptoSlateScraper extends ArticleScraper {
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
-        //get tags
+        /* get tags */
         try {
             Elements tags = document
                     .body()
@@ -117,7 +117,7 @@ public class CryptoSlateScraper extends ArticleScraper {
         } catch (NoSuchElementException ignored) {
         }
 
-        //get category
+        /* get category */
         try {
             Element category = document
                     .body()
@@ -130,7 +130,7 @@ public class CryptoSlateScraper extends ArticleScraper {
         }
 
 
-        // get author
+        /* get author */
         String author = document
                 .head()
                 .select("meta[name=\"author\"]")
@@ -140,14 +140,14 @@ public class CryptoSlateScraper extends ArticleScraper {
         }
         news.setAuthor(author);
 
-        //get summary (description)
+        /* get summary (description) */
         String summary = document
                 .head()
                 .select("meta[property=\"og:description\"]")
                 .attr("content");
         news.setSummary(summary);
 
-        // get title
+        /* get title */
         String title = document
                 .head()
                 .select("meta[property=\"og:title\"]")
@@ -155,7 +155,7 @@ public class CryptoSlateScraper extends ArticleScraper {
         news.setTitle(title);
 
 
-        // get content
+        /* get content */
         try {
             List<String> content = document
                     .select("article[class=\"full-article\"]")
@@ -167,7 +167,7 @@ public class CryptoSlateScraper extends ArticleScraper {
         }
 
 
-        // get creation date
+        /* get creation date */
         String datetime = document
                 .head()
                 .select("meta[property=\"article:published_time\"]")
@@ -179,13 +179,5 @@ public class CryptoSlateScraper extends ArticleScraper {
             news.setCreationDate(Instant.parse(datetime).toEpochMilli());
         }
 
-    }
-
-    public static void main(String[] args) throws IOException {
-        String url = "https://cryptoslate.com/jury-finds-do-kwon-terraform-labs-liable-for-multi-billion-dollar-fraud/";
-        CryptoSlateScraper scraper = new CryptoSlateScraper();
-        News news = new News();
-        scraper.getInfoFromURL(url, news);
-        System.out.println("done");
     }
 }

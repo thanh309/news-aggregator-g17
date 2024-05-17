@@ -14,23 +14,28 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 public class ShowWebController {
     private Stage stageWeb;
+
     private Scene sceneWeb;
-    @FXML
-    private Pane Navigator;
 
+    private List<News> newsList;
 
-    @FXML
-    private WebView webView;
+    private int currentIndex;
+
     private WebEngine engine;
 
     @FXML
-    private AnchorPane webscene;
+    private Pane Navigator;
 
+    @FXML
+    private WebView webView;
+
+    @FXML
+    private AnchorPane webscene;
 
     @FXML
     private ImageView homeImage;
@@ -40,9 +45,6 @@ public class ShowWebController {
 
     @FXML
     private ImageView prevImage;
-
-    private List<News> newsList;
-    private int currentIndex;
 
     public ShowWebController(Stage stage, Scene scene, List<News> newsList) {
         this.stageWeb = stage;
@@ -55,9 +57,7 @@ public class ShowWebController {
             stageWeb.hide();
         });
 
-
         nextImage.setOnMouseClicked(nextOn -> {
-
             if (currentIndex < newsList.size() - 1) {
                 currentIndex += 1;
                 try {
@@ -67,8 +67,8 @@ public class ShowWebController {
                 }
             }
         });
-        prevImage.setOnMouseClicked(prevOn -> {
 
+        prevImage.setOnMouseClicked(prevOn -> {
             if (currentIndex > 0) {
                 currentIndex -= 1;
                 try {
@@ -83,28 +83,20 @@ public class ShowWebController {
     public void showVisitScene(News news) throws IOException {
         currentIndex = newsList.indexOf(news);
         String url = news.getLink();
-//        String url = "https://cryptonews.com/news/top-crypto-gainers-today-on-dexscreener-felon-yield-boob.htm";
         Document doc = Jsoup
                 .connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0")
                 .get();
 
         WebFormatter.format(doc);
-
         String header = doc.head().html();
-
         String content = doc.html();
-
         engine = webView.getEngine();
 
         if (news.getWebsiteSource().equals("Medium")) {
             engine.setUserStyleSheetLocation(Objects.requireNonNull(getClass().getResource("/group17/news_aggregator/gui/css/medium-reader.css")).toString());
         }
 
-//        engine = webView.getEngine();
-//        engine.load(news.getLink());
-
         engine.loadContent(header + content);
-
     }
 }
