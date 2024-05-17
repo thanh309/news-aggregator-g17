@@ -2,6 +2,11 @@
 *.csv
 *.json
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
