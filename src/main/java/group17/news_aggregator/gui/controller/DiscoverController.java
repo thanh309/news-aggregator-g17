@@ -1,6 +1,7 @@
 package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
+import group17.news_aggregator.exception.RequestException;
 import group17.news_aggregator.gui.utils.DataLoader;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
@@ -8,6 +9,7 @@ import group17.news_aggregator.search_engine.SearchEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,6 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -79,6 +83,19 @@ public class DiscoverController {
     private Button searchButton;
 
     @FXML
+    private Button oneDay;
+
+    @FXML
+    private Button oneMonth;
+
+    @FXML
+    private Button sevenDay;
+
+
+    @FXML
+    private Button threeDay;
+
+    @FXML
     private TextField endDateField;
 
     @FXML
@@ -107,6 +124,9 @@ public class DiscoverController {
 
     @FXML
     private Button cdSort;
+
+    @FXML
+    private VBox pricePredictionVBox;
 
     public DiscoverController() {
     }
@@ -306,6 +326,14 @@ public class DiscoverController {
         noneSort.setOnMouseClicked(noneSort -> {
             updateSortedList(newsList, originalIds);
         });
+
+        oneDay.setOnAction(event -> handleButtonClick(2));
+        threeDay.setOnAction(event -> handleButtonClick(3));
+        sevenDay.setOnAction(event -> handleButtonClick(4));
+        oneMonth.setOnAction(event -> handleButtonClick(5));
+
+        handleButtonClick(2);
+
     }
 
     private void updateSortedList(List<News> aNewsList, List<Integer> sortedIds) {
@@ -352,6 +380,42 @@ public class DiscoverController {
         next20.setDisable(endIndex >= size);
         int total = (int) Math.ceil((double) size / 20);
         totalPages.setText("/  " + total);
+    }
+
+    private void handleButtonClick(int intervalIndex) {
+        try {
+            PricePredictionController pricePredictionController = new PricePredictionController();
+            List<List<String>> response = pricePredictionController.getFormattedResponse();
+            pricePredictionVBox.getChildren().clear();
+            for (List<String> formattedPrice : response) {
+                HBox node = new HBox();
+                node.setSpacing(5);
+                for (int i = 0; i < 3; i++){
+                    if (i< 2){
+                        Text text = new Text(formattedPrice.get(i));
+                        text.setWrappingWidth(50);
+                        text.baselineOffsetProperty();
+                        node.getChildren().add(text);
+                    }
+                    if (i == 2){
+                        Text text = new Text(formattedPrice.get(intervalIndex));
+                        text.setWrappingWidth(50);
+                        String value = text.getText();
+                        if("+".equals(value.charAt(0))){
+                            text.setStyle("-fx-fill: green;");
+                        }
+                        if("-".equals(value.charAt(0))){
+                            text.setStyle("-fx-fill: red;");
+                        }
+                        node.getChildren().add(text);
+                    }
+
+                }
+                pricePredictionVBox.getChildren().add(node);
+            }
+        } catch (IOException | InterruptedException | RequestException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
