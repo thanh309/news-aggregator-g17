@@ -1,18 +1,16 @@
 from flask import Flask, jsonify
 
+from src.python.pythontrenddetection.trenddetection import generate_trending_dict
+
 app = Flask(__name__)
 
 
-@app.route('/generate_json')
-def generate_json_endpoint():
+@app.route('/trend_detection')
+def generate_trending_json():
     """Generates a JSON object and returns it as a JSON response."""
 
-    data = {
-        "name": "Alice",
-        "age": 30,
-        "city": "New York",
-        "skills": ["Python", "Java", "JavaScript"],
-    }
+    coin_code_list = ['BTC-USD', 'ETH-USD', 'WBTC-USD', 'BNB-USD', 'THOREUM17410-USD']
+    data = generate_trending_dict(coin_code_list)
 
     return jsonify(data)  # Return the data as a JSON response
 
