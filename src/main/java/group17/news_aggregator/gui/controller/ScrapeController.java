@@ -117,7 +117,7 @@ public class ScrapeController {
 
             } catch (NumberFormatException e) {
                 // Handle the case where the text cannot be parsed as an integer
-                numberPageCryptonews.setText("0");
+                numberPageCryptonews.clear();
             }
         }
 
@@ -128,7 +128,7 @@ public class ScrapeController {
                 scraperEngine.setNbPagesCryptopolitan(pageCount);
             } catch (NumberFormatException e) {
                 // Handle the case where the text cannot be parsed as an integer
-                numberPageCryptopolitan.setText("0");
+                numberPageCryptopolitan.clear();
             }
         }
 
@@ -139,7 +139,7 @@ public class ScrapeController {
                 scraperEngine.setNbPagesCryptoSlate(pageCount);
             } catch (NumberFormatException e) {
                 // Handle the case where the text cannot be parsed as an integer
-                numberPageCryptoslate.setText("0");
+                numberPageCryptoslate.clear();
             }
         }
 
