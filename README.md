@@ -1,9 +1,70 @@
 # News aggregator - Group 17
 
-OOP Project (2023-2) of group 17.
 
-This project implements a simple news aggregator application using Java ~~and Python~~.
+## Introduction
 
-## Installation
+In the fast-paced world of blockchain technology, developers and investors need to be updated at all times.
+But reading the news manually on different platforms is neither productive nor efficient.
 
-## Usage
+This project is our group effort to build a news aggregator, making a data collection and analysis system for news
+related to the blockchain field. It utilizes Java for the core system and Python for a crypto coin price prediction
+component.
+
+Our news aggregator aims to provide a lightweight app, prioritizing efficiency and ease of use without compromising
+functionality.
+
+## Key features
+
+- News scraper from various blockchain-related news and blog sites using [JSoup](https://jsoup.org/) and 
+[Selenium](https://www.selenium.dev/).
+- Data storage in CSV format with reading to and writing from Java annotated beans, using
+[opencsv](https://opencsv.sourceforge.net/).
+- Interactive GUI designed using [JavaFX](https://openjfx.io/) and 
+[Scene Builder](https://gluonhq.com/products/scene-builder/).
+- Accurate and relevant search results using [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) ranking algorithm.
+- Simple implementation of autocomplete function using [Trie](https://en.wikipedia.org/wiki/Trie) data structure.
+- Various cryptocurrency price predictions with data from [Yahoo Finance](https://finance.yahoo.com/), using linear
+regression and SVM. The models are implemented in Python and connected to Java by sending HTTP requests to 
+[Flask](https://flask.palletsprojects.com/en/3.0.x/) applications.
+
+## Requirements
+
+- Java JDK version 21 or higher.
+- Python version 3.9 or higher.
+
+## Installation and usage
+
+First, clone this repository, and change the current working directory to this repository's root folder:
+
+```bash
+git clone https://github.com/thanh309/news-aggregator-g17.git
+cd news-aggregator-g17
+```
+
+### Java
+
+The application is already bundled into an executable JAR file with all the dependencies needed to run - you only
+need to run the bundled file:
+```shell
+java -jar src/release/news-aggregator-g17.jar
+```
+
+### Python
+
+Python is needed to use the price prediction function. A fresh `conda` environment is recommended, although you can
+totally use global environment and use `pip`.
+
+#### Conda
+```shell
+conda create --name news-aggregator-g17 python=3.9 --yes
+conda activate news-aggregator-g17
+pip install -r requirements.txt
+```
+
+#### Pip
+```shell
+pip install -r requirements.txt
+```
+
+#### Running the Flask app
+/todo
