@@ -173,27 +173,25 @@
                         </Text>
                      </children>
                   </HBox>
-                  <VBox prefHeight="75.0" prefWidth="224.0">
+                  <VBox fx:id="vboxAuthor" prefHeight="75.0" prefWidth="224.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
                            <font>
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="authorTextField" prefHeight="30.0" prefWidth="207.0" promptText="Author" stylesheets="@../css/style.css" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="75.0" prefWidth="224.0">
+                  <VBox fx:id="vboxCategory" prefHeight="75.0" prefWidth="224.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
                            <font>
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="cateTextField" prefHeight="30.0" prefWidth="182.0" promptText="Category" stylesheets="@../css/style.css" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="106.0" prefWidth="221.0">
+                  <VBox fx:id="vobxTag" prefHeight="106.0" prefWidth="221.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -203,7 +201,6 @@
                               <Font name="System Italic" size="18.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="tagTextField" prefHeight="30.0" prefWidth="182.0" promptText="Tag" stylesheets="@../css/style.css" />
                      </children>
                   </VBox>
                   <VBox>

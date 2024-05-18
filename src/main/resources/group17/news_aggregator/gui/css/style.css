@@ -63,3 +63,8 @@
     -fx-background-radius: 15;
     -fx-background-color: #B0B0B0;
 }
+
+.link-style {
+-fx-underline: true;
+-fx-text-color: blue;
+}

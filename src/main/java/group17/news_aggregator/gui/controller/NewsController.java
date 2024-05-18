@@ -7,6 +7,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -22,6 +24,17 @@ public class NewsController {
     private Stage stage;
 
     private List<News> newsList;
+
+    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/cryptopolitan.png");
+
+    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/cryptoslate.png");
+
+    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/cryptonews.png");
+
+    private Image mediumImage = new Image("group17/news_aggregator/gui/image/medium.png");
+
+    @FXML
+    private ImageView iconImage;
 
     @FXML
     Button author;
@@ -69,6 +82,12 @@ public class NewsController {
     }
 
     public void attachValue(News news, Stage stage, List<News> newsList) {
+        switch (news.getWebsiteSource()) {
+            case "Cryptopolitan" -> iconImage.setImage(cryptopolitanImage);
+            case "Cryptoslate" -> iconImage.setImage(cryptoslateImage);
+            case "Cryptonews" -> iconImage.setImage(cryptonewsImage);
+            case "Medium" -> iconImage.setImage(mediumImage);
+        }
         this.title.setText(news.getTitle());
         this.author.setText(news.getAuthor());
         this.datetype.getChildren().clear();
@@ -89,6 +108,7 @@ public class NewsController {
                 stage.setScene(new Scene(visitScene));
                 stage.show();
             } catch (IOException e) {
+                e.printStackTrace();
                 FXMLLoader loadOfflineContent = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/offline-content.fxml"));
                 OfflineContentController offlineContentController = new OfflineContentController(stage, scene, newsList);
 

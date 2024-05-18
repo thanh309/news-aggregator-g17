@@ -2,6 +2,9 @@ package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.gui.utils.DataLoader;
+import group17.news_aggregator.gui.utils.auto_complete_field.AuthorTextField;
+import group17.news_aggregator.gui.utils.auto_complete_field.CategoryTextField;
+import group17.news_aggregator.gui.utils.auto_complete_field.TagTextField;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
 import group17.news_aggregator.search_engine.SearchEngine;
@@ -55,16 +58,10 @@ public class DiscoverController {
     private List<News> newsList;
 
     @FXML
+    private VBox vboxAuthor;
+
+    @FXML
     private TextField filterText;
-
-    @FXML
-    private TextField authorTextField;
-
-    @FXML
-    private TextField cateTextField;
-
-    @FXML
-    private TextField tagTextField;
 
     @FXML
     private ScrollPane scrollableID;
@@ -95,6 +92,15 @@ public class DiscoverController {
 
     @FXML
     private Text errorFormatText;
+    @FXML
+    private VBox vboxCategory;
+
+    @FXML
+    private VBox vobxTag;
+
+    private TextField authorComplete;
+    private TextField cateComplete;
+    private TextField tagComplete;
 
     @FXML
     private Button noneSort;
@@ -107,6 +113,7 @@ public class DiscoverController {
 
     public DiscoverController() {
     }
+
 
     public DiscoverController(Stage stage, Scene mainScene) {
         this.stage = stage;
@@ -138,7 +145,7 @@ public class DiscoverController {
                         .toInstant().toEpochMilli();
             }
 
-            query = new Query(textQuery, authorTextField.getText(), cateTextField.getText(), tagTextField.getText(), startDateMillis, endDateMillis);
+            query = new Query(textQuery, authorComplete.getText(), cateComplete.getText(), tagComplete.getText(), startDateMillis, endDateMillis);
 
         } catch (DateTimeParseException dte) {
             errorFormatText.setVisible(true);
@@ -221,6 +228,23 @@ public class DiscoverController {
     }
 
     public void initialize() {
+
+        authorComplete = new AuthorTextField();
+        authorComplete.setPrefHeight(30);
+        authorComplete.setPromptText("Author");
+        vboxAuthor.getChildren().add(authorComplete);
+
+        cateComplete = new CategoryTextField();
+        cateComplete.setPrefHeight(30);
+        cateComplete.setPromptText("Category");
+        vboxCategory.getChildren().add(cateComplete);
+
+        tagComplete = new TagTextField();
+        tagComplete.setPrefHeight(30);
+        tagComplete.setPromptText("Tag");
+        vobxTag.getChildren().add(tagComplete);
+
+
         originalNewsList = DataLoader.getInstance().getNews();
         SearchEngine searchEngine = DataLoader.getInstance().getSearchEngine();
 
