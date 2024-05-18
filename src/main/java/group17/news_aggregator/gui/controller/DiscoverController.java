@@ -387,4 +387,21 @@ public class DiscoverController {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    void scrape(ActionEvent event) {
+        if (stage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader scrapeLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/scrape-view.fxml"));
+
+        try {
+            Parent scrapeScene = scrapeLoader.load();
+            stage.setScene(new Scene(scrapeScene));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

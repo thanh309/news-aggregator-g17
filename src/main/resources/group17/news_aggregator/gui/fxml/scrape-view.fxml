@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane prefHeight="750.0" prefWidth="1200.0" styleClass="background_center" stylesheets="@../css/start.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.ScrapeController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1200.0" spacing="30.0" styleClass="white-background" stylesheets="@../css/start.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="77.0" prefWidth="130.0">
+               <children>
+                  <ImageView fitHeight="46.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="125.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#returnHome" prefHeight="63.0" prefWidth="122.0" styleClass="white-background" stylesheets="@../css/start.css" text="Home">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" prefWidth="139.0" styleClass="white-background" stylesheets="@../css/start.css" text="About Us">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" styleClass="white-background" stylesheets="@../css/start.css" text="Discover">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="122.0" styleClass="home-selected" stylesheets="@../css/start.css" text="Scrape">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="94.0" prefWidth="1200.0">
+               <children>
+                  <Text layoutX="23.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File name:">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="namefile" layoutX="210.0" layoutY="9.0" promptText="filename.csv">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="checkCryptonews" mnemonicParsing="false" prefHeight="35.0" prefWidth="362.0" text="Cryptonews: scrape the first">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </CheckBox>
+                  <TextField fx:id="numberPageCryptonews" alignment="CENTER" prefHeight="26.0" prefWidth="78.0" promptText="0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pages">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="checkCryptopolitan" mnemonicParsing="false" prefHeight="35.0" prefWidth="361.0" text="Cryptopolitan: scrape the first">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </CheckBox>
+                  <TextField fx:id="numberPageCryptopolitan" alignment="CENTER" prefHeight="26.0" prefWidth="78.0" promptText="0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pages">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="checkCryptoslate" mnemonicParsing="false" prefHeight="35.0" prefWidth="361.0" text="Cryptoslate: scrape the first">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </CheckBox>
+                  <TextField fx:id="numberPageCryptoslate" alignment="CENTER" prefHeight="26.0" prefWidth="78.0" promptText="0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pages">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <CheckBox fx:id="checkMedium" mnemonicParsing="false" prefHeight="35.0" prefWidth="363.0" text="Medium">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="87.0" prefWidth="1200.0">
+               <children>
+                  <Button fx:id="scrapeButton" layoutX="794.0" layoutY="18.0" mnemonicParsing="false" onAction="#scrapeNow" text="Scrape">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
