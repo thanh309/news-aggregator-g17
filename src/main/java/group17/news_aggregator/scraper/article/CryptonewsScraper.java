@@ -25,7 +25,15 @@ import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public class CryptonewsScraper extends ArticleScraper {
-    private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 16;
+    private final int MAX_PAGE;
+
+    public CryptonewsScraper() {
+        MAX_PAGE  = MAX_NEWS_PER_SITE / 16;
+    }
+
+    public CryptonewsScraper(int maxPage) {
+        this.MAX_PAGE = maxPage;
+    }
 
     public static void main(String[] args) throws IOException {
         CryptonewsScraper scraper = new CryptonewsScraper();
