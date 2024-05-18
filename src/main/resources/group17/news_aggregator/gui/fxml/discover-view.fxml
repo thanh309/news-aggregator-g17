@@ -82,7 +82,7 @@
                                  <image>
                                     <Image url="@../image/Prev20.png" />
                                  </image></ImageView>
-                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="35.0" promptText="Go To">
+                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="54.0" promptText="Go To">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -173,7 +173,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <VBox fx:id="vboxAuthor" prefHeight="75.0" prefWidth="224.0">
+                  <VBox fx:id="vboxAuthor" prefHeight="75.0" prefWidth="274.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
                            <font>
@@ -182,7 +182,7 @@
                         </Text>
                      </children>
                   </VBox>
-                  <VBox fx:id="vboxCategory" prefHeight="75.0" prefWidth="224.0">
+                  <VBox fx:id="vboxCategory" prefHeight="75.0" prefWidth="274.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
                            <font>
@@ -191,7 +191,7 @@
                         </Text>
                      </children>
                   </VBox>
-                  <VBox fx:id="vobxTag" prefHeight="106.0" prefWidth="221.0">
+                  <VBox fx:id="vobxTag" prefHeight="75.0" prefWidth="274.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -222,9 +222,9 @@
                         </VBox>
                         <VBox prefHeight="63.0" prefWidth="274.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To" underline="true">
                                  <font>
-                                    <Font size="22.0" />
+                                    <Font name="System Bold" size="22.0" />
                                  </font>
                               </Text>
                               <TextField fx:id="endDateField" promptText="YYYY/MM/DD">
