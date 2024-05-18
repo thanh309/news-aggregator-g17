@@ -8,8 +8,8 @@ from sklearn.model_selection import train_test_split
 app = Flask(__name__)
 
 
-@app.route('/trend_detection')
-def generate_trending_json():
+@app.route('/price_prediction')
+def generate_json():
     """Generates a JSON object and returns it as a JSON response."""
 
     coin_code_list = ['BTC-USD', 'ETH-USD', 'WBTC-USD', 'BNB-USD', 'THOREUM17410-USD']
@@ -28,7 +28,7 @@ def download_historical_data(coin_code):
     return bitcoin
 
 
-def trend_detection(coin):
+def price_prediction(coin):
     """Prepare data for model"""
     # Create a variable for predicting 'n' days out into the future
     future_days = 30
@@ -64,7 +64,7 @@ def generate_trending_dict(coin_code_list):
     trending_dict = {coin_code: [] for coin_code in coin_code_list}
     for coin_code in coin_code_list:
         coin = download_historical_data(coin_code)
-        trending_dict[coin_code] = trend_detection(coin)
+        trending_dict[coin_code] = price_prediction(coin)
 
     return trending_dict
 
