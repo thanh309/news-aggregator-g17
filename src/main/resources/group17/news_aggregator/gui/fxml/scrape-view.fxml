@@ -73,14 +73,14 @@
             </Pane>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <CheckBox fx:id="checkCryptonews" mnemonicParsing="false" prefHeight="54.0" prefWidth="545.0" text="Cryptonews        scrape the first">
+                  <CheckBox fx:id="checkCryptonews" mnemonicParsing="false" prefHeight="54.0" prefWidth="480.0" text="Cryptonews        scrape the first">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </CheckBox>
                   <TextField fx:id="numberPageCryptonews" alignment="CENTER" prefHeight="26.0" prefWidth="78.0" promptText="0">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pages">
@@ -92,14 +92,14 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <CheckBox fx:id="checkCryptopolitan" mnemonicParsing="false" prefHeight="54.0" prefWidth="545.0" text="Cryptopolitan     scrape the first">
+                  <CheckBox fx:id="checkCryptopolitan" mnemonicParsing="false" prefHeight="54.0" prefWidth="480.0" text="Cryptopolitan     scrape the first">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </CheckBox>
                   <TextField fx:id="numberPageCryptopolitan" alignment="CENTER" prefHeight="26.0" prefWidth="78.0" promptText="0">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pages">
@@ -111,14 +111,14 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <CheckBox fx:id="checkCryptoslate" mnemonicParsing="false" prefHeight="54.0" prefWidth="547.0" text="Cryptoslate         scrape the first">
+                  <CheckBox fx:id="checkCryptoslate" mnemonicParsing="false" prefHeight="54.0" prefWidth="482.0" text="Cryptoslate         scrape the first">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </CheckBox>
                   <TextField fx:id="numberPageCryptoslate" alignment="CENTER" prefHeight="26.0" prefWidth="78.0" promptText="0">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="24.0" />
                      </font>
                   </TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pages">
