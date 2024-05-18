@@ -1,21 +1,11 @@
 from flask import Flask, jsonify
-import datetime
-import numpy as np
 import yfinance as yf
-from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import numpy as np
+import datetime
 
 app = Flask(__name__)
-
-
-@app.route('/price_prediction')
-def generate_json():
-    """Generates a JSON object and returns it as a JSON response."""
-
-    coin_code_list = ['BTC-USD', 'ETH-USD', 'WBTC-USD', 'BNB-USD', 'THOREUM17410-USD']
-    data = generate_trending_dict(coin_code_list)
-
-    return jsonify(data)  # Return the data as a JSON response
 
 
 def download_historical_data(coin_code):
@@ -24,8 +14,8 @@ def download_historical_data(coin_code):
 
     """Download the historical data"""
 
-    bitcoin = yf.download(coin_code, start='2014-09-17', end=today)
-    return bitcoin
+    coin = yf.download(coin_code, start='2014-09-17', end=today)
+    return coin
 
 
 def price_prediction(coin):
@@ -60,14 +50,26 @@ def price_prediction(coin):
     return [list(coin['Adj Close'])[-1], model_prediction[0], model_prediction[6], model_prediction[29]]
 
 
-def generate_trending_dict(coin_code_list):
-    trending_dict = {coin_code: [] for coin_code in coin_code_list}
+def generate_prices_dict(coin_code_list, coin_name):
+    prices_dict = {coin_name[coin_code]: [] for coin_code in coin_code_list}
     for coin_code in coin_code_list:
         coin = download_historical_data(coin_code)
-        trending_dict[coin_code] = price_prediction(coin)
+        prices_dict[coin_name[coin_code]] = price_prediction(coin)
 
-    return trending_dict
+    return prices_dict
+
+
+@app.route('/price_prediction')
+def generate_price_prediction_json():
+    """Generates a JSON object and returns it as a JSON response."""
+
+    coin_code_list = ['BTC-USD', 'ETH-USD', '^DJI', 'BNB-USD', 'THOREUM17410-USD']
+    coin_name = {'BTC-USD': 'Bitcoin USD', 'ETH-USD': 'Ethereum USD', '^DJI': 'Dow 30', 'BNB-USD': 'BNB-USD',
+                 'THOREUM17410-USD': 'Thoreum V3 USD'}
+    data = generate_prices_dict(coin_code_list, coin_name)
+
+    return jsonify(data)  # Return the data as a JSON response
 
 
 if __name__ == '__main__':
-    app.run(debug=True)  # Start the Flask development server
+    app.run()  # Start the Flask development server
