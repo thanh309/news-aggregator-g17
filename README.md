@@ -58,6 +58,7 @@ totally use global environment and use `pip`.
 ```shell
 conda create --name news-aggregator-g17 python=3.9 --yes
 conda activate news-aggregator-g17
+pip install -r requirements.txt
 ```
 
 #### Pip
