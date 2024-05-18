@@ -82,7 +82,7 @@
                                  <image>
                                     <Image url="@../image/Prev20.png" />
                                  </image></ImageView>
-                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="35.0" promptText="Go To">
+                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="46.0" promptText="Go To">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
@@ -173,7 +173,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <VBox fx:id="vboxAuthor" prefHeight="75.0" prefWidth="224.0">
+                  <VBox fx:id="vboxAuthor" prefHeight="75.0" prefWidth="274.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
                            <font>
@@ -182,7 +182,7 @@
                         </Text>
                      </children>
                   </VBox>
-                  <VBox fx:id="vboxCategory" prefHeight="75.0" prefWidth="224.0">
+                  <VBox fx:id="vboxCategory" prefHeight="75.0" prefWidth="274.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
                            <font>
@@ -191,7 +191,7 @@
                         </Text>
                      </children>
                   </VBox>
-                  <VBox fx:id="vobxTag" prefHeight="106.0" prefWidth="221.0">
+                  <VBox fx:id="vobxTag" prefHeight="75.0" prefWidth="274.0">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -207,6 +207,11 @@
                      <children>
                         <VBox prefHeight="75.0" prefWidth="274.0" spacing="10.0">
                            <children>
+                              <Text fx:id="errorFormatText" fill="#ff3a3a" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong DateTime format" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;" text="From">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
@@ -217,9 +222,9 @@
                         </VBox>
                         <VBox prefHeight="63.0" prefWidth="274.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To" underline="true">
                                  <font>
-                                    <Font size="22.0" />
+                                    <Font name="System Bold" size="22.0" />
                                  </font>
                               </Text>
                               <TextField fx:id="endDateField" promptText="YYYY/MM/DD">
@@ -295,15 +300,7 @@
                   </Button>
                </children>
             </VBox>
-            <Pane prefHeight="44.0" prefWidth="300.0">
-               <children>
-                  <Text fx:id="errorFormatText" fill="#ff3a3a" layoutX="21.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong DateTime format" visible="false">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
+            <Pane prefHeight="44.0" prefWidth="300.0" />
          </children>
          <BorderPane.margin>
             <Insets left="30.0" />

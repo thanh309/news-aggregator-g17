@@ -3,7 +3,6 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -24,7 +23,7 @@
                         <Image url="@../image/logo.png" />
                      </image>
                   </ImageView>
-                  <Label prefHeight="30.0" prefWidth="110.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="125.0" text="Aggregator" textAlignment="CENTER" textFill="#1d8496">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -75,7 +74,7 @@
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/vtt.jpg" />
+                              <Image url="@../image/members/vtt.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Vũ Trung Thành">
@@ -83,12 +82,11 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225534" textAlignment="CENTER" wrappingWidth="100.81668090820312">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20220066" textAlignment="CENTER" wrappingWidth="100.81668090820312">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" stylesheets="@../css/start.css" />
                      </children>
                   </VBox>
                   <Pane prefHeight="260.0" prefWidth="150.0" />
@@ -96,7 +94,7 @@
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/vdoan.jpg" />
+                              <Image url="@../image/members/vdoan.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Đoàn Anh Vũ">
@@ -104,12 +102,11 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225534" textAlignment="CENTER" wrappingWidth="100.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225465" textAlignment="CENTER" wrappingWidth="100.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" />
                      </children>
                   </VBox>
                   <Pane prefHeight="260.0" prefWidth="150.0" />
@@ -117,7 +114,7 @@
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/lht.jpg" />
+                              <Image url="@../image/members/lht.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Lương Hữu Thành">
@@ -125,12 +122,11 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225534" wrappingWidth="100.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225458" textAlignment="CENTER" wrappingWidth="100.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" />
                      </children>
                   </VBox>
                </children>
@@ -141,7 +137,7 @@
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/nmt.jpg" />
+                              <Image url="@../image/members/nmt.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Nguyễn Mậu Trung">
@@ -154,7 +150,6 @@
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" />
                      </children>
                   </VBox>
                   <Pane prefHeight="260.0" prefWidth="150.0" />
@@ -162,7 +157,7 @@
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/ttv.jpg" />
+                              <Image url="@../image/members/ttv.jpg" />
                            </image>
                         </ImageView>
                         <Label text="Trần Thành Vinh">
@@ -170,12 +165,11 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225534" textAlignment="CENTER" wrappingWidth="100.0">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="20225539" textAlignment="CENTER" wrappingWidth="100.0">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Text>
-                        <Separator maxWidth="-Infinity" prefHeight="2.0" prefWidth="101.0" />
                      </children>
                   </VBox>
                </children>

@@ -25,13 +25,13 @@ public class NewsController {
 
     private List<News> newsList;
 
-    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/cryptopolitan.png");
+    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptopolitan.png");
 
-    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/cryptoslate.png");
+    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptoslate.png");
 
-    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/cryptonews.png");
+    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptonews.png");
 
-    private Image mediumImage = new Image("group17/news_aggregator/gui/image/medium.png");
+    private Image mediumImage = new Image("group17/news_aggregator/gui/image/website_icons/medium.png");
 
     @FXML
     private ImageView iconImage;

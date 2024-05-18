@@ -2,9 +2,6 @@ package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
 import group17.news_aggregator.gui.utils.DataLoader;
-import group17.news_aggregator.gui.utils.auto_complete_field.AuthorTextField;
-import group17.news_aggregator.gui.utils.auto_complete_field.CategoryTextField;
-import group17.news_aggregator.gui.utils.auto_complete_field.TagTextField;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
 import group17.news_aggregator.search_engine.SearchEngine;
@@ -98,9 +95,9 @@ public class DiscoverController {
     @FXML
     private VBox vobxTag;
 
-    private TextField authorComplete;
-    private TextField cateComplete;
-    private TextField tagComplete;
+    private TextField authorAutocompleteField;
+    private TextField cateAutocompleteField;
+    private TextField tagAutocompleteField;
 
     @FXML
     private Button noneSort;
@@ -145,7 +142,7 @@ public class DiscoverController {
                         .toInstant().toEpochMilli();
             }
 
-            query = new Query(textQuery, authorComplete.getText(), cateComplete.getText(), tagComplete.getText(), startDateMillis, endDateMillis);
+            query = new Query(textQuery, authorAutocompleteField.getText(), cateAutocompleteField.getText(), tagAutocompleteField.getText(), startDateMillis, endDateMillis);
 
         } catch (DateTimeParseException dte) {
             errorFormatText.setVisible(true);
@@ -167,10 +164,7 @@ public class DiscoverController {
             newsList.add(originalNewsList.get(i));
         }
 
-        List<Integer> originalIds = new ArrayList<>();
-        for (Integer id : res) {
-            originalIds.add(Integer.valueOf(id));
-        }
+        List<Integer> originalIds = new ArrayList<>(res);
 
         next20.setOnMouseClicked(increase20 -> {
             if (endIndex + 20 <= newsList.size()) {
@@ -229,20 +223,14 @@ public class DiscoverController {
 
     public void initialize() {
 
-        authorComplete = new AuthorTextField();
-        authorComplete.setPrefHeight(30);
-        authorComplete.setPromptText("Author");
-        vboxAuthor.getChildren().add(authorComplete);
+        authorAutocompleteField = DataLoader.getInstance().getAuthorTextField();
+        vboxAuthor.getChildren().add(authorAutocompleteField);
 
-        cateComplete = new CategoryTextField();
-        cateComplete.setPrefHeight(30);
-        cateComplete.setPromptText("Category");
-        vboxCategory.getChildren().add(cateComplete);
+        cateAutocompleteField = DataLoader.getInstance().getCategoryTextField();
+        vboxCategory.getChildren().add(cateAutocompleteField);
 
-        tagComplete = new TagTextField();
-        tagComplete.setPrefHeight(30);
-        tagComplete.setPromptText("Tag");
-        vobxTag.getChildren().add(tagComplete);
+        tagAutocompleteField = DataLoader.getInstance().getTagTextField();
+        vobxTag.getChildren().add(tagAutocompleteField);
 
 
         originalNewsList = DataLoader.getInstance().getNews();
@@ -251,16 +239,12 @@ public class DiscoverController {
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
 
-//        List<Integer> ids = new ArrayList<>();
-//        for (int i = 0; i < size; i ++){
-//            ids.add(i);
-//        }
         List<Integer> ids = new ArrayList<>(IntStream.rangeClosed(0, size-1).boxed().toList());
         List<Integer> originalIds = new ArrayList<>();
         newsList = new ArrayList<>();
 
         for (Integer id : ids) {
-            originalIds.add(Integer.valueOf(id));
+            originalIds.add(id);
             newsList.add(originalNewsList.get(id));
         }
 
@@ -326,8 +310,8 @@ public class DiscoverController {
 
     private void updateSortedList(List<News> aNewsList, List<Integer> sortedIds) {
         aNewsList.clear();
-        for (int i = 0; i < sortedIds.size(); i++) {
-            aNewsList.add(originalNewsList.get(sortedIds.get(i)));
+        for (Integer sortedId : sortedIds) {
+            aNewsList.add(originalNewsList.get(sortedId));
         }
 
         startIndex = 0;
