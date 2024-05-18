@@ -1,11 +1,21 @@
-"""Import necessary libraries"""
-
-import yfinance as yf
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn import metrics
-import numpy as np
+from flask import Flask, jsonify
 import datetime
+import numpy as np
+import yfinance as yf
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+app = Flask(__name__)
+
+
+@app.route('/trend_detection')
+def generate_trending_json():
+    """Generates a JSON object and returns it as a JSON response."""
+
+    coin_code_list = ['BTC-USD', 'ETH-USD', 'WBTC-USD', 'BNB-USD', 'THOREUM17410-USD']
+    data = generate_trending_dict(coin_code_list)
+
+    return jsonify(data)  # Return the data as a JSON response
 
 
 def download_historical_data(coin_code):
@@ -57,3 +67,7 @@ def generate_trending_dict(coin_code_list):
         trending_dict[coin_code] = trend_detection(coin)
 
     return trending_dict
+
+
+if __name__ == '__main__':
+    app.run(debug=True)  # Start the Flask development server
