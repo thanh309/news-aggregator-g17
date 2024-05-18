@@ -1,4 +1,5 @@
-# News aggregator - Group 17
+# News aggregator — Group 17
+
 
 
 ## Introduction
@@ -13,6 +14,11 @@ component.
 Our news aggregator aims to provide a lightweight app, prioritizing efficiency and ease of use without compromising
 functionality.
 
+***Disclaimer: The application is for educational purposes only. The information provided by this application,
+including any price predictions for cryptocurrency, is for informational purposes only and should not be considered
+financial advice. We are not responsible for any investment losses or gains you may incur as a result of using the
+information provided in this application.***
+
 ## Key features
 
 - News scraper from various blockchain-related news and blog sites using [JSoup](https://jsoup.org/) and 
@@ -24,13 +30,32 @@ functionality.
 - Accurate and relevant search results using [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) ranking algorithm.
 - Simple implementation of autocomplete function using [Trie](https://en.wikipedia.org/wiki/Trie) data structure.
 - Various cryptocurrency price predictions with data from [Yahoo Finance](https://finance.yahoo.com/), using linear
-regression and SVM. The models are implemented in Python and connected to Java by sending HTTP requests to 
+regression ~~and SVM~~. The models are implemented in Python and connected to Java by sending HTTP requests to 
 [Flask](https://flask.palletsprojects.com/en/3.0.x/) applications.
+
+
+## Project structure
+```
+└── src
+    ├── java
+    │   └── group17.news_aggregator
+    │       ├── auto_complete
+    │       ├── csv_converter
+    │       ├── exception
+    │       ├── gui
+    │       ├── news
+    │       ├── scraper
+    │       └── search_engine
+    ├── python
+    └── resources
+```
+
 
 ## Requirements
 
 - Java JDK version 21 or higher.
 - Python version 3.9 or higher.
+
 
 ## Installation and usage
 
@@ -67,4 +92,34 @@ pip install -r requirements.txt
 ```
 
 #### Running the Flask app
-/todo
+```shell
+conda activate news-aggregator-g17
+flask --app src/main/python/app.py run
+```
+
+## Building
+This project uses Gradle as the build system for dependency management. We recommend using
+[IntelliJ IDEA](https://www.jetbrains.com/idea/) as it supports a fully functional integration with Gradle.
+
+To build the project, run
+```shell
+./gradlew build
+```
+in the IDE's terminal.
+
+
+## Demo
+
+todo: create a short demo (maybe in GIF format?)
+
+
+## Acknowledgments
+This project would not be possible if not for the great open-source libraries, such as [JSoup](https://jsoup.org/),
+[Selenium](https://www.selenium.dev/) and [opencsv](https://opencsv.sourceforge.net/). We would like to express our
+gratitude to our lecturer, Professor Trinh Tuan Dat for providing us with a challenging, yet highly fascinating project
+assignment, which has allowed us to learn a lot and significantly broadened our skillset. We would also want to thank
+our friends for their invaluable feedback and suggestions throughout the development process.
+
+
+## License
+This project is licensed under the [MIT License](LICENSE).
