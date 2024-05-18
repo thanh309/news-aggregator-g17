@@ -38,8 +38,8 @@ public class SearchEngine {
 
     public void sortByTitle(List<Integer> ids, List<News> references) {
         Map<Integer, String> map = new HashMap<>();
-        for (int i = 0; i < references.size(); i++) {
-            map.put(i, references.get(i).getTitle());
+        for (Integer id : ids) {
+            map.put(id, references.get(id).getTitle());
         }
 
         List<Map.Entry<Integer, String>> list = new ArrayList<>(map.entrySet());
@@ -57,12 +57,13 @@ public class SearchEngine {
 
     public void sortByCreationDate(List<Integer> ids, List<News> references) {
         Map<Integer, Long> map = new HashMap<>();
-        for (int i = 0; i < references.size(); i++) {
-            map.put(i, references.get(i).getCreationDate());
+
+        for (Integer id : ids) {
+            map.put(id, references.get(id).getCreationDate());
         }
 
         List<Map.Entry<Integer, Long>> list = new ArrayList<>(map.entrySet());
-        list.sort(Map.Entry.comparingByValue());
+        list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
         List<Integer> res = new ArrayList<>();
         for (Map.Entry<Integer, Long> entry : list) {

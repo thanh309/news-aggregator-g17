@@ -10,7 +10,6 @@
 }
 
 .mouse-moved: hover{
-    -fx-background-color: grey;
     -fx-background-radius: 15;
     -fx-background-color: #F1F1F2;
 }
@@ -54,3 +53,13 @@
     -fx-border-color: #4D788D;
 }
 
+.round-layout-sort{
+    -fx-border-radius: 20;
+    -fx-border-color: #D58101;
+    -fx-border-width: 3;
+}
+
+.mouse-move-sort: hover {
+    -fx-background-radius: 15;
+    -fx-background-color: #B0B0B0;
+}

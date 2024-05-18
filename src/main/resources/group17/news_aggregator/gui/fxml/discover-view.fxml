@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.DiscoverController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="transparent" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
@@ -142,7 +141,7 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" stylesheets="@../css/start.css" text="About Us">
+            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" prefWidth="139.0" stylesheets="@../css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
@@ -160,10 +159,10 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="674.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="674.0" prefWidth="300.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="103.0" prefWidth="246.0" />
-            <VBox prefHeight="486.0" prefWidth="282.0" styleClass="round-layout" stylesheets="@../css/style.css">
+            <Pane prefHeight="43.0" prefWidth="300.0" />
+            <VBox prefHeight="468.0" prefWidth="300.0" styleClass="round-layout" stylesheets="@../css/style.css">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="224.0">
                      <children>
@@ -209,7 +208,7 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <VBox prefHeight="85.0" prefWidth="221.0" spacing="10.0">
+                        <VBox prefHeight="75.0" prefWidth="274.0" spacing="10.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;" text="From">
                                  <font>
@@ -219,14 +218,17 @@
                               <TextField fx:id="startDateField" promptText="YYYY/MM/DD" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="55.0" prefWidth="142.0" spacing="10.0">
+                        <VBox prefHeight="63.0" prefWidth="274.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;" text="To">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To">
                                  <font>
-                                    <Font name="System Bold" size="22.0" />
+                                    <Font size="22.0" />
                                  </font>
                               </Text>
-                              <TextField fx:id="endDateField" promptText="YYYY/MM/DD" />
+                              <TextField fx:id="endDateField" promptText="YYYY/MM/DD">
+                                 <VBox.margin>
+                                    <Insets bottom="7.0" />
+                                 </VBox.margin></TextField>
                            </children>
                         </VBox>
                      </children>
@@ -236,7 +238,67 @@
                   <Insets left="10.0" right="10.0" />
                </padding>
             </VBox>
-            <Pane prefHeight="98.0" prefWidth="322.0">
+            <VBox alignment="BOTTOM_LEFT" prefHeight="128.0" prefWidth="300.0" styleClass="round-layout-sort" stylesheets="@../css/style.css">
+               <children>
+                  <HBox prefHeight="44.0" prefWidth="294.0">
+                     <children>
+                        <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/sort.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="4.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="77.0" text="Sort by">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Button fx:id="noneSort" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="40.0" prefWidth="73.0" stylesheets="@../css/style.css" text="None">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="22.0" />
+                     </VBox.margin>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-move-sort" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="titleSort" alignment="TOP_LEFT" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="86.0" stylesheets="@../css/style.css" text="Title">
+                     <VBox.margin>
+                        <Insets left="22.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-move-sort" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="cdSort" alignment="TOP_LEFT" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" stylesheets="@../css/style.css" text="CreationDate">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="22.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="mouse-move-sort" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <Pane prefHeight="44.0" prefWidth="300.0">
                <children>
                   <Text fx:id="errorFormatText" fill="#ff3a3a" layoutX="21.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong DateTime format" visible="false">
                      <font>

@@ -14,19 +14,19 @@ public class TestSortFeatures {
 
         News news2 = new News();
         news2.setTitle("Apple watch");
-        news2.setCreationDate(200);
+        news2.setCreationDate(100);
 
         News news3 = new News();
         news3.setTitle("The new laptop");
-        news3.setCreationDate(5);
+        news3.setCreationDate(100);
 
         News news4 = new News();
         news4.setTitle("The new laptop");
-        news4.setCreationDate(1);
+        news4.setCreationDate(100);
 
         News news5 = new News();
         news5.setTitle("Machine Learning");
-        news5.setCreationDate(2);
+        news5.setCreationDate(100);
 
         listNews.add(news1);
         listNews.add(news2);
@@ -47,6 +47,26 @@ public class TestSortFeatures {
 
         searchEngine.sortByCreationDate(ids, listNews);
         System.out.println(ids);
+
+        searchEngine.sortByTitle(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByTitle(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByTitle(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByTitle(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByTitle(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByTitle(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByCreationDate(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByCreationDate(ids, listNews);
+        System.out.println(ids);
+        searchEngine.sortByCreationDate(ids, listNews);
+        System.out.println(ids);
+
     }
 
 }
