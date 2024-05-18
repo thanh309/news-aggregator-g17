@@ -82,7 +82,7 @@
                                  <image>
                                     <Image url="@../image/Prev20.png" />
                                  </image></ImageView>
-                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="54.0" promptText="Go To">
+                              <TextField fx:id="toPage" alignment="CENTER" maxHeight="-Infinity" prefHeight="27.0" prefWidth="46.0" promptText="Go To">
                                  <HBox.margin>
                                     <Insets left="5.0" />
                                  </HBox.margin>
