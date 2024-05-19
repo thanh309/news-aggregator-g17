@@ -64,7 +64,7 @@
                         <Font size="30.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="namefile" layoutX="368.0" layoutY="51.0" promptText="filename.csv">
+                  <TextField fx:id="namefile" layoutX="368.0" layoutY="51.0" onMouseClicked="#resetFileName" promptText="filename.csv">
                      <font>
                         <Font size="20.0" />
                      </font>
