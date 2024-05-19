@@ -60,4 +60,21 @@ public class AboutUsController {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    void scrape(ActionEvent event) {
+        if (stageAu == null) {
+            stageAu = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader searchLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/scrape-view.fxml"));
+
+        try {
+            Parent aboutScene = searchLoader.load();
+            stageAu.setScene(new Scene(aboutScene));
+            stageAu.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
