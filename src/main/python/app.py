@@ -35,7 +35,7 @@ def price_prediction(coin):
     y = y[:-future_days]
 
     # Split the data into 80% training data and 20% testing data
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
     """Modeling"""
 
     # Create and train the model
