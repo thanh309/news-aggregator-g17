@@ -13,10 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -407,19 +404,24 @@ public class DiscoverController {
         }
 
         for (List<String> formattedPrice : pricePredictions) {
-            HBox node = new HBox();
+            VBox node = new VBox();
+            node.setAlignment(Pos.CENTER);
             node.setSpacing(10);
             for (int i = 0; i < 2; i++) {
                 if (i == 0){
                     Label label = new Label(formattedPrice.get(i));
-                    label.setPrefWidth(60);
+                    label.setPrefHeight(22);
+                    label.setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
                     node.getChildren().add(label);
                 }
                 if (i == 1){
+                    HBox temp = new HBox();
                     Label priceOri = new Label(formattedPrice.get(intervalIndex));
                     Label price = new Label(formattedPrice.get(intervalIndex+1));
-                    priceOri.setPrefWidth(60);
+                    priceOri.setPrefWidth(50);
+                    priceOri.setAlignment(Pos.CENTER);
                     price.setPrefWidth(50);
+                    price.setAlignment(Pos.CENTER);
                     String text = price.getText();
                     if (text != null && !text.isEmpty()) {
                         char firstChar = text.charAt(0);
@@ -429,10 +431,18 @@ public class DiscoverController {
                             price.setTextFill(Color.RED);
                         }
                     }
-                    node.getChildren().add(priceOri);
-                    node.getChildren().add(price);
+                    temp.getChildren().add(priceOri);
+                    temp.getChildren().add(price);
+                    temp.setSpacing(15);
+                    temp.setAlignment(Pos.CENTER);
+                    node.getChildren().add(temp);
+
                 }
+
             }
+            Separator sep = new Separator();
+            sep.setOpacity(0.2);
+            node.getChildren().add(sep);
             pricePredictionVBox.getChildren().add(node);
         }
     }
