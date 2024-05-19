@@ -48,16 +48,16 @@
       </ScrollPane>
    </center>
    <top>
-      <Pane fx:id="Navigator" prefHeight="73.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="Navigator" prefHeight="79.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="headerPage" layoutX="25.0" layoutY="19.0" prefHeight="39.0" prefWidth="1103.0" spacing="15.0">
                <children>
-                  <ImageView fx:id="prevImage" fitHeight="39.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="prevImage" fitHeight="39.0" fitWidth="38.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/Prev20.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="nextImage" fitHeight="39.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="nextImage" fitHeight="39.0" fitWidth="38.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/Next20.png" />
                      </image>
