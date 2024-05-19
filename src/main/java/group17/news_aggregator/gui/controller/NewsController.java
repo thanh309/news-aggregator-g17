@@ -1,5 +1,6 @@
 package group17.news_aggregator.gui.controller;
 
+import group17.news_aggregator.gui.utils.DataLoader;
 import group17.news_aggregator.news.News;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,13 +26,13 @@ public class NewsController {
 
     private List<News> newsList;
 
-    private Image cryptopolitanImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptopolitan.png");
+    private Image cryptopolitanImage = DataLoader.getInstance().getCryptopolitanImage();
 
-    private Image cryptoslateImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptoslate.png");
+    private Image cryptoslateImage = DataLoader.getInstance().getCryptoslateImage();
 
-    private Image cryptonewsImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptonews.png");
+    private Image cryptonewsImage = DataLoader.getInstance().getCryptonewsImage();
 
-    private Image mediumImage = new Image("group17/news_aggregator/gui/image/website_icons/medium.png");
+    private Image mediumImage = DataLoader.getInstance().getMediumImage();
 
     @FXML
     private ImageView iconImage;

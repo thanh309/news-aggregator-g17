@@ -34,7 +34,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="64.0" stylesheets="@../css/style.css" text="Search">
+                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" stylesheets="@../css/style.css" text="Search">
                                  <font>
                                     <Font name="System Italic" size="15.0" />
                                  </font>
