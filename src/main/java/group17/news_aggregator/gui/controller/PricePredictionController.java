@@ -35,10 +35,12 @@ public class PricePredictionController {
         formattedPrices.add(key);
         double firstElement = prices.get(0);
         formattedPrices.add(String.format("%.1f", firstElement));
+        formattedPrices.add("0%");
 
         for (int i = 1; i <= 3; i++) {
             double percentageChange = ((prices.get(i) - firstElement) / firstElement) * 100;
-            formattedPrices.add(String.format("%+.2f%%", percentageChange)); // Correctly escaped and uniformly formatted
+            formattedPrices.add(String.format("%.1f",prices.get(i)));
+            formattedPrices.add(String.format("%+.2f%%", percentageChange));
         }
 
 

@@ -83,6 +83,9 @@ public class DiscoverController {
     private Label totalPages;
 
     @FXML
+    private Label changePredict;
+
+    @FXML
     private Button searchButton;
 
     @FXML
@@ -93,6 +96,9 @@ public class DiscoverController {
 
     @FXML
     private Button sevenDay;
+
+    @FXML
+    private Button today;
 
 
     @FXML
@@ -329,11 +335,25 @@ public class DiscoverController {
             updateSortedList(newsList, originalIds);
         });
 
-        oneDay.setOnAction(event -> displayPricePredictions(pricePredict,2));
-        sevenDay.setOnAction(event -> displayPricePredictions(pricePredict,3));
-        oneMonth.setOnAction(event -> displayPricePredictions(pricePredict,4));
+        today.setOnAction(event -> {
+            displayPricePredictions(pricePredict,1);
+            changePredict.setText("Change-now");
+        });
 
-        displayPricePredictions(pricePredict,2);
+        oneDay.setOnAction(event -> {
+                    displayPricePredictions(pricePredict, 3);
+                    changePredict.setText("Change-24h");
+        });
+        sevenDay.setOnAction(event -> {
+                displayPricePredictions(pricePredict,5);
+                changePredict.setText("Change-7d");
+        });
+        oneMonth.setOnAction(event -> {
+            displayPricePredictions(pricePredict,7);
+            changePredict.setText("Change-1m");
+        });
+
+        displayPricePredictions(pricePredict,1);
 
     }
 
@@ -396,25 +416,28 @@ public class DiscoverController {
         for (List<String> formattedPrice : pricePredictions) {
             HBox node = new HBox();
             node.setSpacing(10);
-            for (int i = 0; i < 3; i++) {
-                if (i<2){
+            for (int i = 0; i < 2; i++) {
+                if (i == 0){
                     Label label = new Label(formattedPrice.get(i));
-                    label.setPrefWidth(50);
+                    label.setPrefWidth(40);
                     node.getChildren().add(label);
                 }
-                if (i == 2){
-                    Label label = new Label(formattedPrice.get(intervalIndex));
-                    label.setPrefWidth(50);
-                    String text = label.getText();
+                if (i == 1){
+                    Label priceOri = new Label(formattedPrice.get(intervalIndex));
+                    Label price = new Label(formattedPrice.get(intervalIndex+1));
+                    priceOri.setPrefWidth(50);
+                    price.setPrefWidth(50);
+                    String text = price.getText();
                     if (text != null && !text.isEmpty()) {
                         char firstChar = text.charAt(0);
                         if (firstChar == '+') {
-                            label.setTextFill(Color.GREEN);
+                            price.setTextFill(Color.GREEN);
                         } else if (firstChar == '-') {
-                            label.setTextFill(Color.RED);
+                            price.setTextFill(Color.RED);
                         }
                     }
-                    node.getChildren().add(label);
+                    node.getChildren().add(priceOri);
+                    node.getChildren().add(price);
                 }
             }
             pricePredictionVBox.getChildren().add(node);
