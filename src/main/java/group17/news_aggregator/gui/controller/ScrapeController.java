@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -105,9 +106,10 @@ public class ScrapeController {
         }
     }
 
+
     @FXML
     void scrapeNow(ActionEvent event) throws InterruptedException {
-        ScraperEngine scraperEngine = new ScraperEngine();
+            ScraperEngine scraperEngine = new ScraperEngine();
         if (checkCryptonews.isSelected()) {
             scraperEngine.setScrapeCryptonews(true);
             try {
@@ -151,5 +153,15 @@ public class ScrapeController {
         scraperEngine.scrape();
 
         scrapeButton.setText("Done");
+        scrapeButton.setDisable(true);
+
     }
+
+    @FXML
+    void resetFileName(MouseEvent event) {
+        namefile.clear();
+        scrapeButton.setText("Scrape");
+        scrapeButton.setDisable(false);
+    }
+
 }
