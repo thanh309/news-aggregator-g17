@@ -366,8 +366,7 @@ public class DiscoverController {
         endIndex = Math.min(endIndex, size);
 
         if (startIndex < size) {
-            List<? extends News> subList = newsList.subList(startIndex, endIndex);
-            for (News news : subList) {
+            for (int i = startIndex; i < endIndex; i++) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/news-component.fxml"));
                     NewsController newsController = new NewsController(newStage, mainScene, newsList);
@@ -375,9 +374,9 @@ public class DiscoverController {
                     loader.setController(newsController);
                     HBox newsComponent = loader.load();
 
-                    newsController.attachValue(news, stage, newsList);
+                    newsController.attachValue(newsList.get(i), stage, newsList);
                     newsController = loader.getController();
-                    newsController.attachValue(news, newStage, newsList);
+                    newsController.attachValue(newsList.get(i), newStage, newsList);
 
                     vboxContainer.getChildren().add(newsComponent);
                 } catch (IOException e) {
