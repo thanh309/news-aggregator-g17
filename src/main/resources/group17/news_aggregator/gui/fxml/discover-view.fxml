@@ -320,9 +320,9 @@
             <Insets left="5.0" />
          </padding>
          <children>
-            <VBox prefHeight="378.0" prefWidth="182.0" styleClass="round-layout" stylesheets="@../css/style.css">
+            <VBox prefHeight="324.0" prefWidth="182.0" stylesheets="@../css/style.css">
                <children>
-                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="178.0" text="Price Prediction">
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="175.0" text="Price Prediction">
                      <font>
                         <Font name="System Bold" size="22.0" />
                      </font>
@@ -377,37 +377,41 @@
                   <Separator opacity="0.2" prefWidth="200.0" style="-fx-background-color: grey;" />
                   <HBox maxWidth="-Infinity" prefHeight="22.0" prefWidth="196.0" spacing="10.0">
                      <children>
-                        <Label prefWidth="50.0" text="Name">
+                        <Label alignment="BOTTOM_LEFT" prefWidth="60.0" text="Name">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label prefWidth="50.0" text="Price">
+                        <Label alignment="BOTTOM_LEFT" prefHeight="18.0" prefWidth="60.0" text="Price-$">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="changePredict" alignment="BOTTOM_LEFT" prefHeight="20.0" prefWidth="85.0" text="Change-now">
+                        <Label fx:id="changePredict" alignment="BOTTOM_LEFT" prefHeight="20.0" prefWidth="60.0" text="Change">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
                   <Separator opacity="0.2" prefWidth="200.0" style="-fx-background-color: grey;" />
-                  <ScrollPane prefHeight="398.0" prefWidth="181.0" stylesheets="@../css/style.css">
+                  <ScrollPane prefHeight="201.0" prefWidth="175.0" stylesheets="@../css/style.css">
                      <styleClass>
                         <String fx:value="transparent" />
                         <String fx:value="viewport" />
                      </styleClass>
                      <content>
-                        <VBox fx:id="pricePredictionVBox" prefHeight="252.0" prefWidth="163.0" spacing="7.0" />
+                        <VBox fx:id="pricePredictionVBox" prefHeight="192.0" prefWidth="163.0" spacing="7.0" />
                      </content>
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
                   </ScrollPane>
                </children>
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="new-round-background" />
+               </styleClass>
             </VBox>
          </children>
       </VBox>

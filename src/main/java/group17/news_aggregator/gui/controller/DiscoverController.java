@@ -83,9 +83,6 @@ public class DiscoverController {
     private Label totalPages;
 
     @FXML
-    private Label changePredict;
-
-    @FXML
     private Button searchButton;
 
     @FXML
@@ -337,20 +334,16 @@ public class DiscoverController {
 
         today.setOnAction(event -> {
             displayPricePredictions(pricePredict,1);
-            changePredict.setText("Change-now");
         });
 
         oneDay.setOnAction(event -> {
                     displayPricePredictions(pricePredict, 3);
-                    changePredict.setText("Change-24h");
         });
         sevenDay.setOnAction(event -> {
                 displayPricePredictions(pricePredict,5);
-                changePredict.setText("Change-7d");
         });
         oneMonth.setOnAction(event -> {
             displayPricePredictions(pricePredict,7);
-            changePredict.setText("Change-1m");
         });
 
         displayPricePredictions(pricePredict,1);
@@ -419,13 +412,13 @@ public class DiscoverController {
             for (int i = 0; i < 2; i++) {
                 if (i == 0){
                     Label label = new Label(formattedPrice.get(i));
-                    label.setPrefWidth(40);
+                    label.setPrefWidth(60);
                     node.getChildren().add(label);
                 }
                 if (i == 1){
                     Label priceOri = new Label(formattedPrice.get(intervalIndex));
                     Label price = new Label(formattedPrice.get(intervalIndex+1));
-                    priceOri.setPrefWidth(50);
+                    priceOri.setPrefWidth(60);
                     price.setPrefWidth(50);
                     String text = price.getText();
                     if (text != null && !text.isEmpty()) {
