@@ -67,8 +67,8 @@ def generate_price_prediction_json():
     """Generates a JSON object and returns it as a JSON response."""
 
     coin_code_list = ['BTC-USD', 'ETH-USD', '^DJI', 'BNB-USD', 'THOREUM17410-USD']
-    coin_name = {'BTC-USD': 'Bitcoin USD', 'ETH-USD': 'Ethereum USD', '^DJI': 'Dow 30', 'BNB-USD': 'BNB-USD',
-                 'THOREUM17410-USD': 'Thoreum V3 USD'}
+    coin_name = {'BTC-USD': 'Bitcoin', 'ETH-USD': 'Ethereum', '^DJI': 'Dow 30', 'BNB-USD': 'Binance',
+                 'THOREUM17410-USD': 'Thoreum V3'}
     data = generate_prices_dict(coin_code_list, coin_name)
 
     return jsonify(data)  # Return the data as a JSON response
