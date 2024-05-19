@@ -85,7 +85,7 @@ public class NewsController {
     public void attachValue(News news, Stage stage, List<News> newsList) {
         switch (news.getWebsiteSource()) {
             case "Cryptopolitan" -> iconImage.setImage(cryptopolitanImage);
-            case "Cryptoslate" -> iconImage.setImage(cryptoslateImage);
+            case "CryptoSlate" -> iconImage.setImage(cryptoslateImage);
             case "Cryptonews" -> iconImage.setImage(cryptonewsImage);
             case "Medium" -> iconImage.setImage(mediumImage);
         }

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class HelloApplication extends Application {
+public class HomeApplication extends Application {
     private Parent root;
 
     private Scene firstScene;
