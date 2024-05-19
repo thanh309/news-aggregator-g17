@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 import yfinance as yf
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
 import numpy as np
 import datetime
 
@@ -14,7 +15,7 @@ def download_historical_data(coin_code):
 
     """Download the historical data"""
 
-    coin = yf.download(coin_code, start='2014-09-17', end=today)
+    coin = yf.download(coin_code, start='2018-05-19', end=today)
     return coin
 
 
@@ -28,6 +29,9 @@ def price_prediction(coin):
 
     # Create the independent data set (x)
     x = np.array(coin[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']])
+    poly = PolynomialFeatures(degree=2)
+    x = poly.fit_transform(x)
+    x_projection = np.array(x[-future_days:])
     x = x[:-future_days]
 
     # Create the dependent data set (y)
@@ -45,7 +49,6 @@ def price_prediction(coin):
 
     """Prediction"""
     # Create a variable called x_projection and set it equal to the last 30 rows of data from the original data set
-    x_projection = np.array(coin[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']])[-future_days:]
     model_prediction = model.predict(x_projection)
     return [list(coin['Adj Close'])[-1], model_prediction[0], model_prediction[6], model_prediction[29]]
 
