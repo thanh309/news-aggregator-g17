@@ -1,7 +1,6 @@
 package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
-import group17.news_aggregator.exception.RequestException;
 import group17.news_aggregator.gui.utils.DataLoader;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
@@ -22,9 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.json.JSONException;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -32,7 +29,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 

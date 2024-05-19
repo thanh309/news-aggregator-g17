@@ -94,7 +94,7 @@
                      <children>
                         <ImageView fitHeight="155.0" fitWidth="171.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../image/members/vdoan.jpg" />
+                              <Image url="@../image/members/vdoan.png" />
                            </image>
                         </ImageView>
                         <Label text="Đoàn Anh Vũ">
