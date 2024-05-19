@@ -10,7 +10,6 @@ import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.SearchEngine;
 import javafx.scene.image.Image;
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -20,7 +19,6 @@ public class DataLoader {
     private final String dataPath = "src/main/resources/data/database.csv";
 
     private List<News> cachedNews;
-
     private List<List<String>> cachedPricePredictions;
 
     private SearchEngine searchEngine;

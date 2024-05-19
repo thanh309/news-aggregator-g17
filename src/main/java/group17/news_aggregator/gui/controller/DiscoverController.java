@@ -345,6 +345,7 @@ public class DiscoverController {
 
         displayPricePredictions(pricePredict,1);
         search_handle(originalNewsList, newsList, searchEngine, originalIds);
+
     }
 
     private void updateSortedList(List<News> aNewsList, List<Integer> sortedIds) {

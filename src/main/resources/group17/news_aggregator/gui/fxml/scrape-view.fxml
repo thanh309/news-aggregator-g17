@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -31,20 +33,32 @@
                   </Label>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" onAction="#returnHome" prefHeight="63.0" prefWidth="122.0" styleClass="white-background" stylesheets="@../css/start.css" text="Home">
+            <Button mnemonicParsing="false" onAction="#returnHome" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Home">
                <font>
                   <Font size="25.0" />
                </font>
+               <styleClass>
+                  <String fx:value="white-background" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" prefWidth="139.0" styleClass="white-background" stylesheets="@../css/start.css" text="About Us">
+            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="63.0" prefWidth="139.0" stylesheets="@../css/start.css" text="About Us">
                <font>
                   <Font size="25.0" />
                </font>
+               <styleClass>
+                  <String fx:value="white-background" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" styleClass="white-background" stylesheets="@../css/start.css" text="Discover">
+            <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" stylesheets="@../css/start.css" text="Discover">
                <font>
                   <Font size="25.0" />
                </font>
+               <styleClass>
+                  <String fx:value="white-background" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
             </Button>
             <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="122.0" styleClass="home-selected" stylesheets="@../css/start.css" text="Scrape">
                <font>
