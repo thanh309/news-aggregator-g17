@@ -123,8 +123,8 @@ public class DataLoader {
         PricePredictionController pricePredictionController = new PricePredictionController();
         try {
             cachedPricePredictions = pricePredictionController.getFormattedResponse();
-        } catch (IOException | InterruptedException | RequestException | JSONException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            e.printStackTrace();
             cachedPricePredictions = List.of();
         }
     }
