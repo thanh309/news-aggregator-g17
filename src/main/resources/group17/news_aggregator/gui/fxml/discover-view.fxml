@@ -299,7 +299,7 @@
                         <String fx:value="mouse-move-sort" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="cdSort" alignment="TOP_LEFT" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" stylesheets="@../css/style.css" text="CreationDate">
+                  <Button fx:id="cdSort" alignment="TOP_LEFT" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="141.0" stylesheets="@../css/style.css" text="Creation date">
                      <VBox.margin>
                         <Insets bottom="5.0" left="22.0" />
                      </VBox.margin>
