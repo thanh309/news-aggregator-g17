@@ -122,5 +122,12 @@ assignment, which has allowed us to learn a lot and significantly broadened our 
 our friends for their invaluable feedback and suggestions throughout the development process.
 
 
+## Contributors
+- Vũ Trung Thành - 20220066
+- Lương Hữu Thành - 20225458
+- Nguyễn Mậu Trung - 20225534
+- Trần Thành Vinh - 20225539
+- Đoàn Anh Vũ - 20225465
+
 ## License
 This project is licensed under the [MIT License](LICENSE).
