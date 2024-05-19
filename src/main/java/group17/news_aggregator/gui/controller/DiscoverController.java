@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.JSONException;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -57,6 +58,7 @@ public class DiscoverController {
     private List<News> originalNewsList;
 
     private List<News> newsList;
+    private List<List<String>> pricePredict;
 
     @FXML
     private VBox vboxAuthor;
@@ -91,9 +93,6 @@ public class DiscoverController {
     @FXML
     private Button sevenDay;
 
-
-    @FXML
-    private Button threeDay;
 
     @FXML
     private TextField endDateField;
@@ -255,6 +254,8 @@ public class DiscoverController {
 
         originalNewsList = DataLoader.getInstance().getNews();
         SearchEngine searchEngine = DataLoader.getInstance().getSearchEngine();
+        pricePredict = DataLoader.getInstance().getPricePredictions();
+
 
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
@@ -327,12 +328,11 @@ public class DiscoverController {
             updateSortedList(newsList, originalIds);
         });
 
-        oneDay.setOnAction(event -> handleButtonClick(2));
-        threeDay.setOnAction(event -> handleButtonClick(3));
-        sevenDay.setOnAction(event -> handleButtonClick(4));
-        oneMonth.setOnAction(event -> handleButtonClick(5));
+        oneDay.setOnAction(event -> displayPricePredictions(pricePredict,2));
+        sevenDay.setOnAction(event -> displayPricePredictions(pricePredict,3));
+        oneMonth.setOnAction(event -> displayPricePredictions(pricePredict,4));
 
-        handleButtonClick(2);
+        displayPricePredictions(pricePredict,2);
 
     }
 
@@ -382,39 +382,25 @@ public class DiscoverController {
         totalPages.setText("/  " + total);
     }
 
-    private void handleButtonClick(int intervalIndex) {
-        try {
-            PricePredictionController pricePredictionController = new PricePredictionController();
-            List<List<String>> response = pricePredictionController.getFormattedResponse();
-            pricePredictionVBox.getChildren().clear();
-            for (List<String> formattedPrice : response) {
-                HBox node = new HBox();
-                node.setSpacing(5);
-                for (int i = 0; i < 3; i++){
-                    if (i< 2){
-                        Text text = new Text(formattedPrice.get(i));
-                        text.setWrappingWidth(50);
-                        text.baselineOffsetProperty();
-                        node.getChildren().add(text);
-                    }
-                    if (i == 2){
-                        Text text = new Text(formattedPrice.get(intervalIndex));
-                        text.setWrappingWidth(50);
-                        String value = text.getText();
-                        if("+".equals(value.charAt(0))){
-                            text.setStyle("-fx-fill: green;");
-                        }
-                        if("-".equals(value.charAt(0))){
-                            text.setStyle("-fx-fill: red;");
-                        }
-                        node.getChildren().add(text);
-                    }
-
+    private void displayPricePredictions(List<List<String>> pricePredictions, Integer intervalIndex) {
+        pricePredictionVBox.getChildren().clear();
+        for (List<String> formattedPrice : pricePredictions) {
+            HBox node = new HBox();
+            for (int i = 0; i < 3; i++) {
+                if (i<2){
+                    Label label = new Label(formattedPrice.get(i));
+                    label.setPrefWidth(50);
+                    label.setStyle("-fx-alignment: CENTER;");
+                    node.getChildren().add(label);
                 }
-                pricePredictionVBox.getChildren().add(node);
+                if (i == 2){
+                    Label label = new Label(formattedPrice.get(intervalIndex));
+                    label.setPrefWidth(50);
+                    label.setStyle("-fx-alignment: CENTER;");
+                    node.getChildren().add(label);
+                }
             }
-        } catch (IOException | InterruptedException | RequestException | JSONException e) {
-            e.printStackTrace();
+            pricePredictionVBox.getChildren().add(node);
         }
     }
 

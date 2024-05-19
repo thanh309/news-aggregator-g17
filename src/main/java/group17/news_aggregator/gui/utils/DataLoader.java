@@ -1,12 +1,16 @@
 package group17.news_aggregator.gui.utils;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
+import group17.news_aggregator.exception.RequestException;
+import group17.news_aggregator.gui.controller.PricePredictionController;
 import group17.news_aggregator.gui.utils.auto_complete_field.AuthorTextField;
 import group17.news_aggregator.gui.utils.auto_complete_field.CategoryTextField;
 import group17.news_aggregator.gui.utils.auto_complete_field.TagTextField;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.SearchEngine;
+import org.json.JSONException;
 
+import java.io.IOException;
 import java.util.List;
 
 public class DataLoader {
@@ -15,6 +19,7 @@ public class DataLoader {
     private final String dataPath = "src/main/resources/data/database.csv";
 
     private List<News> cachedNews;
+    private List<List<String>> cachedPricePredictions;
 
     private SearchEngine searchEngine;
 
@@ -39,6 +44,7 @@ public class DataLoader {
     private DataLoader() {
         loadNews();
         initializeSearchEngine();
+        loadPricePredictions();
         initializeAutocompleteFields();
     }
 
@@ -51,6 +57,10 @@ public class DataLoader {
 
     public List<News> getNews() {
         return cachedNews;
+    }
+
+    public List<List<String>> getPricePredictions() {
+        return cachedPricePredictions;
     }
 
     private void loadNews() {
@@ -80,5 +90,15 @@ public class DataLoader {
 
         tagTextField.setPrefHeight(30);
         tagTextField.setPromptText("Tag");
+    }
+
+    private void loadPricePredictions() {
+        PricePredictionController pricePredictionController = new PricePredictionController();
+        try {
+            cachedPricePredictions = pricePredictionController.getFormattedResponse();
+        } catch (IOException | InterruptedException | RequestException | JSONException e) {
+            e.printStackTrace();
+            cachedPricePredictions = List.of();
+        }
     }
 }

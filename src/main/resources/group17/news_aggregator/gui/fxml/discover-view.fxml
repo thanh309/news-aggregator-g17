@@ -332,12 +332,6 @@
                         <String fx:value="mouse-moved" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="threeDay" mnemonicParsing="false" stylesheets="@../css/style.css" text="3D">
-                     <styleClass>
-                        <String fx:value="transparent" />
-                        <String fx:value="mouse-moved" />
-                     </styleClass>
-                  </Button>
                   <Button fx:id="sevenDay" mnemonicParsing="false" stylesheets="@../css/style.css" text="7D">
                      <styleClass>
                         <String fx:value="transparent" />
