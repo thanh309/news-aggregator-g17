@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,19 +13,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.DiscoverController">
+<BorderPane prefHeight="750.0" prefWidth="1200.0" styleClass="background" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group17.news_aggregator.gui.controller.DiscoverController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="transparent" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
+      <VBox maxWidth="1500.0" prefHeight="674.0" prefWidth="1292.0" styleClass="transparent" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="19.0" prefWidth="943.0" />
             <VBox prefHeight="39.0" prefWidth="943.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="39.0" prefWidth="1200.0" styleClass="transparent" stylesheets="@../css/style.css">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="645.0" styleClass="round-layout" stylesheets="@../css/style.css">
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="657.0" styleClass="round-layout" stylesheets="@../css/style.css">
                            <children>
                               <TextField fx:id="filterText" prefHeight="32.0" prefWidth="590.0" promptText="Type here to search" styleClass="transparent" stylesheets="@../css/style.css">
                                  <font>
@@ -45,23 +49,20 @@
                            </padding>
                         </HBox>
                      </children>
-                     <padding>
-                        <Insets right="60.0" />
-                     </padding>
                   </HBox>
                </children>
             </VBox>
             <Pane prefHeight="23.0" prefWidth="1200.0" />
             <HBox alignment="CENTER" prefHeight="595.0" prefWidth="943.0" styleClass="transparent" stylesheets="@../css/style.css">
                <children>
-                  <Pane prefHeight="594.0" prefWidth="60.0" />
-                  <VBox prefHeight="594.0" prefWidth="801.0">
+                  <Pane prefHeight="594.0" prefWidth="20.0" />
+                  <VBox prefHeight="1000.0" prefWidth="802.0">
                      <children>
-                        <HBox prefHeight="550.0" prefWidth="879.0">
+                        <HBox prefHeight="1000.0" prefWidth="802.0">
                            <children>
-                              <ScrollPane fx:id="scrollableID" prefHeight="546.0" prefWidth="838.0" stylesheets="@../css/style.css">
+                              <ScrollPane fx:id="scrollableID" prefHeight="1000.0" prefWidth="802.0" stylesheets="@../css/style.css">
                                  <content>
-                                    <VBox fx:id="vboxContainer" prefHeight="544.0" prefWidth="770.0" spacing="15.0">
+                                    <VBox fx:id="vboxContainer" prefHeight="551.0" prefWidth="770.0" spacing="15.0">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding></VBox>
@@ -76,7 +77,7 @@
                               </ScrollPane>
                            </children>
                         </HBox>
-                        <HBox alignment="BOTTOM_RIGHT" prefHeight="22.0" prefWidth="802.0" stylesheets="@../css/style.css">
+                        <HBox alignment="BOTTOM_RIGHT" prefHeight="63.0" prefWidth="802.0" stylesheets="@../css/style.css">
                            <children>
                               <ImageView fx:id="prev20" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -107,6 +108,9 @@
                            <padding>
                               <Insets right="5.0" />
                            </padding>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
                         </HBox>
                      </children>
                   </VBox>
@@ -168,10 +172,10 @@
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="674.0" prefWidth="300.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="674.0" prefWidth="209.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="43.0" prefWidth="300.0" />
-            <VBox prefHeight="468.0" prefWidth="300.0" styleClass="round-layout" stylesheets="@../css/style.css">
+            <Pane prefHeight="12.0" prefWidth="210.0" />
+            <VBox prefHeight="468.0" prefWidth="176.0" styleClass="round-layout" stylesheets="@../css/style.css">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="224.0">
                      <children>
@@ -231,7 +235,7 @@
                         </VBox>
                         <VBox prefHeight="63.0" prefWidth="274.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="To" underline="true">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: false;" text="To" underline="true">
                                  <font>
                                     <Font name="System Bold" size="22.0" />
                                  </font>
@@ -261,7 +265,7 @@
                               <Insets top="4.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="77.0" text="Sort by">
+                        <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="77.0" style="-fx-underline: true;" text="Sort by">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -312,8 +316,93 @@
             <Pane prefHeight="44.0" prefWidth="300.0" />
          </children>
          <BorderPane.margin>
-            <Insets left="30.0" />
+            <Insets left="10.0" />
          </BorderPane.margin>
       </VBox>
    </left>
+   <right>
+      <VBox alignment="CENTER_LEFT" prefHeight="586.0" prefWidth="186.0" BorderPane.alignment="CENTER_LEFT">
+         <BorderPane.margin>
+            <Insets right="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+         <children>
+            <VBox prefHeight="433.0" prefWidth="182.0" stylesheets="@../css/style.css">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="175.0" text="Price Prediction">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.24768030643463135" green="0.6315789222717285" blue="0.09590643644332886" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.23052631318569183" green="0.437894731760025" blue="0.8526315689086914" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="28.0" prefWidth="246.0">
+                     <children>
+                        <Button fx:id="today" mnemonicParsing="false" stylesheets="@../css/style.css" text="Today">
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="oneDay" mnemonicParsing="false" stylesheets="@../css/style.css" text="24H">
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="sevenDay" mnemonicParsing="false" stylesheets="@../css/style.css" text="7D">
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="oneMonth" mnemonicParsing="false" stylesheets="@../css/style.css" text="1M">
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Separator opacity="0.2" prefWidth="200.0" style="-fx-background-color: grey;" />
+                  <ScrollPane prefHeight="357.0" prefWidth="175.0" stylesheets="@../css/style.css">
+                     <styleClass>
+                        <String fx:value="transparent" />
+                        <String fx:value="viewport" />
+                     </styleClass>
+                     <content>
+                        <VBox fx:id="pricePredictionVBox" alignment="CENTER" prefHeight="339.0" prefWidth="173.0" spacing="7.0" />
+                     </content>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </ScrollPane>
+               </children>
+               <styleClass>
+                  <String fx:value="round-layout" />
+                  <String fx:value="new-round-background" />
+               </styleClass>
+            </VBox>
+         </children>
+      </VBox>
+   </right>
 </BorderPane>

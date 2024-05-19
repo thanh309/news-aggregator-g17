@@ -1,6 +1,7 @@
 package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
+import group17.news_aggregator.exception.RequestException;
 import group17.news_aggregator.gui.utils.DataLoader;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
@@ -8,21 +9,22 @@ import group17.news_aggregator.search_engine.SearchEngine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -30,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -53,6 +56,7 @@ public class DiscoverController {
     private List<News> originalNewsList;
 
     private List<News> newsList;
+    private List<List<String>> pricePredict;
 
     @FXML
     private VBox vboxAuthor;
@@ -77,6 +81,19 @@ public class DiscoverController {
 
     @FXML
     private Button searchButton;
+
+    @FXML
+    private Button oneDay;
+
+    @FXML
+    private Button oneMonth;
+
+    @FXML
+    private Button sevenDay;
+
+    @FXML
+    private Button today;
+
 
     @FXML
     private TextField endDateField;
@@ -107,6 +124,9 @@ public class DiscoverController {
 
     @FXML
     private Button cdSort;
+
+    @FXML
+    private VBox pricePredictionVBox;
 
     public DiscoverController() {
     }
@@ -235,6 +255,8 @@ public class DiscoverController {
 
         originalNewsList = DataLoader.getInstance().getNews();
         SearchEngine searchEngine = DataLoader.getInstance().getSearchEngine();
+        pricePredict = DataLoader.getInstance().getPricePredictions();
+
 
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
@@ -306,6 +328,23 @@ public class DiscoverController {
         noneSort.setOnMouseClicked(noneSort -> {
             updateSortedList(newsList, originalIds);
         });
+
+        today.setOnAction(event -> {
+            displayPricePredictions(pricePredict,1);
+        });
+
+        oneDay.setOnAction(event -> {
+                    displayPricePredictions(pricePredict, 3);
+        });
+        sevenDay.setOnAction(event -> {
+                displayPricePredictions(pricePredict,5);
+        });
+        oneMonth.setOnAction(event -> {
+            displayPricePredictions(pricePredict,7);
+        });
+
+        displayPricePredictions(pricePredict,1);
+
     }
 
     private void updateSortedList(List<News> aNewsList, List<Integer> sortedIds) {
@@ -352,6 +391,60 @@ public class DiscoverController {
         next20.setDisable(endIndex >= size);
         int total = (int) Math.ceil((double) size / 20);
         totalPages.setText("/  " + total);
+    }
+
+    private void displayPricePredictions(List<List<String>> pricePredictions, Integer intervalIndex) {
+        pricePredictionVBox.getChildren().clear();
+
+        if (pricePredictions.isEmpty()) {
+            Label errorLabel = new Label("Cannot connect to server");
+            errorLabel.setTextFill(Color.RED);
+            pricePredictionVBox.getChildren().add(errorLabel);
+            return;
+        }
+
+        for (List<String> formattedPrice : pricePredictions) {
+            VBox node = new VBox();
+            node.setAlignment(Pos.CENTER);
+            node.setSpacing(10);
+            for (int i = 0; i < 2; i++) {
+                if (i == 0){
+                    Label label = new Label(formattedPrice.get(i));
+                    label.setPrefHeight(22);
+                    label.setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
+                    node.getChildren().add(label);
+                }
+                if (i == 1){
+                    HBox temp = new HBox();
+                    Label priceOri = new Label(formattedPrice.get(intervalIndex));
+                    Label price = new Label(formattedPrice.get(intervalIndex+1));
+                    priceOri.setPrefWidth(50);
+                    priceOri.setAlignment(Pos.CENTER);
+                    price.setPrefWidth(50);
+                    price.setAlignment(Pos.CENTER);
+                    String text = price.getText();
+                    if (text != null && !text.isEmpty()) {
+                        char firstChar = text.charAt(0);
+                        if (firstChar == '+') {
+                            price.setTextFill(Color.GREEN);
+                        } else if (firstChar == '-') {
+                            price.setTextFill(Color.RED);
+                        }
+                    }
+                    temp.getChildren().add(priceOri);
+                    temp.getChildren().add(price);
+                    temp.setSpacing(15);
+                    temp.setAlignment(Pos.CENTER);
+                    node.getChildren().add(temp);
+
+                }
+
+            }
+            Separator sep = new Separator();
+            sep.setOpacity(0.2);
+            node.getChildren().add(sep);
+            pricePredictionVBox.getChildren().add(node);
+        }
     }
 
     @FXML
