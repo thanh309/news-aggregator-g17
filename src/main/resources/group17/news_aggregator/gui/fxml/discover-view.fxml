@@ -381,7 +381,7 @@
                         <String fx:value="viewport" />
                      </styleClass>
                      <content>
-                        <VBox fx:id="pricePredictionVBox" prefHeight="192.0" prefWidth="163.0" spacing="7.0" />
+                        <VBox fx:id="pricePredictionVBox" alignment="CENTER" prefHeight="339.0" prefWidth="173.0" spacing="7.0" />
                      </content>
                      <VBox.margin>
                         <Insets top="5.0" />
