@@ -3,6 +3,7 @@
 
 
 ## Introduction
+![image](github_res/myapp.png)
 
 In the fast-paced world of blockchain technology, developers and investors need to be updated at all times.
 But reading the news manually on different platforms is neither productive nor efficient.
