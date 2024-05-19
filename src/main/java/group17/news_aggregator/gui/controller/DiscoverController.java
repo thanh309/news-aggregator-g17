@@ -22,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.JSONException;
@@ -384,19 +385,35 @@ public class DiscoverController {
 
     private void displayPricePredictions(List<List<String>> pricePredictions, Integer intervalIndex) {
         pricePredictionVBox.getChildren().clear();
+
+        if (pricePredictions.isEmpty()) {
+            Label errorLabel = new Label("Cannot connect to server");
+            errorLabel.setTextFill(Color.RED);
+            pricePredictionVBox.getChildren().add(errorLabel);
+            return;
+        }
+
         for (List<String> formattedPrice : pricePredictions) {
             HBox node = new HBox();
+            node.setSpacing(10);
             for (int i = 0; i < 3; i++) {
                 if (i<2){
                     Label label = new Label(formattedPrice.get(i));
                     label.setPrefWidth(50);
-                    label.setStyle("-fx-alignment: CENTER;");
                     node.getChildren().add(label);
                 }
                 if (i == 2){
                     Label label = new Label(formattedPrice.get(intervalIndex));
                     label.setPrefWidth(50);
-                    label.setStyle("-fx-alignment: CENTER;");
+                    String text = label.getText();
+                    if (text != null && !text.isEmpty()) {
+                        char firstChar = text.charAt(0);
+                        if (firstChar == '+') {
+                            label.setTextFill(Color.GREEN);
+                        } else if (firstChar == '-') {
+                            label.setTextFill(Color.RED);
+                        }
+                    }
                     node.getChildren().add(label);
                 }
             }
