@@ -239,7 +239,7 @@ public class DiscoverController {
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
 
-        List<Integer> ids = new ArrayList<>(IntStream.rangeClosed(0, size-1).boxed().toList());
+        List<Integer> ids = new ArrayList<>(IntStream.rangeClosed(0, size - 1).boxed().toList());
         List<Integer> originalIds = new ArrayList<>();
         newsList = new ArrayList<>();
 

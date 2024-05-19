@@ -10,9 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class ScrapeController {
@@ -109,7 +108,7 @@ public class ScrapeController {
     @FXML
     void scrapeNow(ActionEvent event) throws InterruptedException {
         ScraperEngine scraperEngine = new ScraperEngine();
-        if (checkCryptonews.isSelected()){
+        if (checkCryptonews.isSelected()) {
             scraperEngine.setScrapeCryptonews(true);
             try {
                 int pageCount = Integer.parseInt(numberPageCryptonews.getText());
@@ -121,7 +120,7 @@ public class ScrapeController {
             }
         }
 
-        if (checkCryptopolitan.isSelected()){
+        if (checkCryptopolitan.isSelected()) {
             scraperEngine.setScrapeCryptopolitan(true);
             try {
                 int pageCount = Integer.parseInt(numberPageCryptopolitan.getText());
@@ -132,7 +131,7 @@ public class ScrapeController {
             }
         }
 
-        if (checkCryptoslate.isSelected()){
+        if (checkCryptoslate.isSelected()) {
             scraperEngine.setScrapeCryptoSlate(true);
             try {
                 int pageCount = Integer.parseInt(numberPageCryptoslate.getText());
@@ -143,7 +142,7 @@ public class ScrapeController {
             }
         }
 
-        if (checkMedium.isSelected()){
+        if (checkMedium.isSelected()) {
             scraperEngine.setScrapeMedium(true);
         }
 

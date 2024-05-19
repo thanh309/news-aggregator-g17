@@ -85,7 +85,7 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
-            <Button mnemonicParsing="false" onAction="#scrape" prefHeight="63.0" stylesheets="@../css/start.css" text="Scrape">
+            <Button mnemonicParsing="false" onAction="#scrape" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Scrape">
                <font>
                   <Font size="25.0" />
                </font>

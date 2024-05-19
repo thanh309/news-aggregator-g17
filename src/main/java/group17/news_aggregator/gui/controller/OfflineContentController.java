@@ -11,7 +11,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -85,7 +84,7 @@ public class OfflineContentController {
             }
         });
 
-        copyLink.setOnMouseClicked(copied ->{
+        copyLink.setOnMouseClicked(copied -> {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             ClipboardContent linkCopied = new ClipboardContent();
             linkCopied.putString(httpField.getText());
