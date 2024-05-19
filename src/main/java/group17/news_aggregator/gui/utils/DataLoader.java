@@ -21,8 +21,6 @@ public class DataLoader {
     private List<News> cachedNews;
     private List<List<String>> cachedPricePredictions;
 
-    private List<List<String>> cachedPricePredictions;
-
     private SearchEngine searchEngine;
 
     private AuthorTextField authorTextField;
