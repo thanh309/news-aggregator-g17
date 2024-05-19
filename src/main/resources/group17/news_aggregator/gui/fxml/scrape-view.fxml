@@ -57,18 +57,31 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="136.0" prefWidth="1001.0">
+            <Pane prefHeight="166.0" prefWidth="1001.0">
                <children>
-                  <Text layoutX="184.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File name:">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-                  <TextField fx:id="namefile" layoutX="368.0" layoutY="51.0" onMouseClicked="#resetFileName" promptText="filename.csv">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextField>
+                  <VBox alignment="CENTER" prefHeight="131.0" prefWidth="791.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="791.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="File name:   ">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="namefile" onMouseClicked="#resetFileName" promptText="filename.csv">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </HBox>
+                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: set file name to database.csv to overwrite the old data and use it in the app">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
                </children>
             </Pane>
             <VBox prefHeight="353.0" prefWidth="1001.0">
