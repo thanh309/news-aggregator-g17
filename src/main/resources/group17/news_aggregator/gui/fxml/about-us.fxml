@@ -53,6 +53,15 @@
                   <String fx:value="mouse-moved" />
                </styleClass>
             </Button>
+            <Button fx:id="homeButton1" mnemonicParsing="false" onAction="#scrape" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Scrape">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="white-background" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
+            </Button>
          </children>
       </HBox>
    </top>

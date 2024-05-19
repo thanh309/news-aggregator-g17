@@ -23,7 +23,15 @@ import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public class CryptopolitanScraper extends ArticleScraper {
-    private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 40;
+    private final int MAX_PAGE;
+
+    public CryptopolitanScraper() {
+        MAX_PAGE = MAX_NEWS_PER_SITE / 40;
+    }
+
+    public CryptopolitanScraper(int maxPage) {
+        MAX_PAGE = maxPage;
+    }
 
     public static void main(String[] args) throws IOException {
         String url = "https://www.cryptopolitan.com/ubisofts-shooter-xdefiant-postponed-2/";

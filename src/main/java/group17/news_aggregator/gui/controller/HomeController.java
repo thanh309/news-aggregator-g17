@@ -60,4 +60,21 @@ public class HomeController {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    void scrape(ActionEvent event) {
+        if (stageStart == null) {
+            stageStart = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader scrapeLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/scrape-view.fxml"));
+
+        try {
+            Parent scrapeScene = scrapeLoader.load();
+            stageStart.setScene(new Scene(scrapeScene));
+            stageStart.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

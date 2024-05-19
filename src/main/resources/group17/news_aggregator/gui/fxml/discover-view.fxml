@@ -34,7 +34,7 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></TextField>
-                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="72.0" stylesheets="@../css/style.css" text="Search">
+                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="72.0" stylesheets="@../css/style.css" text="Search">
                                  <font>
                                     <Font name="System Italic" size="15.0" />
                                  </font>
@@ -103,7 +103,7 @@
                                  <image>
                                     <Image url="@../image/Next20.png" />
                                  </image></ImageView>
-                              <Pane prefHeight="30.0" prefWidth="30.0" />
+                              <Pane prefHeight="27.0" prefWidth="10.0" />
                            </children>
                            <padding>
                               <Insets right="5.0" />
@@ -158,6 +158,15 @@
                <font>
                   <Font size="25.0" />
                </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#scrape" onMouseClicked="#home" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Scrape">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="white-background" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
             </Button>
          </children>
       </HBox>
@@ -381,7 +390,7 @@
                         <String fx:value="viewport" />
                      </styleClass>
                      <content>
-                        <VBox fx:id="pricePredictionVBox" prefHeight="192.0" prefWidth="163.0" spacing="7.0" />
+                        <VBox fx:id="pricePredictionVBox" alignment="CENTER" prefHeight="339.0" prefWidth="173.0" spacing="7.0" />
                      </content>
                      <VBox.margin>
                         <Insets top="5.0" />

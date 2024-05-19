@@ -23,7 +23,15 @@ import static group17.news_aggregator.scraper.ScraperConstants.MAX_NEWS_PER_SITE
 import static group17.news_aggregator.scraper.ScraperConstants.MAX_RETRIES;
 
 public class CryptoSlateScraper extends ArticleScraper {
-    private static final int MAX_PAGE = MAX_NEWS_PER_SITE / 10;
+    private final int MAX_PAGE;
+
+    public CryptoSlateScraper() {
+        MAX_PAGE = MAX_NEWS_PER_SITE / 10;
+    }
+
+    public CryptoSlateScraper(int MAX_PAGE) {
+        this.MAX_PAGE = MAX_PAGE;
+    }
 
     public static void main(String[] args) throws IOException {
         String url = "https://cryptoslate.com/jury-finds-do-kwon-terraform-labs-liable-for-multi-billion-dollar-fraud/";

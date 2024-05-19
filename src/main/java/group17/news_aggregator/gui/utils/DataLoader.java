@@ -8,8 +8,8 @@ import group17.news_aggregator.gui.utils.auto_complete_field.CategoryTextField;
 import group17.news_aggregator.gui.utils.auto_complete_field.TagTextField;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.SearchEngine;
+import javafx.scene.image.Image;
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -21,6 +21,8 @@ public class DataLoader {
     private List<News> cachedNews;
     private List<List<String>> cachedPricePredictions;
 
+    private List<List<String>> cachedPricePredictions;
+
     private SearchEngine searchEngine;
 
     private AuthorTextField authorTextField;
@@ -28,6 +30,30 @@ public class DataLoader {
     private TagTextField tagTextField;
 
     private CategoryTextField categoryTextField;
+
+    private Image cryptopolitanImage;
+
+    private Image cryptoslateImage;
+
+    private Image cryptonewsImage;
+
+    private Image mediumImage;
+
+    public Image getMediumImage() {
+        return mediumImage;
+    }
+
+    public Image getCryptonewsImage() {
+        return cryptonewsImage;
+    }
+
+    public Image getCryptoslateImage() {
+        return cryptoslateImage;
+    }
+
+    public Image getCryptopolitanImage() {
+        return cryptopolitanImage;
+    }
 
     public CategoryTextField getCategoryTextField() {
         return categoryTextField;
@@ -46,6 +72,7 @@ public class DataLoader {
         initializeSearchEngine();
         loadPricePredictions();
         initializeAutocompleteFields();
+        initializeImage();
     }
 
     public static DataLoader getInstance() {
@@ -96,9 +123,16 @@ public class DataLoader {
         PricePredictionController pricePredictionController = new PricePredictionController();
         try {
             cachedPricePredictions = pricePredictionController.getFormattedResponse();
-        } catch (IOException | InterruptedException | RequestException | JSONException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            e.printStackTrace();
             cachedPricePredictions = List.of();
         }
+    }
+
+    private void initializeImage() {
+        mediumImage = new Image("group17/news_aggregator/gui/image/website_icons/medium.png");
+        cryptonewsImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptonews.png");
+        cryptoslateImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptoslate.png");
+        cryptopolitanImage = new Image("group17/news_aggregator/gui/image/website_icons/cryptopolitan.png");
     }
 }

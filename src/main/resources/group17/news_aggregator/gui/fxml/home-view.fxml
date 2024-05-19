@@ -35,7 +35,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="98.0" prefWidth="1200.0">
                <children>
-                  <Label prefHeight="36.0" prefWidth="842.0" text="A product of Group 17 using search engines based on the TF-IDF algorithm">
+                  <Label alignment="CENTER" prefHeight="36.0" prefWidth="1201.0" text="A product of Group 17 using search engines based on the BM25 algorithm" textAlignment="CENTER">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -77,6 +77,15 @@
                </styleClass>
             </Button>
             <Button mnemonicParsing="false" onAction="#discover" prefHeight="63.0" stylesheets="@../css/start.css" text="Discover">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="transparent" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#scrape" prefHeight="63.0" prefWidth="122.0" stylesheets="@../css/start.css" text="Scrape">
                <font>
                   <Font size="25.0" />
                </font>

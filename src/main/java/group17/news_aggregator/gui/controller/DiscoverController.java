@@ -1,6 +1,7 @@
 package group17.news_aggregator.gui.controller;
 
 import group17.news_aggregator.csv_converter.CSVConverter;
+import group17.news_aggregator.exception.RequestException;
 import group17.news_aggregator.gui.utils.DataLoader;
 import group17.news_aggregator.news.News;
 import group17.news_aggregator.search_engine.Query;
@@ -21,7 +22,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -29,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
@@ -257,7 +261,7 @@ public class DiscoverController {
         int size = originalNewsList.size();
         int totalPage = (int) Math.ceil((double) originalNewsList.size() / 20);
 
-        List<Integer> ids = new ArrayList<>(IntStream.rangeClosed(0, size-1).boxed().toList());
+        List<Integer> ids = new ArrayList<>(IntStream.rangeClosed(0, size - 1).boxed().toList());
         List<Integer> originalIds = new ArrayList<>();
         newsList = new ArrayList<>();
 
@@ -340,6 +344,7 @@ public class DiscoverController {
         });
 
         displayPricePredictions(pricePredict,1);
+        search_handle(originalNewsList, newsList, searchEngine, originalIds);
 
     }
 
@@ -362,8 +367,7 @@ public class DiscoverController {
         endIndex = Math.min(endIndex, size);
 
         if (startIndex < size) {
-            List<? extends News> subList = newsList.subList(startIndex, endIndex);
-            for (News news : subList) {
+            for (int i = startIndex; i < endIndex; i++) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/news-component.fxml"));
                     NewsController newsController = new NewsController(newStage, mainScene, newsList);
@@ -371,9 +375,9 @@ public class DiscoverController {
                     loader.setController(newsController);
                     HBox newsComponent = loader.load();
 
-                    newsController.attachValue(news, stage, newsList);
+                    newsController.attachValue(newsList.get(i), stage, newsList);
                     newsController = loader.getController();
-                    newsController.attachValue(news, newStage, newsList);
+                    newsController.attachValue(newsList.get(i), newStage, newsList);
 
                     vboxContainer.getChildren().add(newsComponent);
                 } catch (IOException e) {
@@ -471,6 +475,23 @@ public class DiscoverController {
         try {
             Parent mainScene = loader.load();
             stage.setScene(new Scene(mainScene));
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    void scrape(ActionEvent event) {
+        if (stage == null) {
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        }
+
+        FXMLLoader scrapeLoader = new FXMLLoader(getClass().getResource("/group17/news_aggregator/gui/fxml/scrape-view.fxml"));
+
+        try {
+            Parent scrapeScene = scrapeLoader.load();
+            stage.setScene(new Scene(scrapeScene));
             stage.show();
         } catch (IOException ex) {
             ex.printStackTrace();
