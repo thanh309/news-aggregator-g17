@@ -77,20 +77,30 @@ java -jar src/release/news-aggregator-g17.jar
 
 ### Python
 
-Python is needed to use the price prediction function. A fresh `conda` environment is recommended, although you can
+Python is needed to use the price prediction function. A fresh conda environment is recommended, although you can
 totally use global environment and use `pip`.
 
 #### Conda
+Make sure conda is installed on your machine. If not, follow the [instruction](https://docs.anaconda.com/free/miniconda/)
+to install Miniconda.
 ```shell
 conda create --name news-aggregator-g17 python=3.9 --yes
 conda activate news-aggregator-g17
 pip install -r requirements.txt
 ```
+If you get the error `'conda' is not recognized as an internal or external command`, run the Anaconda Prompt as
+administrator and run
+```shell
+conda update conda
+conda init
+```
 
 #### Pip
+If you prefer not to install conda, run
 ```shell
 pip install -r requirements.txt
 ```
+to install Python dependencies.
 
 #### Running the Flask app
 ```shell

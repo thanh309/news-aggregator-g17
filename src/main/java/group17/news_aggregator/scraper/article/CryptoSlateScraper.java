@@ -29,8 +29,8 @@ public class CryptoSlateScraper extends ArticleScraper {
         MAX_PAGE = MAX_NEWS_PER_SITE / 10;
     }
 
-    public CryptoSlateScraper(int MAX_PAGE) {
-        this.MAX_PAGE = MAX_PAGE;
+    public CryptoSlateScraper(int maxPage) {
+        MAX_PAGE = maxPage;
     }
 
     public static void main(String[] args) throws IOException {
@@ -133,6 +133,7 @@ public class CryptoSlateScraper extends ArticleScraper {
                     .select("span")
                     .select("a[href]")
                     .last();
+            assert category != null;
             news.setCategory(category.text());
         } catch (NoSuchElementException | NullPointerException ignored) {
         }
